@@ -1,0 +1,7 @@
+LIBRARY   glm_PhysX3GpuPROFILE_x64  
+	EXPORTS  
+	   PxCreateCudaContextManager   @1  
+	   PxCreatePhysXGpu   @2  
+	   PxGetSuggestedCudaDeviceOrdinal   @3  
+	   PxSetPhysXGpuDelayLoadHook   @4  
+	   
