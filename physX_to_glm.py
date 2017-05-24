@@ -204,6 +204,8 @@ class PhysXToGlmConverter():
 
         self.srcFilesChanged = 0
         self.namespacesReplaced = 0
+        self.convexEnumFixed = 0
+        self.preprocessorFixed = 0
         self.missingNamespacesFixed = 0
         self.glmPostFixAdded = 0
         self.glmPreFixAdded = 0
@@ -260,6 +262,8 @@ class PhysXToGlmConverter():
 
         namespaceReplacedCount=0
         namespaceFixedCount=0
+        convexEnumFixed = 0
+        preprocessorFixed = 0
         methodAdded = 0
 
         # if changing the physx namespace into glm_physx, it's not possible to use GPU acceleration anymore.
@@ -269,11 +273,31 @@ class PhysXToGlmConverter():
         namespaceFixedCount += replaceTextInFile(fullFilePath, " Array<", " physx::shdfnd::Array<")
         namespaceFixedCount += replaceTextInFile(fullFilePath, "(Array<", "(physx::shdfnd::Array<")
         namespaceFixedCount += replaceTextInFile(fullFilePath, "	Array<", "	physx::shdfnd::Array<")
+
         #Mutex replacement does not work properly in all files, lets just do it in files where it's needed...
         if file=="ApexScene.h":
             namespaceFixedCount += replaceTextInFile(fullFilePath, "	Mutex ", "	physx::shdfnd::Mutex ")
             namespaceFixedCount += replaceTextInFile(fullFilePath, "	Mutex	", "	physx::shdfnd::Mutex	")
 
+        #on Linux, Convex seems to be defined in one of our dependencies... So renaming it in phsyX
+        if file=="ClothingCollision.h":
+            convexEnumFixed += replaceTextInFile(fullFilePath, "	Convex,", "	Convex_,")
+        if file=="ClothingCollisionImpl.h":
+            convexEnumFixed += replaceTextInFile(fullFilePath, "::Convex;", "::Convex_;")
+        #on Linux, some preprocessor protections are missing...
+        if file=="UserRenderInstanceBufferDesc.h":
+            preprocessorFixed += replaceTextInFile(fullFilePath, "#if !PX_PS4", "#if !PX_PS4 && !PX_LINUX")
+        if file=="UserRenderIndexBufferDesc.h":
+            preprocessorFixed += replaceTextInFile(fullFilePath, "#if !PX_PS4", "#if !PX_PS4 && !PX_LINUX")
+        if file=="UserRenderSpriteBufferDesc.h":
+            preprocessorFixed += replaceTextInFile(fullFilePath, "#if !PX_PS4", "#if !PX_PS4 && !PX_LINUX")
+        if file=="ApexSharedUtils.h":
+            preprocessorFixed += replaceTextInFile(fullFilePath, "#if PX_X64", "#if PX_X64 && !PX_LINUX")
+        if file=="PxSimpleTypes.h":
+            preprocessorFixed += replaceTextInFile(fullFilePath, "#if PX_LINUX\n#define __STDC_LIMIT_MACROS\n#endif", "#if PX_LINUX\n#  ifndef __STDC_LIMIT_MACROS\n#    define __STDC_LIMIT_MACROS\n#  endif\n#endif")
+            
+
+        #some methods are missing for the golaem way of using Apex...
         if(file=="ClothingAsset.h"):
             methodDeclaration = "\
 \n\
@@ -363,9 +387,11 @@ class PhysXToGlmConverter():
 
 
         self.namespacesReplaced += namespaceReplacedCount
+        self.convexEnumFixed += convexEnumFixed
+        self.preprocessorFixed += preprocessorFixed
         self.missingNamespacesFixed += namespaceFixedCount
         self.classMethodsAdded += methodAdded
-        return (namespaceReplacedCount+namespaceFixedCount+methodAdded)>0
+        return (namespaceReplacedCount+namespaceFixedCount+convexEnumFixed+preprocessorFixed+methodAdded)>0
 
 
     #------------------------------------------------------------------
@@ -413,7 +439,7 @@ class PhysXToGlmConverter():
     #------------------------------------------------------------------
     def printStats(self):
         print("\nMade replacement in {} project files:\n     -{} /MT changed into /MD\n     -{} /MTd changed into /MDd\n     -{} ignore lib added\n     -{} _glm postfix added\n     -{} glm_ prefix added".format(self.projectFilesChanged, self.MDOptionReplaced, self.MDdOptionReplaced, self.IgnoreDefaultLibAdded, self.glmPostFixAdded, self.glmPreFixAdded))
-        print("\nMade replacement in {} source files:\n     -{} physx namespace changed into glm_physx\n     -{} missing physx namespace fixed\n     -{} code addition".format(self.srcFilesChanged, self.namespacesReplaced, self.missingNamespacesFixed, self.classMethodsAdded))
+        print("\nMade replacement in {} source files:\n     -{} physx namespace changed into glm_physx\n     -{} missing physx namespace fixed\n     -{} 'Convex' enum renamed in 'Convex_'\n     -{} missing #if !PX_LINUX preprocessor instruction added\n     -{} code addition".format(self.srcFilesChanged, self.namespacesReplaced, self.missingNamespacesFixed, self.convexEnumFixed, self.preprocessorFixed, self.classMethodsAdded))
 
 
 

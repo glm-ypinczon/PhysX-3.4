@@ -937,8 +937,10 @@ class IndexBank
 
 	uint32_t				calculateMaxCapacity()
 	{
+#if !PX_LINUX
 #pragma warning(push)
 #pragma warning(disable: 4127) // conditional expression is constant
+#endif
 		if (sizeof(IndexType) >= sizeof(uint32_t))
 		{
 			return 0xFFFFFFFF;	// Limited by data type we use to report capacity
@@ -947,7 +949,9 @@ class IndexBank
 		{
 			return (1u << (8 * PxMin((uint32_t)sizeof(IndexType), 3u))) - 1;	// Limited by data type we use for indices
 		}
+#if !PX_LINUX
 #pragma warning(pop)
+#endif
 	}
 
 	protected:

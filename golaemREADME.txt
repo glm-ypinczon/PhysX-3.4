@@ -44,3 +44,8 @@ In short:
 3.\ In PxPhysXGpuModuleLoader.cpp file in PhysX project, configure the new gpu library name, and rebuild the PhysX project:
 	static const char*	gPhysXGpuLibraryName = "glm_PhysX3Gpu" CONFIG_SUB_STR "_" PLATFORM_SUB_STR ".dll";
 	
+4.\ To be able to build on Linux:
+	The ClothingCollisionType enum in ClothingCollision.h has to be changed: Convex needs to be renamed (there seems to be a define of Convex in our linux dependencies). Let's name it Convex_
+	Some PX_PS4 are misused and needs to be fixed: UserRenderInstanceBufferDesc.h UserRenderIndexBufferDesc.h UserRenderSpriteBufferDesc.h ApexSharedUtils.h
+
+	
