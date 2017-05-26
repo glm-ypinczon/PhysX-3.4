@@ -55,7 +55,7 @@
 
 #include "windows/PsWindowsInclude.h"
 #include "windows/CmWindowsModuleUpdateLoader.h"
-static const char*	gPhysXGpuLibraryName = "PhysX3Gpu" CONFIG_SUB_STR "_" PLATFORM_SUB_STR ".dll";
+static const char*	gPhysXGpuLibraryName = "glm_PhysX3Gpu" CONFIG_SUB_STR "_" PLATFORM_SUB_STR ".dll";
 
 #elif PX_LINUX
 
