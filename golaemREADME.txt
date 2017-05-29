@@ -47,5 +47,7 @@ In short:
 4.\ To be able to build on Linux:
 	The ClothingCollisionType enum in ClothingCollision.h has to be changed: Convex needs to be renamed (there seems to be a define of Convex in our linux dependencies). Let's name it Convex_
 	Some PX_PS4 are misused and needs to be fixed: UserRenderInstanceBufferDesc.h UserRenderIndexBufferDesc.h UserRenderSpriteBufferDesc.h ApexSharedUtils.h
+	
+5.\ Once the windows and linux build are both done, run the export_to_glmExternals.py to export the phsyX .git directory tree into the golaem svn external repo. It will copy only .h, .inl, .lib, .dll, .a and .so files from phsyX and keep the same directory tree, which allow working with the same cmake find.
 
 	
