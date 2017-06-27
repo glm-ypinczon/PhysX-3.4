@@ -6,7 +6,6 @@
 import sys
 import os
 import string
-import xml.etree.ElementTree as ET
 
 #------------------------------------------------------------------
 def addOrChangeXMLTagInFile(fullFilePath, XMLcontainerTag, XMLTag, value):
@@ -198,6 +197,7 @@ class PhysXToGlmConverter():
         self.processorsList  = {}
         # statistics data members
         self.projectFilesChanged = 0
+        self.makefilesChanged = 0
         self.MDOptionReplaced = 0
         self.MDdOptionReplaced = 0
         self.IgnoreDefaultLibAdded = 0
@@ -255,6 +255,16 @@ class PhysXToGlmConverter():
         newTotalReplacements = self.MDOptionReplaced + self.MDdOptionReplaced + self.IgnoreDefaultLibAdded + self.glmPostFixAdded + self.glmPreFixAdded
         return newTotalReplacements>currentTotalReplacements
 
+    #------------------------------------------------------------------
+    def parseMakefile(self, file, path):
+        changedMakeFileCount=0
+
+        # add -lm option flag (link with the math lib) at the end of the _common_cflags
+        if(string.find(file, "PhysXExtensions.mk")>=0 or string.find(file, "PhysX.mk")>=0 or string.find(file, "PxPvdSDK.mk")>=0 or string.find(file, "PxFoundation.mk")>=0 or string.find(file, "PxPvdSDK.mk")>=0):
+            fullFilePath = "{}\\{}".format(path, file)
+            changedMakeFileCount += replaceTextInFile(fullFilePath, "-fPIC ", "-fPIC -lm ")
+        
+        return changedMakeFileCount>0
 
     #------------------------------------------------------------------
     def parseSourceFile(self, file, path):
@@ -423,6 +433,10 @@ class PhysXToGlmConverter():
                     isFileModified = self.parseProjectFile(file, root)
                     if(isFileModified):
                         self.projectFilesChanged += 1
+                elif(string.find(file, "Makefile")>=0):
+                    isFileModified = self.parseMakefile(file, root)
+                    if(isFileModified):
+                        self.makefilesChanged += 1
                 else:
                     if(printParsedFiles==True):
                         print("Ignoring file: {}").format(file)
@@ -439,6 +453,7 @@ class PhysXToGlmConverter():
     #------------------------------------------------------------------
     def printStats(self):
         print("\nMade replacement in {} project files:\n     -{} /MT changed into /MD\n     -{} /MTd changed into /MDd\n     -{} ignore lib added\n     -{} _glm postfix added\n     -{} glm_ prefix added".format(self.projectFilesChanged, self.MDOptionReplaced, self.MDdOptionReplaced, self.IgnoreDefaultLibAdded, self.glmPostFixAdded, self.glmPreFixAdded))
+        print("\nMade replacement in {} Makefiles:".format(self.makefilesChanged))
         print("\nMade replacement in {} source files:\n     -{} physx namespace changed into glm_physx\n     -{} missing physx namespace fixed\n     -{} 'Convex' enum renamed in 'Convex_'\n     -{} missing #if !PX_LINUX preprocessor instruction added\n     -{} code addition".format(self.srcFilesChanged, self.namespacesReplaced, self.missingNamespacesFixed, self.convexEnumFixed, self.preprocessorFixed, self.classMethodsAdded))
 
 

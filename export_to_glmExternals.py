@@ -66,7 +66,7 @@ def main():
     src = os.path._getfullpathname(".")
     dst = "{}\pack".format(src)
     ignoreDirectories = {".git", ".vs", "Externals", "KaplaDemo", "Documentation", "Sample", "Snippets", "Media", "compiler", "vc11win32", "vc12win32", "vc12win64", "vc14win32"}
-    fileExtensions = {".h", ".lib", ".dll", ".pdb", ".a", ".so"}
+    fileExtensions = {".h", ".inl", ".lib", ".dll", ".pdb", ".a", ".so"}
 
     app = QtGui.QApplication(sys.argv)
 
