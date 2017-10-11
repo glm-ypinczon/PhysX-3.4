@@ -103,7 +103,29 @@ def replaceTextInFile(fullFilePath, textToReplace, textReplacement):
 
 #------------------------------------------------------------------
 def addMethodAtEndOfSourceFile(fullFilePath, namespace, methodText):
-    return addTextAtEndOfSection(fullFilePath, "namespace", namespace, '{', '}', methodText, False)
+    if len(namespace)>0:
+        return addTextAtEndOfSection(fullFilePath, "namespace", namespace, '{', '}', methodText, False)
+    else:
+        #simply write the file down with the added declaration text
+        srcFile = open(fullFilePath, 'r')
+        fileAsText = srcFile.read()
+        srcFile.close()
+
+        #check if the text was already added...
+        alreadyThere = string.find(fileAsText, methodText)
+        if alreadyThere>=0:
+            return False
+
+        dstFile = open(fullFilePath, 'w')
+        #write file
+        dstFile.write(fileAsText)
+        dstFile.write("\n")
+        dstFile.write(methodText)
+        dstFile.write("\n")
+        dstFile.close()
+
+        return True
+
 
 #------------------------------------------------------------------
 def addMethodDeclarationInHeader(fullFilePath, className, methodDeclarationText):
@@ -121,11 +143,25 @@ def addTextAtEndOfSection(fullFilePath, sectionName, sectionValue, sectionStartS
         return False
 
     #find the begin and end brackets of the class...
-    classPos = string.find(fileAsText, "{} {}".format(sectionName, sectionValue))
-    if(classPos<=0):
-        print "Error: Could not find the {} {} in {}".format(sectionName, sectionValue, fullFilePath)
-        return False
+    currentSrcPos = 0
+    classPos = 0
+
+    while classPos==0:
+        classPos = string.find(fileAsText, "{} {}".format(sectionName, sectionValue), currentSrcPos)
+        if(classPos<=0):
+            print "Error: Could not find the {} {} in {}".format(sectionName, sectionValue, fullFilePath)
+            return False
+        #make sure it's not a predeclatation only...: check that the next symbol is not a ;
+        nextCharacterPos = classPos+1
+        while((fileAsText[nextCharacterPos]!=';') and (fileAsText[nextCharacterPos]!='{')):
+            nextCharacterPos+=1
+        if fileAsText[nextCharacterPos]==';':   #it's not the class, it's a predeclaration. Search again
+            currentSrcPos=nextCharacterPos
+            classPos = 0
+
     currentSrcPos = classPos+6+len(sectionStartSymbol)
+
+
 
     classBeginBracketPos = string.find(fileAsText, sectionStartSymbol, currentSrcPos)
     classEndBracketPos = -1
@@ -394,6 +430,91 @@ class PhysXToGlmConverter():
 \n\
 "
             methodAdded = addMethodAtEndOfSourceFile(fullFilePath, "clothing", methodText)
+        elif(file=="PxScene.h"):
+            methodDeclaration = "\
+\n\
+\n		//---------------------------------------------------------------------------------\
+\n		// Glm added accessor\
+\n		//---------------------------------------------------------------------------------\
+\n		virtual PxU32 getCollisionPairStatus(PxU32 pairID) = 0;\
+\n		//---------------------------------------------------------------------------------\
+\n\
+"
+            methodAdded = addMethodDeclarationInHeader(fullFilePath, "PxScene", methodDeclaration)
+        elif(file=="NpScene.h"):
+            methodDeclaration = "\
+\n\
+\n		//---------------------------------------------------------------------------------\
+\n		// Glm added accessor\
+\n		//---------------------------------------------------------------------------------\
+\n		virtual PxU32 getCollisionPairStatus(PxU32 pairID) { return mScene.getCollisionPairStatus(pairID); }\
+\n		//---------------------------------------------------------------------------------\
+\n\
+"
+            methodAdded = addMethodDeclarationInHeader(fullFilePath, "NpScene", methodDeclaration)
+        elif(file=="ScbScene.h"):
+            methodDeclaration = "\
+\n\
+\n		//---------------------------------------------------------------------------------\
+\n		// Glm added accessor\
+\n		//---------------------------------------------------------------------------------\
+\n		PxU32 getCollisionPairStatus(PxU32 pairID) { return mScene.getCollisionPairStatus(pairID); }\
+\n		//---------------------------------------------------------------------------------\
+\n\
+"
+            methodAdded = addMethodDeclarationInHeader(fullFilePath, "Scene", methodDeclaration)
+        elif(file=="ScScene.h"):
+            methodDeclaration = "\
+\n\
+\n		//---------------------------------------------------------------------------------\
+\n		// Glm added accessor\
+\n		//---------------------------------------------------------------------------------\
+\n		PxU32 getCollisionPairStatus(PxU32 pairID);\
+\n		//---------------------------------------------------------------------------------\
+\n\
+"
+            methodAdded = addMethodDeclarationInHeader(fullFilePath, "Scene", methodDeclaration)
+        elif(file=="ScScene.cpp"):
+            methodDeclaration = "\
+\n\
+\n		//---------------------------------------------------------------------------------\
+\n		// Glm added accessor\
+\n		//---------------------------------------------------------------------------------\
+\n      PxU32 Sc::Scene::getCollisionPairStatus(PxU32 pairID)\
+\n      {\
+\n      	return getNPhaseCore()->getCollisionPairStatus(pairID);\
+\n      }\
+\n		//---------------------------------------------------------------------------------\
+\n\
+"
+            methodAdded = addMethodAtEndOfSourceFile(fullFilePath, "", methodDeclaration)
+        elif(file=="ScNPhaseCore.h"):
+            methodDeclaration = "\
+\n\
+\n		//---------------------------------------------------------------------------------\
+\n		// Glm added accessor\
+\n		//---------------------------------------------------------------------------------\
+\n		PxU32 getCollisionPairStatus(PxU32 pairID);\
+\n		//---------------------------------------------------------------------------------\
+\n\
+"
+            methodAdded = addMethodDeclarationInHeader(fullFilePath, "NPhaseCore", methodDeclaration)
+        elif(file=="ScNPhaseCore.cpp"):
+            methodDeclaration = "\
+\n\
+\n		//---------------------------------------------------------------------------------\
+\n		// Glm added accessor\
+\n		//---------------------------------------------------------------------------------\
+\n		PxU32 Sc::NPhaseCore::getCollisionPairStatus(PxU32 pairID)\
+\n		{\
+\n			const FilterPair& fp = (*mFilterPairManager)[pairID];\
+\n			return fp.getType();\
+\n		}\
+\n		//---------------------------------------------------------------------------------\
+\n\
+"
+            methodAdded = addMethodAtEndOfSourceFile(fullFilePath, "", methodDeclaration)
+
 
 
         self.namespacesReplaced += namespaceReplacedCount
