@@ -48,8 +48,8 @@ def doCopyFileTree(src, dst, fileExtensions, ignoreDirectories):
                if(string.find(file, fileExtension)>=0):
                    filesFoundCount[iExtension] = filesFoundCount[iExtension]+1
                    print("\n          Copying file: {}").format(file)
-                   srcFile = "{}\\{}".format(root, file)
-                   dstFile = "{}\\{}".format(dstDir, file)
+                   srcFile = "{}/{}".format(root, file)
+                   dstFile = "{}/{}".format(dstDir, file)
                    makeDir(dstDir)
                    shutil.copy2(srcFile, dstFile)
                    break
@@ -63,8 +63,8 @@ def doCopyFileTree(src, dst, fileExtensions, ignoreDirectories):
     print(msg)
 
 def main():
-    src = os.path._getfullpathname(".")
-    dst = "{}\pack".format(src)
+    src = os.path.abspath(".")
+    dst = "{}/pack".format(src)
     ignoreDirectories = {".git", ".vs", "Externals", "KaplaDemo", "Documentation", "Sample", "Snippets", "Media", "compiler", "vc11win32", "vc12win32", "vc12win64", "vc14win32"}
     fileExtensions = {".h", ".inl", ".lib", ".dll", ".pdb", ".a", ".so"}
 
