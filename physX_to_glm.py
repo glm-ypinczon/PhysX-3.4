@@ -12,7 +12,7 @@ def addOrChangeXMLTagInFile(fullFilePath, XMLcontainerTag, XMLTag, value):
     openedOutputFile = False
 
     #print("Reading XML file: {}").format(fullFilePath)
-    srcFile = open(fullFilePath, 'r')
+    srcFile = open(fullFilePath.replace("\\", "/"), 'r')
     fileAsText = srcFile.read()
     srcFile.close()
 
@@ -38,7 +38,7 @@ def addOrChangeXMLTagInFile(fullFilePath, XMLcontainerTag, XMLTag, value):
             if(not openedOutputFile):
                 openedOutputFile = True
                 #print("Writing XML file: {}").format(fullFilePath)
-                dstFile = open(fullFilePath, 'w')
+                dstFile = open(fullFilePath.replace("\\", "/"), 'w')
             #write file
             nextSrcPos = xmlBeginTagPos-1
             nextFilePart = fileAsText[currentSrcPos:nextSrcPos]
@@ -66,7 +66,7 @@ def replaceTextInFile(fullFilePath, textToReplace, textReplacement):
     replacementCount = 0
 
     #print("Reading file: {}").format(fullFilePath)
-    srcFile = open(fullFilePath, 'r')
+    srcFile = open(fullFilePath.replace("\\", "/"), 'r')
     fileAsText = srcFile.read()
     srcFile.close()
 
@@ -83,7 +83,7 @@ def replaceTextInFile(fullFilePath, textToReplace, textReplacement):
         if(not openedOutputFile):
             openedOutputFile = True
             #print("Writing file: {}").format(fullFilePath)
-            dstFile = open(fullFilePath, 'w')
+            dstFile = open(fullFilePath.replace("\\", "/"), 'w')
    
         nextFilePart = fileAsText[currentSrcPos:nextSrcPos]
         dstFile.write(nextFilePart)
@@ -111,7 +111,7 @@ def addMethodDeclarationInHeader(fullFilePath, className, methodDeclarationText)
 
 #------------------------------------------------------------------
 def addTextAtEndOfSection(fullFilePath, sectionName, sectionValue, sectionStartSymbol, sectionEndSymbol, textToAdd, usePublicSubSection):
-    srcFile = open(fullFilePath, 'r')
+    srcFile = open(fullFilePath.replace("\\", "/"), 'r')
     fileAsText = srcFile.read()
     srcFile.close()
 
@@ -165,7 +165,7 @@ def addTextAtEndOfSection(fullFilePath, sectionName, sectionValue, sectionStartS
                 endOfPublicPartPos=nextPartPos
 
     #now finally write the file down with the added declaration text
-    dstFile = open(fullFilePath, 'w')
+    dstFile = open(fullFilePath.replace("\\", "/"), 'w')
     #write file
     dstFile.write(fileAsText[:endOfPublicPartPos])
     dstFile.write("\n")
@@ -459,7 +459,7 @@ class PhysXToGlmConverter():
 
 
 def main():
-    p = os.path._getfullpathname(".")
+    p = os.path.abspath(".")
 
     converter = PhysXToGlmConverter()
     converter.ignoreDirectories = {".git", "External", "external", "Documentation", ".vs", "build", "Lib", "Media"}
