@@ -233,6 +233,8 @@ APEX_API ApexSDKIntl*   CALL_CONV GetInternalApexSDK();
 	nvidia::GetInternalApexSDK()->reportError(PxErrorCode::eDEBUG_INFO          , __FILE__, __LINE__, __FUNCTION__, _A, ##__VA_ARGS__)
 #define APEX_DEBUG_WARNING(_A, ...) \
 	nvidia::GetInternalApexSDK()->reportError(PxErrorCode::eDEBUG_WARNING       , __FILE__, __LINE__, __FUNCTION__, _A, ##__VA_ARGS__)
+#define APEX_PERF_WARNING(_A, ...) \
+	nvidia::GetInternalApexSDK()->reportError(PxErrorCode::ePERF_WARNING       , __FILE__, __LINE__, __FUNCTION__, _A, ##__VA_ARGS__)
 #define APEX_DEPRECATED() \
 	nvidia::GetInternalApexSDK()->reportError(PxErrorCode::eINVALID_PARAMETER, __FILE__, __LINE__, __FUNCTION__, "This method is deprecated")
 #define APEX_DEPRECATED_ONCE() \

@@ -101,7 +101,7 @@ class ClothImpl : public UserAllocated, public Cloth
 	virtual void setPlanes(Range<const PxVec4>, uint32_t first, uint32_t last);
 	virtual uint32_t getNumPlanes() const;
 
-	virtual void setConvexes(Range<const uint32_t>, uint32_t first, uint32_t last);
+	virtual void setConvexes(Range<nvidia::Array<uint32_t>>, uint32_t first, uint32_t last);
 	virtual uint32_t getNumConvexes() const;
 
 	virtual void setTriangles(Range<const PxVec3>, uint32_t first, uint32_t last);
@@ -495,7 +495,6 @@ inline void ClothImpl<T>::setSpheres(Range<const PxVec4> spheres, uint32_t first
 	uint32_t oldSize = uint32_t(mCloth.mStartCollisionSpheres.size());
 	uint32_t newSize = uint32_t(spheres.size()) + oldSize - last + first;
 
-	PX_ASSERT(newSize <= 32);
 	PX_ASSERT(first <= oldSize);
 	PX_ASSERT(last <= oldSize);
 
@@ -588,7 +587,6 @@ inline void ClothImpl<T>::setCapsules(Range<const uint32_t> capsules, uint32_t f
 	uint32_t oldSize = mCloth.mCapsuleIndices.size();
 	uint32_t newSize = uint32_t(capsules.size() / 2) + oldSize - last + first;
 
-	PX_ASSERT(newSize <= 32);
 	PX_ASSERT(first <= oldSize);
 	PX_ASSERT(last <= oldSize);
 
@@ -637,7 +635,6 @@ inline void ClothImpl<T>::setPlanes(Range<const PxVec4> planes, uint32_t first, 
 	uint32_t oldSize = uint32_t(mCloth.mStartCollisionPlanes.size());
 	uint32_t newSize = uint32_t(planes.size()) + oldSize - last + first;
 
-	PX_ASSERT(newSize <= 32);
 	PX_ASSERT(first <= oldSize);
 	PX_ASSERT(last <= oldSize);
 
@@ -680,16 +677,18 @@ inline void ClothImpl<T>::setPlanes(Range<const PxVec4> planes, uint32_t first, 
 
 			// adjust convex indices
 			uint32_t mask = (uint32_t(1) << (last + PxMin(delta, 0))) - 1;
-			Vector<uint32_t>::Type::Iterator cIt, cEnd = mCloth.mConvexMasks.end();
+			Vector<Array<uint32_t>>::Type::Iterator cIt, cEnd = mCloth.mConvexMasks.end();
 			for(cIt = mCloth.mConvexMasks.begin(); cIt != cEnd;)
 			{
-				uint32_t convex = (*cIt & mask);
+				Array<uint32_t>::Iterator cItcGrid = cIt->begin();	//TODO: iterate on all grids (cIt.size())
+
+				uint32_t convex = (*cItcGrid & mask);
 				if(delta < 0)
-					convex |= *cIt >> -delta & ~mask;
+					convex |= *cItcGrid >> -delta & ~mask;
 				else
-					convex |= (*cIt & ~mask) << delta;
+					convex |= (*cItcGrid & ~mask) << delta;
 				if(convex)
-					*cIt++ = convex;
+					*cItcGrid++ = convex;
 				else
 				{
 					mCloth.mConvexMasks.replaceWithLast(cIt);
@@ -718,12 +717,11 @@ inline uint32_t ClothImpl<T>::getNumPlanes() const
 }
 
 template <typename T>
-inline void ClothImpl<T>::setConvexes(Range<const uint32_t> convexes, uint32_t first, uint32_t last)
+inline void ClothImpl<T>::setConvexes(Range<nvidia::Array<uint32_t>> convexes, uint32_t first, uint32_t last)
 {
 	uint32_t oldSize = mCloth.mConvexMasks.size();
-	uint32_t newSize = uint32_t(convexes.size()) + oldSize - last + first;
+	uint32_t newSize = uint32_t(convexes.size() ) + oldSize - last + first;
 
-	PX_ASSERT(newSize <= 32);
 	PX_ASSERT(first <= oldSize);
 	PX_ASSERT(last <= oldSize);
 
@@ -741,7 +739,7 @@ inline void ClothImpl<T>::setConvexes(Range<const uint32_t> convexes, uint32_t f
 		// move past-range elements to new place
 		move(mCloth.mConvexMasks.begin(), last, oldSize, last + delta);
 
-		// fill new elements from capsules
+		// fill new elements from convexes
 		for(uint32_t i = last; i < last + delta; ++i)
 			mCloth.mConvexMasks[i] = convexes[i - first];
 

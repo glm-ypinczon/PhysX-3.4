@@ -147,7 +147,7 @@ class SwCloth
 	Vector<IndexPair>::Type mCapsuleIndices;
 	Vec4fAlignedVector mStartCollisionSpheres;
 	Vec4fAlignedVector mTargetCollisionSpheres;
-	Vector<uint32_t>::Type mConvexMasks;
+	Vector<Array<uint32_t>>::Type mConvexMasks;
 	Vec4fAlignedVector mStartCollisionPlanes;
 	Vec4fAlignedVector mTargetCollisionPlanes;
 	Vector<PxVec3>::Type mStartCollisionTriangles;

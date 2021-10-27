@@ -209,7 +209,7 @@ private:
 	nvidia::Array<uint32_t>					mCollisionCapsulesInvalid;
 	nvidia::Array<PxVec4>					mCollisionSpheres;
 	nvidia::Array<PxVec4>					mCollisionPlanes;
-	nvidia::Array<uint32_t>					mCollisionConvexes;
+	nvidia::Array<nvidia::Array<uint32_t>>	mCollisionConvexes;
 	nvidia::Array<ClothingConvexImpl*>		mCollisionConvexesInvalid;
 	nvidia::Array<PxVec3>					mCollisionTrianglesOld;
 	nvidia::Array<PxVec3>					mCollisionTriangles;

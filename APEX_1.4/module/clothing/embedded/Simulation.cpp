@@ -315,13 +315,11 @@ bool Simulation::initPhysics(uint32_t _physicalMeshId, uint32_t* indices, PxVec3
 		if (mCloth != NULL)
 		{
 			// setup capsules
-			const uint32_t numSupportedCapsules = 32;
-			const uint32_t* collisionIndicesEnd = (mCollisionCapsules.size() > 2 * numSupportedCapsules) ? &mCollisionCapsules[2 * numSupportedCapsules] : mCollisionCapsules.end();
-			cloth::Range<const uint32_t> cIndices(mCollisionCapsules.begin(), collisionIndicesEnd);
+			cloth::Range<const uint32_t> cIndices(mCollisionCapsules.begin(), mCollisionCapsules.end());
 			mCloth->setCapsules(cIndices,0,mCloth->getNumCapsules());
 
 			// setup convexes
-			cloth::Range<const uint32_t> convexes(mCollisionConvexes.begin(), mCollisionConvexes.end());
+			cloth::Range<nvidia::Array<uint32_t>> convexes(mCollisionConvexes.begin(), mCollisionConvexes.end());
 			mCloth->setConvexes(convexes,0,mCloth->getNumConvexes());
 
 			mClothingScene->lockScene();
@@ -429,34 +427,17 @@ void Simulation::initCollision(tBoneActor* boneActors, uint32_t numBoneActors,
 		if (boneActors[i].convexVerticesCount == 0)
 		{
 			PX_ASSERT(boneActors[i].capsuleRadius > 0.0f);
-			if (mCollisionCapsules.size() < 32)
-			{
-				uint32_t index = mCollisionCapsules.size();
-				mCollisionCapsules.pushBack(index);
-				mCollisionCapsules.pushBack(index + 1);
-			}
-			else
-			{
-				uint32_t index = mCollisionCapsules.size() + mCollisionCapsulesInvalid.size();
-				mCollisionCapsulesInvalid.pushBack(index);
-				mCollisionCapsulesInvalid.pushBack(index + 1);
-			}
+			uint32_t index = mCollisionCapsules.size();
+			mCollisionCapsules.pushBack(index);
+			mCollisionCapsules.pushBack(index + 1);
 		}
 	}
 
 	// now add the sphere pairs for PhysX3 capsules
 	for (uint32_t i = 0; i < numSpherePairIndices; i += 2)
 	{
-		if (spherePairIndices[i] < 32 && spherePairIndices[i + 1] < 32)
-		{
-			mCollisionCapsules.pushBack(spherePairIndices[i]);
-			mCollisionCapsules.pushBack(spherePairIndices[i + 1]);
-		}
-		else
-		{
-			mCollisionCapsulesInvalid.pushBack(spherePairIndices[i]);
-			mCollisionCapsulesInvalid.pushBack(spherePairIndices[i + 1]);
-		}
+		mCollisionCapsules.pushBack(spherePairIndices[i]);
+		mCollisionCapsules.pushBack(spherePairIndices[i + 1]);
 	}
 	mNumAssetCapsules = mCollisionCapsules.size();
 	mNumAssetCapsulesInvalid = mCollisionCapsulesInvalid.size();
@@ -464,7 +445,9 @@ void Simulation::initCollision(tBoneActor* boneActors, uint32_t numBoneActors,
 	// convexes
 	for (uint32_t i = 0; i < numConvexes; ++i)
 	{
-		mCollisionConvexes.pushBack(convexes[i]);
+		nvidia::Array<uint32_t> tmp;
+		tmp.pushBack(convexes[i]);
+		mCollisionConvexes.pushBack(tmp);
 	}
 	mNumAssetConvexes = mCollisionConvexes.size();
 
@@ -477,15 +460,6 @@ void Simulation::initCollision(tBoneActor* boneActors, uint32_t numBoneActors,
 
 	updateCollision(boneActors, numBoneActors, boneSpheres, numBoneSpheres, bonePlanes, numBonePlanes, bones, boneTransforms,
 					actorPlanes, actorConvexes, actorSpheres, actorCapsules, actorTriangleMeshes, false);
-
-	if (!mCollisionCapsulesInvalid.empty())
-	{
-		PX_ASSERT(mCollisionSpheres.size() > 32);
-		if (mCollisionSpheres.size() > 32)
-		{
-			APEX_INVALID_PARAMETER("This asset has %d collision volumes, but only 32 are supported. %d will be ignored!", mCollisionSpheres.size(), mCollisionSpheres.size() - 32);
-		}
-	}
 }
 
 
@@ -621,16 +595,8 @@ void Simulation::updateCollision(tBoneActor* boneActors, uint32_t numBoneActors,
 		ClothingSphereImpl** spheres = (ClothingSphereImpl**)actorCapsule->getSpheres();
 		uint32_t s0 = (uint32_t)spheres[0]->getId();
 		uint32_t s1 = (uint32_t)spheres[1]->getId();
-		if (s0 > 32 || s1 > 32)
-		{
-			mCollisionCapsulesInvalid.pushBack(s0);
-			mCollisionCapsulesInvalid.pushBack(s1);
-		}
-		else
-		{
-			mCollisionCapsules.pushBack(s0);
-			mCollisionCapsules.pushBack(s1);
-		}
+		mCollisionCapsules.pushBack(s0);
+		mCollisionCapsules.pushBack(s1);
 	}
 
 
@@ -680,9 +646,11 @@ void Simulation::updateCollision(tBoneActor* boneActors, uint32_t numBoneActors,
 		mCollisionPlanes[planeId] = PxVec4(plane.n, plane.d);
 
 		// create a convex for unreferenced planes (otherwise they don't collide)
-		if (actorPlane->getRefCount() == 0 && planeId <= 32)
+		if (actorPlane->getRefCount() == 0 /*&& planeId <= 32*/)
 		{
-			mCollisionConvexes.pushBack(1u << planeId);
+			nvidia::Array<uint32_t> tmp;
+			tmp.pushBack(1u << planeId);
+			mCollisionConvexes.pushBack(tmp);	//TODO
 		}
 	}
 
@@ -691,21 +659,25 @@ void Simulation::updateCollision(tBoneActor* boneActors, uint32_t numBoneActors,
 	{
 		ClothingConvexImpl* convex = DYNAMIC_CAST(ClothingConvexImpl*)(actorConvexes.getResource(i));
 
-		uint32_t convexMask = 0;
+		nvidia::Array<uint32_t> convexMask;
+
 		ClothingPlaneImpl** planes = (ClothingPlaneImpl**)convex->getPlanes();
+		//get max plane id
+		uint32_t maxPlaneId(0);
+		for (uint32_t j = 0; j < convex->getNumPlanes(); ++j)
+			maxPlaneId = (uint32_t)planes[j]->getId() > maxPlaneId ? (uint32_t)planes[j]->getId() : maxPlaneId;
+		uint32_t planeIterationsCount = (uint32_t)::ceilf(maxPlaneId / 32.f);
+		convexMask.resize(planeIterationsCount, 0);
+
 		for (uint32_t j = 0; j < convex->getNumPlanes(); ++j)
 		{
 			ClothingPlaneImpl* plane = planes[j];
 			uint32_t planeId = (uint32_t)plane->getId();
-			if (planeId > 32)
-			{
-				convexMask = 0;
-				break;
-			}
-			convexMask |= 1 << planeId;
+			uint32_t planeIterationsIndex = (uint32_t)::floorf(planeId / 32.f);
+			convexMask[planeIterationsIndex] |= 1 << planeId;
 		}
 
-		if (convexMask > 0)
+		if (convexMask.size() > 0)
 		{
 			mCollisionConvexes.pushBack(convexMask);
 		}
@@ -1029,7 +1001,7 @@ void Simulation::visualizeConvexes(RenderDebugInterface& renderDebug)
 
 		for(uint32_t i=0; i<mCollisionConvexes.size(); ++i)
 		{
-			builder(mCollisionConvexes[i], scale);
+			builder(mCollisionConvexes[i][0], scale);
 		}
 
 		for (uint32_t i = 0; i < builder.mIndices.size(); i += 3)
@@ -1173,7 +1145,7 @@ void Simulation::visualize(RenderDebugInterface& renderDebug, ClothingDebugRende
 		{
 			if (!usedSpheres[i])
 			{
-				RENDER_DEBUG_IFACE(&renderDebug)->setCurrentColor(i < 32 ? colorGray : colorRed);
+				RENDER_DEBUG_IFACE(&renderDebug)->setCurrentColor(/*i < 32 ?*/ colorGray /*: colorRed*/);
 				RENDER_DEBUG_IFACE(&renderDebug)->debugSphere(mCollisionSpheres[i].getXYZ(), mCollisionSpheres[i].w);
 			}
 		}
@@ -2192,14 +2164,14 @@ void Simulation::applyCollision()
 			for (int32_t i = (int32_t)numReleased-1; i >= 0; --i)
 			{
 				uint32_t id = mReleasedSphereIds[(uint32_t)i];
-				if(id < 32)
+				//if(id < 32)
 				{
 					mCloth->setSpheres(cloth::Range<const PxVec4>(),id, id+1);
 				}
 			}
 			mReleasedSphereIds.clear();
 		}
-		PxVec4* end = (mCollisionSpheres.size() > 32) ? mCollisionSpheres.begin() + 32 : mCollisionSpheres.end();
+		PxVec4* end = /*(mCollisionSpheres.size() > 32) ? mCollisionSpheres.begin() + 32 :*/ mCollisionSpheres.end();
 		cloth::Range<const PxVec4> spheres((PxVec4*)mCollisionSpheres.begin(), end);
 		mCloth->setSpheres(spheres, 0, mCloth->getNumSpheres());
 
@@ -2218,20 +2190,17 @@ void Simulation::applyCollision()
 			for (int32_t i = (int32_t)numReleased-1; i >= 0; --i)
 			{
 				uint32_t id = mReleasedPlaneIds[(uint32_t)i];
-				if(id < 32)
-				{
-					mCloth->setPlanes(cloth::Range<const PxVec4>(),id, id+1);
-				}
+				mCloth->setPlanes(cloth::Range<const PxVec4>(),id, id+1);
 			}
 			mReleasedPlaneIds.clear();
 		}
 
-		end = (mCollisionPlanes.size() > 32) ? mCollisionPlanes.begin() + 32 : mCollisionPlanes.end();
+		end = mCollisionPlanes.end();
 		cloth::Range<const PxVec4> planes((PxVec4*)mCollisionPlanes.begin(), end);
 		mCloth->setPlanes(planes, 0, mCloth->getNumPlanes());
 
 		// convexes
-		cloth::Range<const uint32_t> convexes(mCollisionConvexes.begin(), mCollisionConvexes.end());
+		cloth::Range<nvidia::Array<uint32_t>> convexes(mCollisionConvexes.begin(), mCollisionConvexes.end());
 		mCloth->setConvexes(convexes,0,mCloth->getNumConvexes());
 
 		// triangle meshes

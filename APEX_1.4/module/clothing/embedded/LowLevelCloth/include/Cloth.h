@@ -15,6 +15,7 @@
 
 #include "Range.h"
 #include "PhaseConfig.h"
+#include "PsArray.h"
 
 struct ID3D11Buffer;
 
@@ -177,7 +178,7 @@ class Cloth
 	virtual void setPlanes(Range<const PxVec4>, uint32_t first, uint32_t last) = 0;
 	virtual uint32_t getNumPlanes() const = 0;
 
-	virtual void setConvexes(Range<const uint32_t>, uint32_t first, uint32_t last) = 0;
+	virtual void setConvexes(Range<nvidia::Array<uint32_t>>, uint32_t first, uint32_t last) = 0;
 	virtual uint32_t getNumConvexes() const = 0;
 
 	virtual void setTriangles(Range<const PxVec3>, uint32_t first, uint32_t last) = 0;

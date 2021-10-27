@@ -139,7 +139,7 @@ class SwCollision
 	ShapeMask getShapeMask(const Simd4f*) const;
 	ShapeMask getShapeMask(const Simd4f*, const Simd4f*) const;
 
-	void collideSpheres(const Simd4i&, const Simd4f*, ImpulseAccumulator&) const;
+	void collideSpheres(const Simd4i&, const Simd4f*, ImpulseAccumulator&, const SphereData* currentSpheresData, const SphereData* prevSpheresData) const;
 	Simd4i collideCones(const Simd4f*, ImpulseAccumulator&) const;
 
 	void collideSpheres(const Simd4i&, const Simd4f*, Simd4f*, ImpulseAccumulator&) const;
@@ -157,9 +157,13 @@ class SwCollision
 
   public:
 	// acceleration structure
+	uint32_t sGridsCount = 1;
 	static const uint32_t sGridSize = 8;
-	Simd4i mSphereGrid[6 * sGridSize / 4];
-	Simd4i mConeGrid[6 * sGridSize / 4];
+	static const uint32_t sGridsPan = 6 * sGridSize / 4;
+	Simd4i* mfullSphereGrid;
+	Simd4i* mfullConeGrid;
+	Simd4i* mSphereGrid;
+	Simd4i* mConeGrid;
 	Simd4f mGridScale, mGridBias;
 
 	CollisionData mPrevData;

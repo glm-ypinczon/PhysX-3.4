@@ -126,5 +126,5 @@ void cloth::SwClothData::verify() const
 	PX_ASSERT(!mNumCapsules ||
 	          mNumSpheres > *nvidia::maxElement(&mCapsuleIndices->first, &(mCapsuleIndices + mNumCapsules)->first));
 
-	PX_ASSERT(!mNumConvexes || (1u << mNumPlanes) - 1 >= *nvidia::maxElement(mConvexMasks, mConvexMasks + mNumConvexes));
+	//PX_ASSERT(!mNumConvexes || (1u << mNumPlanes) - 1 >= *nvidia::maxElement(mConvexMasks, mConvexMasks + mNumConvexes));
 }

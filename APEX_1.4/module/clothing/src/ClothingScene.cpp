@@ -778,7 +778,7 @@ void ClothingScene::setSceneRunning(bool on)
 		{
 			float averageSimulatedTime = mSimulatedTime / (float)mFramesCount;
 			float averageTimestep = mTimestep / (float)mFramesCount;
-			APEX_DEBUG_WARNING("Cloth complexity in scene is too high to be simulated in real time for 10 consecutive frames. (Average Delta Time: %f ms, Average Simulation Time: %f ms)", 
+			APEX_PERF_WARNING("Cloth complexity in scene is too high to be simulated in real time for 10 consecutive frames. (Average Delta Time: %f ms, Average Simulation Time: %f ms)",
 								averageSimulatedTime, averageTimestep);
 			mFramesCount	= 0;
 			mSimulatedTime	= 0.f;
