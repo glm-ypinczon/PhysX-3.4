@@ -45,10 +45,10 @@ typedef HashMap<const PxShape*, OwnerActorsValueType*> OwnerActorsMap;
 
 struct PvdMetaDataBindingData : public UserAllocated
 {
-	Array<PxU8> mTempU8Array;
-	Array<PxActor*> mActors;
-	Array<PxArticulation*> mArticulations;
-	Array<PxArticulationLink*> mArticulationLinks;
+	physx::shdfnd::Array<PxU8> mTempU8Array;
+	physx::shdfnd::Array<PxActor*> mActors;
+	physx::shdfnd::Array<PxArticulation*> mArticulations;
+	physx::shdfnd::Array<PxArticulationLink*> mArticulationLinks;
 	HashSet<PxActor*> mSleepingActors;
 	OwnerActorsMap mOwnerActorsMap;
 

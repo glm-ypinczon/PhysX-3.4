@@ -247,7 +247,7 @@ public:
 		}
 		else
 		{
-			materials = Array<PxMaterial*>(materialArray, materialArray + materialCount);
+			materials = physx::shdfnd::Array<PxMaterial*>(materialArray, materialArray + materialCount);
 		}
 		return valid;
 	}
@@ -352,7 +352,7 @@ public:
 
 	// shape
 	uint8_t				shapeFlags;
-	Array<PxMaterial*>	materials;
+	physx::shdfnd::Array<PxMaterial*>	materials;
 	void*				shapeUserData;
 	const char*			shapeName;
 	PxFilterData		simulationFilterData;

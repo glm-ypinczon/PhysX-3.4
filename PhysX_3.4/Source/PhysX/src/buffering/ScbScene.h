@@ -326,7 +326,16 @@ namespace Scb
 		PX_FORCE_INLINE	Sc::Scene&			getScScene()							{ return mScene;						}
 		PX_FORCE_INLINE void				prepareOutOfBoundsCallbacks()			{ mScene.prepareOutOfBoundsCallbacks();	}
 
-	private:
+	
+
+
+		//---------------------------------------------------------------------------------
+		// Glm added accessor
+		//---------------------------------------------------------------------------------
+		PxU32 getCollisionPairStatus(PxU32 pairID) { return mScene.getCollisionPairStatus(pairID); }
+		//---------------------------------------------------------------------------------
+
+private:
 						void				syncState();
 		PX_FORCE_INLINE	Ps::IntBool			isBuffered(BufferFlag f)	const	{ return Ps::IntBool(mBufferFlags& f);	}
 		PX_FORCE_INLINE	void				markUpdated(BufferFlag f)			{ mBufferFlags |= f;					}

@@ -362,6 +362,15 @@ class NpScene : public NpSceneQueries, public Ps::UserAllocated
 
 	PX_FORCE_INLINE PxReal							getWakeCounterResetValueInteral() const { return mScene.getWakeCounterResetValue(); }
 
+
+
+
+		//---------------------------------------------------------------------------------
+		// Glm added accessor
+		//---------------------------------------------------------------------------------
+		virtual PxU32 getCollisionPairStatus(PxU32 pairID) { return mScene.getCollisionPairStatus(pairID); }
+		//---------------------------------------------------------------------------------
+
 private:
 					bool							checkResultsInternal(bool block);
 					bool							checkCollisionInternal(bool block);

@@ -84,7 +84,7 @@ struct ClothingGraphicalMeshActor
 
 	bool active;
 	bool needsTangents;
-	Array<uint32_t> morphTargetVertexOffsets;
+	physx::shdfnd::Array<uint32_t> morphTargetVertexOffsets;
 
 	ClothingRenderProxyImpl* renderProxy;
 };
@@ -414,7 +414,7 @@ protected:
 	uint32_t				mCurrentGraphicalLodId;
 
 
-	Array<ClothingGraphicalMeshActor> mGraphicalMeshes;
+	physx::shdfnd::Array<ClothingGraphicalMeshActor> mGraphicalMeshes;
 	
 	Mutex					mRenderProxyMutex;
 	ClothingRenderProxyImpl*	mRenderProxyReady;

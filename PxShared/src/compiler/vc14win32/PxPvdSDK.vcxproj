@@ -92,7 +92,7 @@
     <OutDir>./../../../bin/vc14win32\</OutDir>
     <IntDir>./Win32/PxPvdSDK/debug\</IntDir>
     <TargetExt>.dll</TargetExt>
-    <TargetName>PxPvdSDKDEBUG_x86</TargetName>
+    <TargetName>glm_PxPvdSDKDEBUG_x86</TargetName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules/>
     <CodeAnalysisRuleAssemblies/>
@@ -113,23 +113,25 @@
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;PX_PVDSDK_DLL=1;PX_FOUNDATION_DLL=1;_DEBUG;PX_DEBUG=1;PX_CHECKED=1;PX_NVTX=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <WarningLevel>Level4</WarningLevel>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalOptions>/DELAYLOAD:PxFoundationDEBUG_x86.dll</AdditionalOptions>
+      <AdditionalOptions>/DELAYLOAD:glm_PxFoundationDEBUG_x86.dll</AdditionalOptions>
       <AdditionalDependencies>./../../../../Externals/nvToolsExt/1/lib/Win32/nvToolsExt32_1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)PxPvdSDKDEBUG_x86.dll</OutputFile>
+      <OutputFile>$(OutDir)glm_PxPvdSDKDEBUG_x86.dll</OutputFile>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <ImportLibrary>./../../../lib/vc14win32/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
-    </Link>
+  
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+ </Link>
     <ResourceCompile></ResourceCompile>
     <ProjectReference></ProjectReference>
   </ItemDefinitionGroup>
@@ -137,7 +139,7 @@
     <OutDir>./../../../bin/vc14win32\</OutDir>
     <IntDir>./Win32/PxPvdSDK/release\</IntDir>
     <TargetExt>.dll</TargetExt>
-    <TargetName>PxPvdSDK_x86</TargetName>
+    <TargetName>glm_PxPvdSDK_x86</TargetName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules/>
     <CodeAnalysisRuleAssemblies/>
@@ -157,23 +159,25 @@
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;PX_PVDSDK_DLL=1;PX_FOUNDATION_DLL=1;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <WarningLevel>Level4</WarningLevel>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalOptions>/INCREMENTAL:NO /DELAYLOAD:PxFoundation_x86.dll</AdditionalOptions>
+      <AdditionalOptions>/INCREMENTAL:NO /DELAYLOAD:glm_PxFoundation_x86.dll</AdditionalOptions>
       <AdditionalDependencies>./../../../../Externals/nvToolsExt/1/lib/Win32/nvToolsExt32_1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)PxPvdSDK_x86.dll</OutputFile>
+      <OutputFile>$(OutDir)glm_PxPvdSDK_x86.dll</OutputFile>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <ImportLibrary>./../../../lib/vc14win32/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
-    </Link>
+  
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+ </Link>
     <ResourceCompile></ResourceCompile>
     <ProjectReference></ProjectReference>
   </ItemDefinitionGroup>
@@ -181,7 +185,7 @@
     <OutDir>./../../../bin/vc14win32\</OutDir>
     <IntDir>./Win32/PxPvdSDK/checked\</IntDir>
     <TargetExt>.dll</TargetExt>
-    <TargetName>PxPvdSDKCHECKED_x86</TargetName>
+    <TargetName>glm_PxPvdSDKCHECKED_x86</TargetName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules/>
     <CodeAnalysisRuleAssemblies/>
@@ -201,23 +205,25 @@
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;PX_PVDSDK_DLL=1;PX_FOUNDATION_DLL=1;NDEBUG;PX_CHECKED=1;PX_NVTX=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <WarningLevel>Level4</WarningLevel>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalOptions>/DELAYLOAD:PxFoundationCHECKED_x86.dll</AdditionalOptions>
+      <AdditionalOptions>/DELAYLOAD:glm_PxFoundationCHECKED_x86.dll</AdditionalOptions>
       <AdditionalDependencies>./../../../../Externals/nvToolsExt/1/lib/Win32/nvToolsExt32_1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)PxPvdSDKCHECKED_x86.dll</OutputFile>
+      <OutputFile>$(OutDir)glm_PxPvdSDKCHECKED_x86.dll</OutputFile>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <ImportLibrary>./../../../lib/vc14win32/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
-    </Link>
+  
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+ </Link>
     <ResourceCompile></ResourceCompile>
     <ProjectReference></ProjectReference>
   </ItemDefinitionGroup>
@@ -225,7 +231,7 @@
     <OutDir>./../../../bin/vc14win32\</OutDir>
     <IntDir>./Win32/PxPvdSDK/profile\</IntDir>
     <TargetExt>.dll</TargetExt>
-    <TargetName>PxPvdSDKPROFILE_x86</TargetName>
+    <TargetName>glm_PxPvdSDKPROFILE_x86</TargetName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules/>
     <CodeAnalysisRuleAssemblies/>
@@ -245,23 +251,25 @@
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;PX_PVDSDK_DLL=1;PX_FOUNDATION_DLL=1;NDEBUG;PX_PROFILE=1;PX_NVTX=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <WarningLevel>Level4</WarningLevel>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalOptions>/INCREMENTAL:NO /DELAYLOAD:PxFoundationPROFILE_x86.dll</AdditionalOptions>
+      <AdditionalOptions>/INCREMENTAL:NO /DELAYLOAD:glm_PxFoundationPROFILE_x86.dll</AdditionalOptions>
       <AdditionalDependencies>./../../../../Externals/nvToolsExt/1/lib/Win32/nvToolsExt32_1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)PxPvdSDKPROFILE_x86.dll</OutputFile>
+      <OutputFile>$(OutDir)glm_PxPvdSDKPROFILE_x86.dll</OutputFile>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <ImportLibrary>./../../../lib/vc14win32/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
-    </Link>
+  
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+ </Link>
     <ResourceCompile></ResourceCompile>
     <ProjectReference></ProjectReference>
   </ItemDefinitionGroup>

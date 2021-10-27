@@ -61,19 +61,19 @@ private:
 	{
 		SubMesh(): renderResource(NULL) {}
 
-		Array<uint32_t>			mIndexCache;
+		physx::shdfnd::Array<uint32_t>			mIndexCache;
 		UserRenderResource*	renderResource;
 	};
 	// To Handle Bone Limit
 	struct ConvexGroup
 	{
-		Array<SubMesh>			mSubMeshes;
-		Array<Convex*>			mConvexCache;
-		Array<PxVec3>			mVertexCache;
-		Array<PxVec3>			mNormalCache;
-		Array<PxVec2>			mTexcoordCache;
-		Array<uint16_t>			mBoneIndexCache;
-		Array<PxMat44>			mBoneCache;
+		physx::shdfnd::Array<SubMesh>			mSubMeshes;
+		physx::shdfnd::Array<Convex*>			mConvexCache;
+		physx::shdfnd::Array<PxVec3>			mVertexCache;
+		physx::shdfnd::Array<PxVec3>			mNormalCache;
+		physx::shdfnd::Array<PxVec2>			mTexcoordCache;
+		physx::shdfnd::Array<uint16_t>			mBoneIndexCache;
+		physx::shdfnd::Array<PxMat44>			mBoneCache;
 	};
 	// Shared by SubMeshes
 	struct MaterialInfo
@@ -84,8 +84,8 @@ private:
 		ResID		mMaterialID;
 	};
 	//
-	Array<ConvexGroup>	mConvexGroups;
-	Array<MaterialInfo> mMaterialInfo;
+	physx::shdfnd::Array<ConvexGroup>	mConvexGroups;
+	physx::shdfnd::Array<MaterialInfo> mMaterialInfo;
 
 	UserRenderVertexBuffer*	mVertexBuffer;
 	UserRenderIndexBuffer*	mIndexBuffer;

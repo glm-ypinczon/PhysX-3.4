@@ -123,7 +123,7 @@ namespace physx
 namespace shdfnd
 {
 template <typename T>
-void swap(Array<T, typename physx::cloth::CuHostAllocator>& left, Array<T, typename physx::cloth::CuHostAllocator>& right)
+void swap(physx::shdfnd::Array<T, typename physx::cloth::CuHostAllocator>& left, physx::shdfnd::Array<T, typename physx::cloth::CuHostAllocator>& right)
 {
 	swap(left.getAllocator(), right.getAllocator());
 	left.swap(right);

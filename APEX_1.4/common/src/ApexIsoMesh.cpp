@@ -625,8 +625,8 @@ void ApexIsoMesh::removeTrisAndVerts()
 		}
 	}
 
-	Array<int32_t> oldToNew;
-	Array<PxVec3> newVertices;
+	physx::shdfnd::Array<int32_t> oldToNew;
+	physx::shdfnd::Array<PxVec3> newVertices;
 
 	oldToNew.resize(mIsoVertices.size(), -1);
 

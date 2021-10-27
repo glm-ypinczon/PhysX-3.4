@@ -61,7 +61,7 @@ class PX_FOUNDATION_API Foundation : public PxFoundation, public UserAllocated
 	typedef MutexT<Allocator> Mutex;
 
 	typedef HashMap<const NamedAllocator*, const char*, Hash<const NamedAllocator*>, NonTrackingAllocator> AllocNameMap;
-	typedef Array<TempAllocatorChunk*, Allocator> AllocFreeTable;
+	typedef physx::shdfnd::Array<TempAllocatorChunk*, Allocator> AllocFreeTable;
 
   public:
 	// factory

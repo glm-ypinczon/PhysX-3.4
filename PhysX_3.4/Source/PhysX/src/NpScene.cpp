@@ -180,7 +180,7 @@ NpScene::~NpScene()
 		removeArticulation(*mArticulations.getEntries()[articCount], false);
 
 	// release volume caches
-	Array<NpVolumeCache*> caches; caches.reserve(mVolumeCaches.size());
+	physx::shdfnd::Array<NpVolumeCache*> caches; caches.reserve(mVolumeCaches.size());
 	for(HashSet<NpVolumeCache*>::Iterator iter = mVolumeCaches.getIterator(); !iter.done(); ++iter)
 		caches.pushBack(*iter);
 	for(PxU32 i = 0; i < caches.size(); i++)

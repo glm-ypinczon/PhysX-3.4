@@ -78,13 +78,13 @@
 			<PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_WIN32;AG_PERFMON;_DEBUG;PX_CHECKED;PX_SUPPORT_VISUAL_DEBUGGER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level3</WarningLevel>
-			<RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalDependencies>OpenGL32.lib;glut32.lib;PhysX3DEBUG_x86.lib;PhysX3CookingDEBUG_x86.lib;PhysX3CommonDEBUG_x86.lib;PhysX3CharacterKinematicDEBUG_x86.lib;PhysX3VehicleDEBUG.lib;PhysX3ExtensionsDEBUG.lib;PxTaskDEBUG_x86.lib;PxPvdSDKDEBUG_x86.lib;PxFoundationDEBUG_x86.lib;cgGL.lib;cg.lib;GFSDK_SSAO_GL.WIN32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>OpenGL32.lib;glut32.lib;glm_PhysX3DEBUG_x86.lib;glm_PhysX3CookingDEBUG_x86.lib;glm_PhysX3CommonDEBUG_x86.lib;glm_PhysX3CharacterKinematicDEBUG_x86.lib;PhysX3VehicleDEBUG.lib;PhysX3ExtensionsDEBUG.lib;PxTaskDEBUG_x86.lib;glm_PxPvdSDKDEBUG_x86.lib;glm_PxFoundationDEBUG_x86.lib;cgGL.lib;cg.lib;GFSDK_SSAO_GL.WIN32.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)$(ProjectName)DEBUG.exe</OutputFile>
 			<AdditionalLibraryDirectories>./../../../../PhysX_3.4/lib/VC12WIN32;./../../../../PhysX_3.4/Samples/PxToolkit/lib/VC12WIN32;./../../../lib/VC12WIN32;./../../../../PxShared/lib/VC12WIN32;./../../../externalIP/glew-1.13.0/lib/WIN32;./../../../externalIP/glut-3.7.6/lib/WIN32;./../../../externalIP/hbao+3.0/lib/WIN32;./../../../../Externals/cg/2.2/lib;./../../../lib/VC12WIN32-PhysX_3.4;./../../../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/$(ProjectName)DEBUG.exe.pdb</ProgramDatabaseFile>
@@ -92,7 +92,9 @@
 			<ImportLibrary>./../../../lib/VC12WIN32-PhysX_3.4/$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -123,13 +125,13 @@
 			<PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_WIN32;AG_PERFMON;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level3</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalDependencies>OpenGL32.lib;glut32.lib;PhysX3_x86.lib;PhysX3Cooking_x86.lib;PhysX3Common_x86.lib;PhysX3CharacterKinematic_x86.lib;PhysX3Vehicle.lib;PhysX3Extensions.lib;PxTask_x86.lib;PxPvdSDK_x86.lib;PxFoundation_x86.lib;cgGL.lib;cg.lib;GFSDK_SSAO_GL.WIN32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>OpenGL32.lib;glut32.lib;glm_PhysX3_x86.lib;glm_PhysX3Cooking_x86.lib;glm_PhysX3Common_x86.lib;glm_PhysX3CharacterKinematic_x86.lib;PhysX3Vehicle.lib;PhysX3Extensions.lib;PxTask_x86.lib;glm_PxPvdSDK_x86.lib;glm_PxFoundation_x86.lib;cgGL.lib;cg.lib;GFSDK_SSAO_GL.WIN32.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
 			<AdditionalLibraryDirectories>./../../../../PhysX_3.4/lib/VC12WIN32;./../../../../PhysX_3.4/Samples/PxToolkit/lib/VC12WIN32;./../../../lib/VC12WIN32;./../../../../PxShared/lib/VC12WIN32;./../../../externalIP/glew-1.13.0/lib/WIN32;./../../../externalIP/glut-3.7.6/lib/WIN32;./../../../externalIP/hbao+3.0/lib/WIN32;./../../../../Externals/cg/2.2/lib;./../../../lib/VC12WIN32-PhysX_3.4;./../../../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/$(ProjectName).exe.pdb</ProgramDatabaseFile>
@@ -137,7 +139,9 @@
 			<ImportLibrary>./../../../lib/VC12WIN32-PhysX_3.4/$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -168,13 +172,13 @@
 			<PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_WIN32;AG_PERFMON;NDEBUG;PX_CHECKED;PX_SUPPORT_VISUAL_DEBUGGER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level3</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalDependencies>OpenGL32.lib;glut32.lib;PhysX3CHECKED_x86.lib;PhysX3CookingCHECKED_x86.lib;PhysX3CommonCHECKED_x86.lib;PhysX3CharacterKinematicCHECKED_x86.lib;PhysX3VehicleCHECKED.lib;PhysX3ExtensionsCHECKED.lib;PxTaskCHECKED_x86.lib;PxPvdSDKCHECKED_x86.lib;PxFoundationCHECKED_x86.lib;cgGL.lib;cg.lib;GFSDK_SSAO_GL.WIN32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>OpenGL32.lib;glut32.lib;glm_PhysX3CHECKED_x86.lib;glm_PhysX3CookingCHECKED_x86.lib;glm_PhysX3CommonCHECKED_x86.lib;glm_PhysX3CharacterKinematicCHECKED_x86.lib;PhysX3VehicleCHECKED.lib;PhysX3ExtensionsCHECKED.lib;PxTaskCHECKED_x86.lib;glm_PxPvdSDKCHECKED_x86.lib;glm_PxFoundationCHECKED_x86.lib;cgGL.lib;cg.lib;GFSDK_SSAO_GL.WIN32.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)$(ProjectName)CHECKED.exe</OutputFile>
 			<AdditionalLibraryDirectories>./../../../../PhysX_3.4/lib/VC12WIN32;./../../../../PhysX_3.4/Samples/PxToolkit/lib/VC12WIN32;./../../../lib/VC12WIN32;./../../../../PxShared/lib/VC12WIN32;./../../../externalIP/glew-1.13.0/lib/WIN32;./../../../externalIP/glut-3.7.6/lib/WIN32;./../../../externalIP/hbao+3.0/lib/WIN32;./../../../../Externals/cg/2.2/lib;./../../../lib/VC12WIN32-PhysX_3.4;./../../../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/$(ProjectName)CHECKED.exe.pdb</ProgramDatabaseFile>
@@ -182,7 +186,9 @@
 			<ImportLibrary>./../../../lib/VC12WIN32-PhysX_3.4/$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -213,13 +219,13 @@
 			<PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_WIN32;AG_PERFMON;NDEBUG;PX_PROFILE;PX_SUPPORT_VISUAL_DEBUGGER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level3</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalDependencies>OpenGL32.lib;glut32.lib;PhysX3PROFILE_x86.lib;PhysX3CookingPROFILE_x86.lib;PhysX3CommonPROFILE_x86.lib;PhysX3CharacterKinematicPROFILE_x86.lib;PhysX3VehiclePROFILE.lib;PhysX3ExtensionsPROFILE.lib;PxTaskPROFILE_x86.lib;PxPvdSDKPROFILE_x86.lib;PxFoundationPROFILE_x86.lib;cgGL.lib;cg.lib;GFSDK_SSAO_GL.WIN32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>OpenGL32.lib;glut32.lib;glm_PhysX3PROFILE_x86.lib;glm_PhysX3CookingPROFILE_x86.lib;glm_PhysX3CommonPROFILE_x86.lib;glm_PhysX3CharacterKinematicPROFILE_x86.lib;PhysX3VehiclePROFILE.lib;PhysX3ExtensionsPROFILE.lib;PxTaskPROFILE_x86.lib;glm_PxPvdSDKPROFILE_x86.lib;glm_PxFoundationPROFILE_x86.lib;cgGL.lib;cg.lib;GFSDK_SSAO_GL.WIN32.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)$(ProjectName)PROFILE.exe</OutputFile>
 			<AdditionalLibraryDirectories>./../../../../PhysX_3.4/lib/VC12WIN32;./../../../../PhysX_3.4/Samples/PxToolkit/lib/VC12WIN32;./../../../lib/VC12WIN32;./../../../../PxShared/lib/VC12WIN32;./../../../externalIP/glew-1.13.0/lib/WIN32;./../../../externalIP/glut-3.7.6/lib/WIN32;./../../../externalIP/hbao+3.0/lib/WIN32;./../../../../Externals/cg/2.2/lib;./../../../lib/VC12WIN32-PhysX_3.4;./../../../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(OutDir)/$(ProjectName)PROFILE.exe.pdb</ProgramDatabaseFile>
@@ -227,7 +233,9 @@
 			<ImportLibrary>./../../../lib/VC12WIN32-PhysX_3.4/$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>

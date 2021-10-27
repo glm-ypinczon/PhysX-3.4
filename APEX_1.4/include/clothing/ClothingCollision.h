@@ -38,7 +38,7 @@ struct ClothingCollisionType
 	enum Enum
 	{
 		Plane,
-		Convex,
+		Convex_,
 		Sphere,
 		Capsule,
 		TriangleMesh

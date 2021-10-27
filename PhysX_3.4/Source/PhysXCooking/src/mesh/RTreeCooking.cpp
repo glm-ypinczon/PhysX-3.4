@@ -83,16 +83,16 @@ struct PxBounds3V
 
 static void buildFromBounds(
 	Gu::RTree& resultTree, const PxBounds3V* allBounds, PxU32 numBounds,
-	Array<PxU32>& resultPermute, RTreeCooker::RemapCallback* rc, Vec3VArg allMn, Vec3VArg allMx,
+	physx::shdfnd::Array<PxU32>& resultPermute, RTreeCooker::RemapCallback* rc, Vec3VArg allMn, Vec3VArg allMx,
 	PxReal sizePerfTradeOff, PxMeshCookingHint::Enum hint);
 
 /////////////////////////////////////////////////////////////////////////
 void RTreeCooker::buildFromTriangles(
 	Gu::RTree& result, const PxVec3* verts, PxU32 numVerts, const PxU16* tris16, const PxU32* tris32, PxU32 numTris,
-	Array<PxU32>& resultPermute, RTreeCooker::RemapCallback* rc, PxReal sizePerfTradeOff01, PxMeshCookingHint::Enum hint)
+	physx::shdfnd::Array<PxU32>& resultPermute, RTreeCooker::RemapCallback* rc, PxReal sizePerfTradeOff01, PxMeshCookingHint::Enum hint)
 {
 	PX_UNUSED(numVerts);
-	Array<PxBounds3V> allBounds;
+	physx::shdfnd::Array<PxBounds3V> allBounds;
 	allBounds.reserve(numTris);
 	Vec3V allMn = Vec3V_From_FloatV(FMax()), allMx = Vec3V_From_FloatV(FNegMax());
 	Vec3V eps = V3Splat(FLoad(5e-4f)); // AP scaffold: use PxTolerancesScale here?
@@ -162,7 +162,7 @@ struct SubSortQuick
 	const PxU32* permuteEnd;
 	const PxU32* permuteStart;
 	const PxBounds3V* allBounds;
-	Array<PxVec3> boundCenters;
+	physx::shdfnd::Array<PxVec3> boundCenters;
 	PxU32 maxBoundsPerLeafPage;
 
 	// initialize the context for the sorting routine
@@ -182,7 +182,7 @@ struct SubSortQuick
 	// implements the sorting/splitting procedure
 	void sort4(
 		PxU32* PX_RESTRICT permute, const PxU32 clusterSize, // beginning and size of current recursively processed cluster
-		Array<RTreeNodeNQ>& resultTree, PxU32& maxLevels,
+		physx::shdfnd::Array<RTreeNodeNQ>& resultTree, PxU32& maxLevels,
 		PxBounds3V& subTreeBound, PxU32 level = 0)
 	{
 		if(level == 0)
@@ -542,7 +542,7 @@ struct SubSortSAH
 	////////////////////////////////////////////////////////////////////
 	// main SAH sort routine
 	void sort4(PxU32* permute, PxU32 clusterSize,
-		Array<RTreeNodeNQ>& resultTree, PxU32& maxLevels, PxU32 level = 0, RTreeNodeNQ* parentNode = NULL)
+		physx::shdfnd::Array<RTreeNodeNQ>& resultTree, PxU32& maxLevels, PxU32 level = 0, RTreeNodeNQ* parentNode = NULL)
 	{
 		PX_UNUSED(parentNode);
 
@@ -725,7 +725,7 @@ struct SubSortSAH
 // and shuffles it so that new sorted index, newIndex = resultPermute[oldIndex]
 static void buildFromBounds(
 	Gu::RTree& result, const PxBounds3V* allBounds, PxU32 numBounds,
-	Array<PxU32>& permute, RTreeCooker::RemapCallback* rc, Vec3VArg allMn, Vec3VArg allMx,
+	physx::shdfnd::Array<PxU32>& permute, RTreeCooker::RemapCallback* rc, Vec3VArg allMn, Vec3VArg allMx,
 	PxReal sizePerfTradeOff01, PxMeshCookingHint::Enum hint)
 {
 	PX_UNUSED(sizePerfTradeOff01);
@@ -742,13 +742,13 @@ static void buildFromBounds(
 	// load sorted nodes into an RTreeNodeNQ tree representation
 	// build the tree structure from sorted nodes
 	const PxU32 pageSize = RTREE_N;
-	Array<RTreeNodeNQ> resultTree;
+	physx::shdfnd::Array<RTreeNodeNQ> resultTree;
 	resultTree.reserve(numBounds*2);
 
 	PxU32 maxLevels = 0;
 	if(hint == PxMeshCookingHint::eSIM_PERFORMANCE) // use high quality SAH build
 	{
-		Array<PxU32> xRanks(numBounds), yRanks(numBounds), zRanks(numBounds), xOrder(numBounds), yOrder(numBounds), zOrder(numBounds);
+		physx::shdfnd::Array<PxU32> xRanks(numBounds), yRanks(numBounds), zRanks(numBounds), xOrder(numBounds), yOrder(numBounds), zOrder(numBounds);
 		PxMemCopy(xOrder.begin(), permute.begin(), sizeof(xOrder[0])*numBounds);
 		PxMemCopy(yOrder.begin(), permute.begin(), sizeof(yOrder[0])*numBounds);
 		PxMemCopy(zOrder.begin(), permute.begin(), sizeof(zOrder[0])*numBounds);
@@ -801,7 +801,7 @@ static void buildFromBounds(
 	const int nodePtrMultiplier = sizeof(RTreeNodeQ); // convert offset as count in qnodes to page ptr
 
 	// Quantize the tree. AP scaffold - might be possible to merge this phase with the page pass below this loop
-	Array<RTreeNodeQ> qtreeNodes;
+	physx::shdfnd::Array<RTreeNodeQ> qtreeNodes;
 	PxU32 firstEmptyIndex = PxU32(-1);
 	PxU32 resultCount = resultTree.size();
 	qtreeNodes.reserve(resultCount);

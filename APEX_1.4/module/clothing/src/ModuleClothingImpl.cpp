@@ -1000,7 +1000,7 @@ ClothingPhysicalMesh* ModuleClothingImpl::createSingleLayeredMeshInternal(Render
 	progress.setSubtaskWork((int32_t)times[0], "Creating single layered mesh");
 	ApexSubdivider subdivider;
 
-	Array<int32_t> old2New(numGraphicalVertices, -1);
+	physx::shdfnd::Array<int32_t> old2New(numGraphicalVertices, -1);
 	uint32_t nbVertices = 0;
 
 	uint32_t vertexOffset = 0;
@@ -1123,14 +1123,14 @@ ClothingPhysicalMesh* ModuleClothingImpl::createSingleLayeredMeshInternal(Render
 		progress.completeSubtask();
 	}
 
-	Array<PxVec3> newVertices(subdivider.getNumVertices());
-	Array<uint32_t> newMasterValues(subdivider.getNumVertices());
+	physx::shdfnd::Array<PxVec3> newVertices(subdivider.getNumVertices());
+	physx::shdfnd::Array<uint32_t> newMasterValues(subdivider.getNumVertices());
 	for (uint32_t i = 0; i < newVertices.size(); i++)
 	{
 		subdivider.getVertex(i, newVertices[i], newMasterValues[i]);
 	}
 
-	Array<uint32_t> newIndices(subdivider.getNumTriangles() * 3);
+	physx::shdfnd::Array<uint32_t> newIndices(subdivider.getNumTriangles() * 3);
 	for (uint32_t i = 0; i < newIndices.size(); i += 3)
 	{
 		subdivider.getTriangle(i / 3, newIndices[i], newIndices[i + 1], newIndices[i + 2]);

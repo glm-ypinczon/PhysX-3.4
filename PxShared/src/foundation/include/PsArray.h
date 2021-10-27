@@ -97,7 +97,7 @@ class Array : protected Alloc
 	Copy-constructor. Copy all entries from other array
 	*/
 	template <class A>
-	PX_INLINE explicit Array(const Array<T, A>& other, const Alloc& alloc = Alloc())
+	PX_INLINE explicit Array(const physx::shdfnd::Array<T, A>& other, const Alloc& alloc = Alloc())
 	: Alloc(alloc)
 	{
 		copy(other);
@@ -140,7 +140,7 @@ class Array : protected Alloc
 	Assignment operator. Copy content (deep-copy)
 	*/
 	template <class A>
-	PX_INLINE Array& operator=(const Array<T, A>& rhs)
+	PX_INLINE Array& operator=(const physx::shdfnd::Array<T, A>& rhs)
 	{
 		if(&rhs == this)
 			return *this;
@@ -557,7 +557,7 @@ class Array : protected Alloc
 	Swap contents of an array without allocating temporary storage
 	*/
 	//////////////////////////////////////////////////////////////////////////
-	PX_INLINE void swap(Array<T, Alloc>& other)
+	PX_INLINE void swap(physx::shdfnd::Array<T, Alloc>& other)
 	{
 		shdfnd::swap(mData, other.mData);
 		shdfnd::swap(mSize, other.mSize);
@@ -596,7 +596,7 @@ class Array : protected Alloc
 	}
 
 	template <class A>
-	PX_NOINLINE void copy(const Array<T, A>& other);
+	PX_NOINLINE void copy(const physx::shdfnd::Array<T, A>& other);
 
 	PX_INLINE T* allocate(uint32_t size)
 	{
@@ -715,7 +715,7 @@ definition for serialized classes is complete in checked builds.
 };
 
 template <class T, class Alloc>
-PX_NOINLINE void Array<T, Alloc>::resize(const uint32_t size, const T& a)
+PX_NOINLINE void physx::shdfnd::Array<T, Alloc>::resize(const uint32_t size, const T& a)
 {
 	reserve(size);
 	create(mData + mSize, mData + size, a);
@@ -725,7 +725,7 @@ PX_NOINLINE void Array<T, Alloc>::resize(const uint32_t size, const T& a)
 
 template <class T, class Alloc>
 template <class A>
-PX_NOINLINE void Array<T, Alloc>::copy(const Array<T, A>& other)
+PX_NOINLINE void physx::shdfnd::Array<T, Alloc>::copy(const physx::shdfnd::Array<T, A>& other)
 {
 	if(!other.empty())
 	{
@@ -746,14 +746,14 @@ PX_NOINLINE void Array<T, Alloc>::copy(const Array<T, A>& other)
 }
 
 template <class T, class Alloc>
-PX_NOINLINE void Array<T, Alloc>::resizeUninitialized(const uint32_t size)
+PX_NOINLINE void physx::shdfnd::Array<T, Alloc>::resizeUninitialized(const uint32_t size)
 {
 	reserve(size);
 	mSize = size;
 }
 
 template <class T, class Alloc>
-PX_NOINLINE T& Array<T, Alloc>::growAndPushBack(const T& a)
+PX_NOINLINE T& physx::shdfnd::Array<T, Alloc>::growAndPushBack(const T& a)
 {
 	uint32_t capacity = capacityIncrement();
 
@@ -776,7 +776,7 @@ PX_NOINLINE T& Array<T, Alloc>::growAndPushBack(const T& a)
 }
 
 template <class T, class Alloc>
-PX_NOINLINE void Array<T, Alloc>::recreate(uint32_t capacity)
+PX_NOINLINE void physx::shdfnd::Array<T, Alloc>::recreate(uint32_t capacity)
 {
 	T* newData = allocate(capacity);
 	PX_ASSERT((!capacity) || (newData && (newData != mData)));
@@ -791,7 +791,7 @@ PX_NOINLINE void Array<T, Alloc>::recreate(uint32_t capacity)
 }
 
 template <class T, class Alloc>
-PX_INLINE void swap(Array<T, Alloc>& x, Array<T, Alloc>& y)
+PX_INLINE void swap(physx::shdfnd::Array<T, Alloc>& x, physx::shdfnd::Array<T, Alloc>& y)
 {
 	x.swap(y);
 }

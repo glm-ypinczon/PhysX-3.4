@@ -293,10 +293,10 @@ void Renderable::updateRenderCacheFull(Actor* actor)
 	//maxBones = rand(1,maxBones-1);
 	// Count Convexes
 	uint32_t numConvexes = 0;
-	const Array<base::Compound*>& compounds = actor->getCompounds();
+	const physx::shdfnd::Array<base::Compound*>& compounds = actor->getCompounds();
 	for (uint32_t k = 0; k < compounds.size(); k++)
 	{
-		const Array<base::Convex*>& convexes = compounds[k]->getConvexes();
+		const physx::shdfnd::Array<base::Convex*>& convexes = compounds[k]->getConvexes();
 		numConvexes += convexes.size();
 	}
 	mBoneBufferSize += numConvexes;
@@ -328,10 +328,10 @@ void Renderable::updateRenderCacheFull(Actor* actor)
 	// Populate convex cache
 	{
 		uint32_t idx = 0;
-		const Array<base::Compound*>& compounds = actor->getCompounds();
+		const physx::shdfnd::Array<base::Compound*>& compounds = actor->getCompounds();
 		for (uint32_t k = 0; k < compounds.size(); k++)
 		{
-			const Array<base::Convex*>& convexes = compounds[k]->getConvexes();
+			const physx::shdfnd::Array<base::Convex*>& convexes = compounds[k]->getConvexes();
 			for (uint32_t j = 0; j < convexes.size(); j++)
 			{
 				mConvexGroups[idx/maxBones].mConvexCache.pushBack((Convex*)convexes[j]);
@@ -388,9 +388,9 @@ void Renderable::updateRenderCacheFull(Actor* actor)
 			Convex* c = g.mConvexCache[j];
 			uint32_t off = g.mVertexCache.size();
 			// fill vertices
-			const Array<PxVec3>& verts = c->getVisVertices();
-			const Array<PxVec3>& norms = c->getVisNormals();
-			const Array<float>& texcs = c->getVisTexCoords();
+			const physx::shdfnd::Array<PxVec3>& verts = c->getVisVertices();
+			const physx::shdfnd::Array<PxVec3>& norms = c->getVisNormals();
+			const physx::shdfnd::Array<float>& texcs = c->getVisTexCoords();
 			PX_ASSERT(verts.size() == norms.size() && verts.size() == (texcs.size()/2));
 			for (uint32_t i = 0; i < verts.size(); i++)
 			{
@@ -402,7 +402,7 @@ void Renderable::updateRenderCacheFull(Actor* actor)
 			// fill indicies for each submesh
 			for (uint32_t i = 0; i < g.mSubMeshes.size(); i++)
 			{
-				const Array<int32_t>& indices = c->getVisTriIndices();
+				const physx::shdfnd::Array<int32_t>& indices = c->getVisTriIndices();
 				PX_ASSERT(indices.size()%3 == 0);
 				for (uint32_t a = 0; a < indices.size()/3; a++)
 				{

@@ -407,7 +407,7 @@ public:
 
 	float						mElapsedTime;
 	ApexSDKImpl*				mApexSDK;
-	Array<ModuleSceneIntl*>		mModuleScenes;
+	physx::shdfnd::Array<ModuleSceneIntl*>		mModuleScenes;
 	RenderDebugInterface* 		mSceneRenderDebug;
 
 	uint32_t					mOrigSceneMaxIter;
@@ -415,7 +415,7 @@ public:
 
 	PxTaskManager*				mTaskManager;
 
-	Mutex						mPhysXLock;
+	physx::shdfnd::Mutex						mPhysXLock;
 
 	bool						mSimulating;
 	bool						mUseDebugRenderable;
@@ -537,8 +537,8 @@ private:
 		bool					isZinvert;
 	};
 
-	Array<ViewMatrixProperties*>	mViewMatrices;
-	Array<ProjMatrixProperties*>	mProjMatrices;
+	physx::shdfnd::Array<ViewMatrixProperties*>	mViewMatrices;
+	physx::shdfnd::Array<ProjMatrixProperties*>	mProjMatrices;
 	PxMat44							mViewProjMatrix;
 #if 0 //lionel: work in progress
 	uint32_t					mCurrentViewID;
@@ -575,7 +575,7 @@ private:
 		UserDefinedBoundingBox(const PxBounds3& _bb, UserBoundingBoxFlags::Enum _flags) :
 																		bb(_bb), flags(_flags) {}
 	};
-	Array<UserDefinedBoundingBox>	mBBs;
+	physx::shdfnd::Array<UserDefinedBoundingBox>	mBBs;
 };
 
 

@@ -77,14 +77,14 @@
 			<PreprocessorDefinitions>_HAS_EXCEPTIONS=0;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;PHYSX_PROFILE_SDK;_DEBUG;PX_DEBUG=1;PX_CHECKED=1;PX_NVTX=1;PX_SUPPORT_PVD=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>Winmm.lib /LIBPATH:../../lib/vc11win64 /LIBPATH:../../../../PxShared/lib/vc11win64 /LIBPATH:../../../Lib/vc11win64 PhysX3CommonDEBUG_x64.lib PhysX3DEBUG_x64.lib PhysX3CookingDEBUG_x64.lib PhysX3CharacterKinematicDEBUG_x64.lib PhysX3ExtensionsDEBUG.lib PhysX3VehicleDEBUG.lib PxPvdSDKDEBUG_x64.lib PxTaskDEBUG_x64.lib PxCudaContextManagerDEBUG_x64.lib PxFoundationDEBUG_x64.lib PsFastXmlDEBUG_x64.lib /DEBUG</AdditionalOptions>
+			<AdditionalOptions>Winmm.lib /LIBPATH:../../lib/vc11win64 /LIBPATH:../../../../PxShared/lib/vc11win64 /LIBPATH:../../../Lib/vc11win64 glm_PhysX3CommonDEBUG_x64.lib glm_PhysX3DEBUG_x64.lib glm_PhysX3CookingDEBUG_x64.lib glm_PhysX3CharacterKinematicDEBUG_x64.lib PhysX3ExtensionsDEBUG.lib PhysX3VehicleDEBUG.lib glm_PxPvdSDKDEBUG_x64.lib PxTaskDEBUG_x64.lib PxCudaContextManagerDEBUG_x64.lib glm_PxFoundationDEBUG_x64.lib PsFastXmlDEBUG_x64.lib /DEBUG</AdditionalOptions>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)$(ProjectName)DEBUG.exe</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -93,13 +93,15 @@
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX64</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
 		</ProjectReference>
 		<PostBuildEvent>
-			<Command>XCOPY "../../../../PxShared/bin\vc11win64\PxFoundationDEBUG_x64.dll" "$(OutDir)" /D /Y&#x0D;&#x0A; XCOPY "../../../../PxShared/bin\vc11win64\PxPvdSDKDEBUG_x64.dll" "$(OutDir)" /D /Y</Command>
+			<Command>XCOPY "../../../../PxShared/bin\vc11win64\glm_PxFoundationDEBUG_x64.dll" "$(OutDir)" /D /Y&#x0D;&#x0A; XCOPY "../../../../PxShared/bin\vc11win64\glm_PxPvdSDKDEBUG_x64.dll" "$(OutDir)" /D /Y</Command>
 		</PostBuildEvent>
 	</ItemDefinitionGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='checked|x64'">
@@ -124,14 +126,14 @@
 			<PreprocessorDefinitions>_HAS_EXCEPTIONS=0;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;PHYSX_PROFILE_SDK;NDEBUG;PX_CHECKED=1;PX_NVTX=1;PX_SUPPORT_PVD=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>Winmm.lib /LIBPATH:../../lib/vc11win64 /LIBPATH:../../../../PxShared/lib/vc11win64 /LIBPATH:../../../Lib/vc11win64 PhysX3CommonCHECKED_x64.lib PhysX3CHECKED_x64.lib PhysX3CookingCHECKED_x64.lib PhysX3CharacterKinematicCHECKED_x64.lib PhysX3ExtensionsCHECKED.lib PhysX3VehicleCHECKED.lib PxPvdSDKCHECKED_x64.lib PxTaskCHECKED_x64.lib PxCudaContextManagerCHECKED_x64.lib PxFoundationCHECKED_x64.lib PsFastXmlCHECKED_x64.lib</AdditionalOptions>
+			<AdditionalOptions>Winmm.lib /LIBPATH:../../lib/vc11win64 /LIBPATH:../../../../PxShared/lib/vc11win64 /LIBPATH:../../../Lib/vc11win64 glm_PhysX3CommonCHECKED_x64.lib glm_PhysX3CHECKED_x64.lib glm_PhysX3CookingCHECKED_x64.lib glm_PhysX3CharacterKinematicCHECKED_x64.lib PhysX3ExtensionsCHECKED.lib PhysX3VehicleCHECKED.lib glm_PxPvdSDKCHECKED_x64.lib PxTaskCHECKED_x64.lib PxCudaContextManagerCHECKED_x64.lib glm_PxFoundationCHECKED_x64.lib PsFastXmlCHECKED_x64.lib</AdditionalOptions>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)$(ProjectName)CHECKED.exe</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -140,13 +142,15 @@
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX64</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
 		</ProjectReference>
 		<PostBuildEvent>
-			<Command>XCOPY "../../../../PxShared/bin\vc11win64\PxFoundationCHECKED_x64.dll" "$(OutDir)" /D /Y&#x0D;&#x0A; XCOPY "../../../../PxShared/bin\vc11win64\PxPvdSDKCHECKED_x64.dll" "$(OutDir)" /D /Y</Command>
+			<Command>XCOPY "../../../../PxShared/bin\vc11win64\glm_PxFoundationCHECKED_x64.dll" "$(OutDir)" /D /Y&#x0D;&#x0A; XCOPY "../../../../PxShared/bin\vc11win64\glm_PxPvdSDKCHECKED_x64.dll" "$(OutDir)" /D /Y</Command>
 		</PostBuildEvent>
 	</ItemDefinitionGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='profile|x64'">
@@ -171,14 +175,14 @@
 			<PreprocessorDefinitions>_HAS_EXCEPTIONS=0;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;PHYSX_PROFILE_SDK;NDEBUG;PX_PROFILE=1;PX_NVTX=1;PX_SUPPORT_PVD=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>Winmm.lib /LIBPATH:../../lib/vc11win64 /LIBPATH:../../../../PxShared/lib/vc11win64 /INCREMENTAL:NO /LIBPATH:../../../Lib/vc11win64 PhysX3CommonPROFILE_x64.lib PhysX3PROFILE_x64.lib PhysX3CookingPROFILE_x64.lib PhysX3CharacterKinematicPROFILE_x64.lib PhysX3ExtensionsPROFILE.lib PhysX3VehiclePROFILE.lib PxPvdSDKPROFILE_x64.lib PxTaskPROFILE_x64.lib PxCudaContextManagerPROFILE_x64.lib PxFoundationPROFILE_x64.lib PsFastXmlPROFILE_x64.lib /DEBUG</AdditionalOptions>
+			<AdditionalOptions>Winmm.lib /LIBPATH:../../lib/vc11win64 /LIBPATH:../../../../PxShared/lib/vc11win64 /INCREMENTAL:NO /LIBPATH:../../../Lib/vc11win64 glm_PhysX3CommonPROFILE_x64.lib glm_PhysX3PROFILE_x64.lib glm_PhysX3CookingPROFILE_x64.lib glm_PhysX3CharacterKinematicPROFILE_x64.lib PhysX3ExtensionsPROFILE.lib PhysX3VehiclePROFILE.lib glm_PxPvdSDKPROFILE_x64.lib PxTaskPROFILE_x64.lib PxCudaContextManagerPROFILE_x64.lib glm_PxFoundationPROFILE_x64.lib PsFastXmlPROFILE_x64.lib /DEBUG</AdditionalOptions>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)$(ProjectName)PROFILE.exe</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -187,13 +191,15 @@
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX64</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
 		</ProjectReference>
 		<PostBuildEvent>
-			<Command>XCOPY "../../../../PxShared/bin\vc11win64\PxFoundationPROFILE_x64.dll" "$(OutDir)" /D /Y&#x0D;&#x0A; XCOPY "../../../../PxShared/bin\vc11win64\PxPvdSDKPROFILE_x64.dll" "$(OutDir)" /D /Y</Command>
+			<Command>XCOPY "../../../../PxShared/bin\vc11win64\glm_PxFoundationPROFILE_x64.dll" "$(OutDir)" /D /Y&#x0D;&#x0A; XCOPY "../../../../PxShared/bin\vc11win64\glm_PxPvdSDKPROFILE_x64.dll" "$(OutDir)" /D /Y</Command>
 		</PostBuildEvent>
 	</ItemDefinitionGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'">
@@ -218,14 +224,14 @@
 			<PreprocessorDefinitions>_HAS_EXCEPTIONS=0;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;PHYSX_PROFILE_SDK;NDEBUG;PX_SUPPORT_PVD=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>Winmm.lib /LIBPATH:../../lib/vc11win64 /LIBPATH:../../../../PxShared/lib/vc11win64 /INCREMENTAL:NO /LIBPATH:../../../Lib/vc11win64 PhysX3Common_x64.lib PhysX3_x64.lib PhysX3Cooking_x64.lib PhysX3CharacterKinematic_x64.lib PhysX3Extensions.lib PhysX3Vehicle.lib PxPvdSDK_x64.lib PxTask_x64.lib PxCudaContextManager_x64.lib PxFoundation_x64.lib PsFastXml_x64.lib</AdditionalOptions>
+			<AdditionalOptions>Winmm.lib /LIBPATH:../../lib/vc11win64 /LIBPATH:../../../../PxShared/lib/vc11win64 /INCREMENTAL:NO /LIBPATH:../../../Lib/vc11win64 glm_PhysX3Common_x64.lib glm_PhysX3_x64.lib glm_PhysX3Cooking_x64.lib glm_PhysX3CharacterKinematic_x64.lib PhysX3Extensions.lib PhysX3Vehicle.lib glm_PxPvdSDK_x64.lib PxTask_x64.lib PxCudaContextManager_x64.lib glm_PxFoundation_x64.lib PsFastXml_x64.lib</AdditionalOptions>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -234,13 +240,15 @@
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX64</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
 		</ProjectReference>
 		<PostBuildEvent>
-			<Command>XCOPY "../../../../PxShared/bin\vc11win64\PxFoundation_x64.dll" "$(OutDir)" /D /Y&#x0D;&#x0A; XCOPY "../../../../PxShared/bin\vc11win64\PxPvdSDK_x64.dll" "$(OutDir)" /D /Y</Command>
+			<Command>XCOPY "../../../../PxShared/bin\vc11win64\glm_PxFoundation_x64.dll" "$(OutDir)" /D /Y&#x0D;&#x0A; XCOPY "../../../../PxShared/bin\vc11win64\glm_PxPvdSDK_x64.dll" "$(OutDir)" /D /Y</Command>
 		</PostBuildEvent>
 	</ItemDefinitionGroup>
 	<ItemGroup>

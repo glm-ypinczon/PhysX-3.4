@@ -163,7 +163,7 @@ public:
 
 	virtual ClothingCollisionType::Enum getType() const
 	{
-		return ClothingCollisionType::Convex;
+		return ClothingCollisionType::Convex_;
 	}
 	virtual ClothingPlane* isPlane() { return NULL; }
 	virtual ClothingConvex* isConvex() { return this; }
@@ -203,7 +203,7 @@ public:
 	}
 
 protected:
-	Array<ClothingPlaneImpl*> mPlanes;
+	physx::shdfnd::Array<ClothingPlaneImpl*> mPlanes;
 };
 
 
@@ -405,11 +405,11 @@ protected:
 	void sortAddAndRemoves();
 
 	PxMat44 mPose;
-	Array<PxVec3> mTriangles;
-	Array<uint32_t> mIds;
+	physx::shdfnd::Array<PxVec3> mTriangles;
+	physx::shdfnd::Array<uint32_t> mIds;
 
-	Array<uint32_t> mRemoved;
-	Array<ClothingTriangle> mAddedTriangles;
+	physx::shdfnd::Array<uint32_t> mRemoved;
+	physx::shdfnd::Array<ClothingTriangle> mAddedTriangles;
 
 	Mutex mLock;
 };

@@ -297,7 +297,7 @@ bool Simulation::initPhysics(uint32_t _physicalMeshId, uint32_t* indices, PxVec3
 		{
 			PX_ASSERT(mCookedData->deformableInvVertexWeights.arraySizes[0] == (int32_t)mCookedData->numVertices);
 
-			Array<PxVec4> startPositions(mCookedData->numVertices);
+			physx::shdfnd::Array<PxVec4> startPositions(mCookedData->numVertices);
 			for (uint32_t i = 0; i < mCookedData->numVertices; i++)
 			{
 				startPositions[i] = PxVec4(sdkWritebackPosition[i], mCookedData->deformableInvVertexWeights.buf[i]);
@@ -1050,7 +1050,7 @@ void Simulation::visualizeConvexesInvalid(RenderDebugInterface& renderDebug)
 		ClothingPlaneImpl** convexPlanes = (ClothingPlaneImpl**)convex->getPlanes();
 		ConvexHullImpl hull;
 		hull.init();
-		Array<PxPlane> planes;
+		physx::shdfnd::Array<PxPlane> planes;
 		for (uint32_t j = 0; j < convex->getNumPlanes(); ++j)
 		{
 			PxPlane plane = convexPlanes[j]->getPlane();

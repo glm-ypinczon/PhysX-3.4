@@ -56,7 +56,7 @@ PX_INLINE uint32_t findIndexedNeighbors(uint32_t indexedNeighbors[3], uint32_t t
 
 
 
-void ApexRenderSubmesh::applyPermutation(const Array<uint32_t>& old2new, const Array<uint32_t>& new2old)
+void ApexRenderSubmesh::applyPermutation(const physx::shdfnd::Array<uint32_t>& old2new, const physx::shdfnd::Array<uint32_t>& new2old)
 {
 	if (mParams->vertexPartition.arraySizes[0] == 2)
 	{

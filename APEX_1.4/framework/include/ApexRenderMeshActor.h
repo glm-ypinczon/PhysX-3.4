@@ -222,8 +222,8 @@ protected:
 	void					visualizeTangentSpace(RenderDebugInterface& batcher, float normalScale, float tangentScale, float bitangentScale, PxMat33* scaledRotations, PxVec3* translations, uint32_t stride, uint32_t numberOfTransforms) const;
 
 	ApexRenderMeshAsset*	mRenderMeshAsset;
-	Array<PxMat44>	mTransforms;
-	Array<PxMat44>	mTransformsLastFrame;
+	physx::shdfnd::Array<PxMat44>	mTransforms;
+	physx::shdfnd::Array<PxMat44>	mTransformsLastFrame;
 
 	struct ResourceData
 	{
@@ -238,7 +238,7 @@ protected:
 		SubmeshData();
 		~SubmeshData();
 
-		Array<ResourceData>				renderResources;
+		physx::shdfnd::Array<ResourceData>				renderResources;
 		UserRenderIndexBuffer*		indexBuffer;
 		void*							fallbackSkinningMemory;
 		UserRenderVertexBuffer*		userDynamicVertexBuffer;
@@ -276,9 +276,9 @@ protected:
 	IndexBank<uint32_t>					mVisiblePartsForAPILastFrame;
 	RenderBufferHint::Enum			mIndexBufferHint;
 
-	Array<uint32_t>						mVisiblePartsForRendering;
+	physx::shdfnd::Array<uint32_t>						mVisiblePartsForRendering;
 
-	Array<UserRenderVertexBuffer*>	mPerActorVertexBuffers;
+	physx::shdfnd::Array<UserRenderVertexBuffer*>	mPerActorVertexBuffers;
 
 	// Instancing
 	uint32_t								mMaxInstanceCount;
@@ -304,11 +304,11 @@ protected:
 	bool								mKeepPreviousFrameBoneBuffer;
 	bool								mPreviousFrameBoneBufferValid;
 	RenderMeshActorSkinningMode::Enum	mSkinningMode;
-	Array<uint32_t>						mTMSwapBuffer;
-	Array<PxMat44>						mRemappedPreviousBoneTMs;
+	physx::shdfnd::Array<uint32_t>						mTMSwapBuffer;
+	physx::shdfnd::Array<PxMat44>						mRemappedPreviousBoneTMs;
 
 	// temporary
-	Array<uint16_t>						mBoneIndexTempBuffer;
+	physx::shdfnd::Array<uint16_t>						mBoneIndexTempBuffer;
 
 	// CM: For some reason the new operator doesn't see these members and allocates not enough memory for the class (on a 64 bit build)
 	// Even though ENABLE_INSTANCED_MESH_CLEANUP_HACK is defined to be 1 earlier in this file.
@@ -318,7 +318,7 @@ protected:
 	uint32_t							mOrderedInstanceTempSize;
 //#endif
 
-	Array<uint32_t>						mPartIndexTempBuffer;
+	physx::shdfnd::Array<uint32_t>						mPartIndexTempBuffer;
 
 	friend class ApexRenderMeshAsset;
 };

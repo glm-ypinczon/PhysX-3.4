@@ -134,7 +134,7 @@ void ApexSceneUserNotify::playBatchedNotifications()
 
 void ApexSceneUserNotify::onConstraintBreak(physx::PxConstraintInfo* constraints, uint32_t count)
 {
-	for (Array<PxSimulationEventCallback*>::Iterator curr = mModuleNotifiers.begin(); curr != mModuleNotifiers.end(); ++curr)
+	for (physx::shdfnd::Array<PxSimulationEventCallback*>::Iterator curr = mModuleNotifiers.begin(); curr != mModuleNotifiers.end(); ++curr)
 	{
 		(*curr)->onConstraintBreak(constraints, count);
 	}
@@ -157,7 +157,7 @@ void ApexSceneUserNotify::onConstraintBreak(physx::PxConstraintInfo* constraints
 
 void ApexSceneUserNotify::onWake(PxActor** actors, uint32_t count)
 {
-	for (Array<PxSimulationEventCallback*>::Iterator curr = mModuleNotifiers.begin(); curr != mModuleNotifiers.end(); ++curr)
+	for (physx::shdfnd::Array<PxSimulationEventCallback*>::Iterator curr = mModuleNotifiers.begin(); curr != mModuleNotifiers.end(); ++curr)
 	{
 		(*curr)->onWake(actors, count);
 	}
@@ -183,7 +183,7 @@ void ApexSceneUserNotify::onWake(PxActor** actors, uint32_t count)
 
 void ApexSceneUserNotify::onSleep(PxActor** actors, uint32_t count)
 {
-	for (Array<PxSimulationEventCallback*>::Iterator curr = mModuleNotifiers.begin(); curr != mModuleNotifiers.end(); ++curr)
+	for (physx::shdfnd::Array<PxSimulationEventCallback*>::Iterator curr = mModuleNotifiers.begin(); curr != mModuleNotifiers.end(); ++curr)
 	{
 		(*curr)->onSleep(actors, count);
 	}
@@ -209,7 +209,7 @@ void ApexSceneUserNotify::onSleep(PxActor** actors, uint32_t count)
 
 void ApexSceneUserNotify::onContact(const physx::PxContactPairHeader& pairHeader, const PxContactPair* pairs, uint32_t nbPairs)
 {
-	for (Array<PxSimulationEventCallback*>::Iterator curr = mModuleNotifiers.begin(); curr != mModuleNotifiers.end(); ++curr)
+	for (physx::shdfnd::Array<PxSimulationEventCallback*>::Iterator curr = mModuleNotifiers.begin(); curr != mModuleNotifiers.end(); ++curr)
 	{
 		(*curr)->onContact(pairHeader, pairs, nbPairs);
 	}
@@ -316,7 +316,7 @@ void ApexSceneUserContactModify::setApplicationContactModify(PxContactModifyCall
 
 void ApexSceneUserContactModify::onContactModify(PxContactModifyPair* const pairs, uint32_t count)
 {
-	for (Array<PxContactModifyCallback*>::Iterator curr = mModuleContactModify.begin(); curr != mModuleContactModify.end(); curr++)
+	for (physx::shdfnd::Array<PxContactModifyCallback*>::Iterator curr = mModuleContactModify.begin(); curr != mModuleContactModify.end(); curr++)
 	{
 		(*curr)->onContactModify(pairs, count);
 	}

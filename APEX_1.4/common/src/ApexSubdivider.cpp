@@ -86,7 +86,7 @@ void ApexSubdivider::mergeVertices(IProgressListener* progress)
 	const float d = (mBound.minimum - mBound.maximum).magnitude() * MERGE_THRESHOLD;
 	const float d2 = d * d;
 
-	Array<SubdividerVertexRef> refs;
+	physx::shdfnd::Array<SubdividerVertexRef> refs;
 	refs.reserve(mVertices.size());
 
 	for (uint32_t i = 0; i < mVertices.size(); i++)
@@ -172,7 +172,7 @@ void ApexSubdivider::mergeVertices(IProgressListener* progress)
 void ApexSubdivider::closeMesh(IProgressListener* progress)
 {
 	PX_UNUSED(progress);
-	Array<SubdividerEdge> edges, borderEdges;
+	physx::shdfnd::Array<SubdividerEdge> edges, borderEdges;
 	SubdividerEdge edge;
 
 	edges.reserve(mTriangles.size() * 3);
@@ -206,7 +206,7 @@ void ApexSubdivider::closeMesh(IProgressListener* progress)
 	}
 
 	// find border circles
-	Array<uint32_t> borderVertices;
+	physx::shdfnd::Array<uint32_t> borderVertices;
 	borderVertices.reserve(borderEdges.size());
 	while (!borderEdges.empty())
 	{
@@ -292,7 +292,7 @@ void ApexSubdivider::subdivide(uint32_t subdivisionGridSize, IProgressListener*)
 		return;
 	}
 
-	Array<SubdividerEdge> edges;
+	physx::shdfnd::Array<SubdividerEdge> edges;
 	edges.reserve(mTriangles.size() * 3);
 	for (uint32_t i = 0; i < mTriangles.size(); i++)
 	{
@@ -434,9 +434,9 @@ void ApexSubdivider::getTriangle(uint32_t i, uint32_t& i0, uint32_t& i1, uint32_
 
 void ApexSubdivider::compress()
 {
-	Array<uint32_t> oldToNew;
+	physx::shdfnd::Array<uint32_t> oldToNew;
 	oldToNew.resize(mVertices.size());
-	Array<SubdividerVertex> newVertices;
+	physx::shdfnd::Array<SubdividerVertex> newVertices;
 	newVertices.reserve(mVertices.size() - mMarkedVertices);
 
 	for (uint32_t i = 0; i < mVertices.size(); i++)
@@ -639,7 +639,7 @@ int32_t ApexSubdivider::getTriangleNr(const uint32_t v0, const uint32_t v1, cons
 
 
 
-int32_t ApexSubdivider::binarySearchEdges(const Array<SubdividerEdge>& edges, uint32_t v0, uint32_t v1, uint32_t triangleNr) const
+int32_t ApexSubdivider::binarySearchEdges(const physx::shdfnd::Array<SubdividerEdge>& edges, uint32_t v0, uint32_t v1, uint32_t triangleNr) const
 {
 	if (edges.empty())
 	{

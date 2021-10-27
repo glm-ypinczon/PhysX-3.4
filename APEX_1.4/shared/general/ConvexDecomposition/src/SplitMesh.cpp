@@ -44,7 +44,7 @@ namespace SPLIT_MESH
 static void addTri(const PxF32 *p1,
 			  const PxF32 *p2,
 			  const PxF32 *p3,
-			  Array< PxU32 > &indices,
+			  physx::shdfnd::Array< PxU32 > &indices,
 			  fm_VertexIndex *vertices)
 {
 	bool newPos;
@@ -104,8 +104,8 @@ void computePlaneQuad(const PxF32 *planeEquation,physx::PxVec3 *quad)
 
 void splitMesh(const PxF32 *planeEquation,const SimpleMesh &input,SimpleMesh &leftMesh,SimpleMesh &rightMesh,bool /*closedMesh*/)
 {
-	Array< PxU32 > leftIndices;
-	Array< PxU32 > rightIndices;
+	physx::shdfnd::Array< PxU32 > leftIndices;
+	physx::shdfnd::Array< PxU32 > rightIndices;
 
 	fm_VertexIndex *leftVertices = fm_createVertexIndex(0.00001f,false);
 	fm_VertexIndex *rightVertices = fm_createVertexIndex(0.00001f,false);

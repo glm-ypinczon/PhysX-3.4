@@ -278,11 +278,11 @@ public:
 #endif
 
 	DestructibleScene* 			dscene;						// The scene that this destructible structure belongs to
-	Array<DestructibleActorImpl*>	destructibles;				// The array of destructible actors associated with this destructible structure
-	Array<Chunk>				chunks;						// The array of chunks associated with this structure.
-	Array<uint32_t>				supportDepthChunks;			//
-	Array<uint32_t>				overlaps;
-	Array<uint32_t>				firstOverlapIndices;		// Size = chunks.size()+1, firstOverlapsIndices[chunks.size()] = overlaps.size()
+	physx::shdfnd::Array<DestructibleActorImpl*>	destructibles;				// The array of destructible actors associated with this destructible structure
+	physx::shdfnd::Array<Chunk>				chunks;						// The array of chunks associated with this structure.
+	physx::shdfnd::Array<uint32_t>				supportDepthChunks;			//
+	physx::shdfnd::Array<uint32_t>				overlaps;
+	physx::shdfnd::Array<uint32_t>				firstOverlapIndices;		// Size = chunks.size()+1, firstOverlapsIndices[chunks.size()] = overlaps.size()
 	uint32_t						ID;							// The unique GUID associated with this destructible structure
 	uint32_t						supportDepthChunksNotExternallySupportedCount;
 	bool						supportInvalid;

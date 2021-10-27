@@ -92,7 +92,7 @@
     <OutDir>./../../../bin/vc14win64\</OutDir>
     <IntDir>./x64/PxFoundation/debug\</IntDir>
     <TargetExt>.dll</TargetExt>
-    <TargetName>PxFoundationDEBUG_x64</TargetName>
+    <TargetName>glm_PxFoundationDEBUG_x64</TargetName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules/>
     <CodeAnalysisRuleAssemblies/>
@@ -112,7 +112,7 @@
       <PreprocessorDefinitions>PX_FOUNDATION_DLL=1;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;_DEBUG;PX_DEBUG=1;PX_CHECKED=1;PX_NVTX=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <WarningLevel>Level4</WarningLevel>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
@@ -120,14 +120,16 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)PxFoundationDEBUG_x64.dll</OutputFile>
+      <OutputFile>$(OutDir)glm_PxFoundationDEBUG_x64.dll</OutputFile>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <ImportLibrary>./../../../lib/vc14win64/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX64</TargetMachine>
-    </Link>
+  
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+ </Link>
     <ResourceCompile></ResourceCompile>
     <ProjectReference></ProjectReference>
   </ItemDefinitionGroup>
@@ -135,7 +137,7 @@
     <OutDir>./../../../bin/vc14win64\</OutDir>
     <IntDir>./x64/PxFoundation/release\</IntDir>
     <TargetExt>.dll</TargetExt>
-    <TargetName>PxFoundation_x64</TargetName>
+    <TargetName>glm_PxFoundation_x64</TargetName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules/>
     <CodeAnalysisRuleAssemblies/>
@@ -154,7 +156,7 @@
       <PreprocessorDefinitions>PX_FOUNDATION_DLL=1;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <WarningLevel>Level4</WarningLevel>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
@@ -163,14 +165,16 @@
     <Link>
       <AdditionalOptions>/INCREMENTAL:NO</AdditionalOptions>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)PxFoundation_x64.dll</OutputFile>
+      <OutputFile>$(OutDir)glm_PxFoundation_x64.dll</OutputFile>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <ImportLibrary>./../../../lib/vc14win64/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX64</TargetMachine>
-    </Link>
+  
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+ </Link>
     <ResourceCompile></ResourceCompile>
     <ProjectReference></ProjectReference>
   </ItemDefinitionGroup>
@@ -178,7 +182,7 @@
     <OutDir>./../../../bin/vc14win64\</OutDir>
     <IntDir>./x64/PxFoundation/checked\</IntDir>
     <TargetExt>.dll</TargetExt>
-    <TargetName>PxFoundationCHECKED_x64</TargetName>
+    <TargetName>glm_PxFoundationCHECKED_x64</TargetName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules/>
     <CodeAnalysisRuleAssemblies/>
@@ -197,7 +201,7 @@
       <PreprocessorDefinitions>PX_FOUNDATION_DLL=1;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;PX_CHECKED=1;PX_NVTX=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <WarningLevel>Level4</WarningLevel>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
@@ -205,14 +209,16 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)PxFoundationCHECKED_x64.dll</OutputFile>
+      <OutputFile>$(OutDir)glm_PxFoundationCHECKED_x64.dll</OutputFile>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <ImportLibrary>./../../../lib/vc14win64/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX64</TargetMachine>
-    </Link>
+  
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+ </Link>
     <ResourceCompile></ResourceCompile>
     <ProjectReference></ProjectReference>
   </ItemDefinitionGroup>
@@ -220,7 +226,7 @@
     <OutDir>./../../../bin/vc14win64\</OutDir>
     <IntDir>./x64/PxFoundation/profile\</IntDir>
     <TargetExt>.dll</TargetExt>
-    <TargetName>PxFoundationPROFILE_x64</TargetName>
+    <TargetName>glm_PxFoundationPROFILE_x64</TargetName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules/>
     <CodeAnalysisRuleAssemblies/>
@@ -239,7 +245,7 @@
       <PreprocessorDefinitions>PX_FOUNDATION_DLL=1;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;PX_PROFILE=1;PX_NVTX=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <WarningLevel>Level4</WarningLevel>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
@@ -248,14 +254,16 @@
     <Link>
       <AdditionalOptions>/INCREMENTAL:NO</AdditionalOptions>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)PxFoundationPROFILE_x64.dll</OutputFile>
+      <OutputFile>$(OutDir)glm_PxFoundationPROFILE_x64.dll</OutputFile>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <ImportLibrary>./../../../lib/vc14win64/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX64</TargetMachine>
-    </Link>
+  
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+ </Link>
     <ResourceCompile></ResourceCompile>
     <ProjectReference></ProjectReference>
   </ItemDefinitionGroup>

@@ -94,9 +94,9 @@ bool convert()
 			RenderMeshAssetParameters* rma = DYNAMIC_CAST(RenderMeshAssetParameters*)(graphicalLod->renderMeshAsset);
 
 			int32_t numSubmeshes = rma->submeshes.arraySizes[0];
-			Array<physx::PxVec3*> submeshPositionBuffer((uint32_t)numSubmeshes, NULL);
-			Array<PxVec4*> submeshTangentBuffer((uint32_t)numSubmeshes, NULL);
-			Array<uint32_t> submeshVertexOffsets((uint32_t)numSubmeshes);
+			physx::shdfnd::Array<physx::PxVec3*> submeshPositionBuffer((uint32_t)numSubmeshes, NULL);
+			physx::shdfnd::Array<PxVec4*> submeshTangentBuffer((uint32_t)numSubmeshes, NULL);
+			physx::shdfnd::Array<uint32_t> submeshVertexOffsets((uint32_t)numSubmeshes);
 			uint32_t submeshVertexOffset = 0;
 			for (int32_t submeshIdx = 0; submeshIdx < numSubmeshes; ++submeshIdx)
 			{

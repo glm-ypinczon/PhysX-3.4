@@ -2710,7 +2710,7 @@ public:
 		// triangle. So we define the submesh number for a triangle as the min of all the submesh numbers of its vertices.
 		// Then we set the vertex submesh number to the min of all its triangle's submesh numbers.
 
-		Array<int32_t> triangleMeshIndex(mNumIndices / 3, 0x7fffffff);
+		physx::shdfnd::Array<int32_t> triangleMeshIndex(mNumIndices / 3, 0x7fffffff);
 		for (uint32_t i = 0; i < triangleMeshIndex.size(); i++)
 		{
 			PxU32 index = i * 3;
@@ -3174,8 +3174,8 @@ bool ClothingAssetImpl::reorderDeformableVertices(ClothingPhysicalMeshImpl& phys
 	uint32_t* indices = physicalMesh.getIndicesBuffer();
 
 	// create mapping arrays
-	Array<uint32_t> newIndices(physicalMesh.getNumVertices(), (uint32_t) - 1);
-	Array<uint32_t> oldIndices(physicalMesh.getNumVertices(), (uint32_t) - 1);
+	physx::shdfnd::Array<uint32_t> newIndices(physicalMesh.getNumVertices(), (uint32_t) - 1);
+	physx::shdfnd::Array<uint32_t> oldIndices(physicalMesh.getNumVertices(), (uint32_t) - 1);
 	uint32_t nextIndex = 0;
 	for (uint32_t i = 0; i < physicalMesh.getNumIndices(); i++)
 	{
@@ -3842,6 +3842,54 @@ void ClothingAssetImpl::destroyPvdInstances()
 	}
 }
 #endif
+
+
+
+
+//---------------------------------------------------------------------------------
+// Glm added accessor
+//---------------------------------------------------------------------------------
+PxU32 ClothingAssetImpl::getPhysicalMeshVertexCount(PxU32 graphicalLodId) const
+{
+	ClothingPhysicalMeshParametersNS::PhysicalMesh_Type* pmesh = getPhysicalMeshFromLod(graphicalLodId);
+	return pmesh->numVertices;
+}
+const PxVec3* ClothingAssetImpl::getPhysicalMeshVertexBuffer(PxU32 graphicalLodId) const
+{
+	ClothingPhysicalMeshParametersNS::PhysicalMesh_Type* pmesh = getPhysicalMeshFromLod(graphicalLodId);
+	return pmesh->vertices.buf;
+}
+PxU32 ClothingAssetImpl::getPhysicalMeshIndexCount(PxU32 graphicalLodId) const
+{
+	ClothingPhysicalMeshParametersNS::PhysicalMesh_Type* pmesh = getPhysicalMeshFromLod(graphicalLodId);
+	return pmesh->numIndices;
+}
+const PxU16* ClothingAssetImpl::getPhysicalMeshIndexBuffer(PxU32 graphicalLodId) const
+{
+	ClothingPhysicalMeshParametersNS::PhysicalMesh_Type* pmesh = getPhysicalMeshFromLod(graphicalLodId);
+	return pmesh->boneIndices.buf;
+}
+PxU32 ClothingAssetImpl::getGraphicalMeshVertexCount(PxU32 graphicalLodId, PxU32 submeshIndex) const
+{
+	const RenderMeshAssetIntl* renderMeshAsset = const_cast<ClothingAssetImpl*>(this)->getGraphicalMesh(graphicalLodId);
+	if (submeshIndex >= renderMeshAsset->getSubmeshCount())
+		return 0;
+
+	const RenderSubmesh& subMesh = renderMeshAsset->getSubmesh(submeshIndex);
+	return subMesh.getVertexBuffer().getVertexCount();
+}
+void ClothingAssetImpl::getGraphicalMeshVertexBuffer(PxVec3* dstBuffer, PxU32 dstBufferSize, PxU32 graphicalLodId, PxU32 submeshIndex) const
+{
+	const RenderMeshAssetIntl* renderMeshAsset = const_cast<ClothingAssetImpl*>(this)->getGraphicalMesh(graphicalLodId);
+	if (submeshIndex >= renderMeshAsset->getSubmeshCount())
+		return;
+
+	const RenderSubmesh& subMesh = renderMeshAsset->getSubmesh(submeshIndex);
+
+	subMesh.getVertexBuffer().getBufferData(dstBuffer, nvidia::apex::RenderDataFormat::FLOAT3, 0, 0,
+		0, (dstBufferSize <= subMesh.getVertexBuffer().getVertexCount() ? dstBufferSize : subMesh.getVertexBuffer().getVertexCount()));
+}
+//---------------------------------------------------------------------------------
 
 }
 } // namespace nvidia

@@ -216,7 +216,7 @@ private:
 	// access
 	bool									addGraphicalMesh(RenderMeshAssetAuthoring* renderMesh, uint32_t graphicalLodIndex);
 
-	Array<ClothingPhysicalMeshImpl*>		mPhysicalMeshesInput;
+	physx::shdfnd::Array<ClothingPhysicalMeshImpl*>		mPhysicalMeshesInput;
 
 	float									mExportScale;
 	bool									mDeriveNormalsFromBones;

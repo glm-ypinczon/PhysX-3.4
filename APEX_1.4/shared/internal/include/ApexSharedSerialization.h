@@ -411,11 +411,11 @@ PX_INLINE void serialize(physx::PxFileBuf& stream, const ConvexHullImpl& h)
 		return;
 	}
 
-	Array<physx::PxVec3>	vertices;
-	Array<physx::PxPlane>	uniquePlanes;
-	Array<uint32_t>	edges;
-	Array<uint32_t>	adjacentFaces;
-	Array<float>	widths;
+	physx::shdfnd::Array<physx::PxVec3>	vertices;
+	physx::shdfnd::Array<physx::PxPlane>	uniquePlanes;
+	physx::shdfnd::Array<uint32_t>	edges;
+	physx::shdfnd::Array<uint32_t>	adjacentFaces;
+	physx::shdfnd::Array<float>	widths;
 
 	NvParameterized::Handle handle(*h.mParams);
 
@@ -472,11 +472,11 @@ PX_INLINE void deserialize(physx::PxFileBuf& stream, uint32_t version, ConvexHul
 		h.init();
 	}
 
-	Array<physx::PxVec3>	vertices;
-	Array<physx::PxPlane>	uniquePlanes;
-	Array<uint32_t>	edges;
-	Array<uint32_t>	adjacentFaces;
-	Array<float>	widths;
+	physx::shdfnd::Array<physx::PxVec3>	vertices;
+	physx::shdfnd::Array<physx::PxPlane>	uniquePlanes;
+	physx::shdfnd::Array<uint32_t>	edges;
+	physx::shdfnd::Array<uint32_t>	adjacentFaces;
+	physx::shdfnd::Array<float>	widths;
 
 	NvParameterized::Handle handle(*h.mParams);
 

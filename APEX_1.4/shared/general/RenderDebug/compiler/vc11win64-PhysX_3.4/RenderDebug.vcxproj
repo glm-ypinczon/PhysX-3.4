@@ -114,7 +114,7 @@
       <PreprocessorDefinitions>PX_FOUNDATION_DLL=0;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_DEBUG;PX_DEBUG;PX_CHECKED;PHYSX_PROFILE_SDK;PX_SUPPORT_VISUAL_DEBUGGER;PX_PROFILE;PX_NVTX=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <WarningLevel>Level4</WarningLevel>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -126,7 +126,9 @@
       <AdditionalLibraryDirectories>../../../../../../PxShared/lib/vc11win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(OutDir)/$(ProjectName)DEBUG.lib.pdb</ProgramDatabaseFile>
       <TargetMachine>MachineX64</TargetMachine>
-    </Lib>
+  
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+ </Lib>
     <ResourceCompile></ResourceCompile>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -153,7 +155,7 @@
       <PreprocessorDefinitions>PX_FOUNDATION_DLL=0;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;NDEBUG;APEX_SHIPPING;_SECURE_SCL=0;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <WarningLevel>Level4</WarningLevel>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -165,7 +167,9 @@
       <AdditionalLibraryDirectories>../../../../../../PxShared/lib/vc11win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(OutDir)/$(ProjectName).lib.pdb</ProgramDatabaseFile>
       <TargetMachine>MachineX64</TargetMachine>
-    </Lib>
+  
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+ </Lib>
     <ResourceCompile></ResourceCompile>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -192,7 +196,7 @@
       <PreprocessorDefinitions>PX_FOUNDATION_DLL=0;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;NDEBUG;PHYSX_PROFILE_SDK;PX_SUPPORT_VISUAL_DEBUGGER;PX_PROFILE;PX_NVTX=1;_SECURE_SCL=0;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <WarningLevel>Level4</WarningLevel>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -204,7 +208,9 @@
       <AdditionalLibraryDirectories>../../../../../../PxShared/lib/vc11win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(OutDir)/$(ProjectName)PROFILE.lib.pdb</ProgramDatabaseFile>
       <TargetMachine>MachineX64</TargetMachine>
-    </Lib>
+  
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+ </Lib>
     <ResourceCompile></ResourceCompile>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -231,7 +237,7 @@
       <PreprocessorDefinitions>PX_FOUNDATION_DLL=0;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;NDEBUG;PX_CHECKED;PHYSX_PROFILE_SDK;PX_SUPPORT_VISUAL_DEBUGGER;PX_ENABLE_CHECKED_ASSERTS;PX_NVTX=1;_SECURE_SCL=0;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <WarningLevel>Level4</WarningLevel>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -243,7 +249,9 @@
       <AdditionalLibraryDirectories>../../../../../../PxShared/lib/vc11win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>$(OutDir)/$(ProjectName)CHECKED.lib.pdb</ProgramDatabaseFile>
       <TargetMachine>MachineX64</TargetMachine>
-    </Lib>
+  
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+ </Lib>
     <ResourceCompile></ResourceCompile>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>

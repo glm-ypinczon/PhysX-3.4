@@ -78,7 +78,7 @@
 			<PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;_DEBUG;PX_DEBUG=1;PX_CHECKED=1;PX_NVTX=1;PX_SUPPORT_PVD=1;PX_PHYSX_DLL_NAME_POSTFIX=DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
@@ -90,7 +90,9 @@
 			<AdditionalLibraryDirectories>./../../Graphics/lib/win32/glut;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Lib>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Lib>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -120,7 +122,7 @@
 			<PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;PX_CHECKED=1;PX_NVTX=1;PX_SUPPORT_PVD=1;PX_PHYSX_DLL_NAME_POSTFIX=CHECKED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
@@ -132,7 +134,9 @@
 			<AdditionalLibraryDirectories>./../../Graphics/lib/win32/glut;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Lib>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Lib>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -162,7 +166,7 @@
 			<PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;PX_PROFILE=1;PX_NVTX=1;PX_SUPPORT_PVD=1;PX_PHYSX_DLL_NAME_POSTFIX=PROFILE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
@@ -175,7 +179,9 @@
 			<AdditionalLibraryDirectories>./../../Graphics/lib/win32/glut;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Lib>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Lib>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -205,7 +211,7 @@
 			<PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;PX_SUPPORT_PVD=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
@@ -218,7 +224,9 @@
 			<AdditionalLibraryDirectories>./../../Graphics/lib/win32/glut;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Lib>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Lib>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>

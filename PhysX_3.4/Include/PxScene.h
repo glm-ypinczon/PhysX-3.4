@@ -1754,6 +1754,15 @@ class PxScene
 	virtual PxPvdSceneClient*		getScenePvdClient() = 0;
 
 	void*	userData;	//!< user can assign this to whatever, usually to create a 1:1 relationship with a user object.
+
+
+
+		//---------------------------------------------------------------------------------
+		// Glm added accessor
+		//---------------------------------------------------------------------------------
+		virtual PxU32 getCollisionPairStatus(PxU32 pairID) = 0;
+		//---------------------------------------------------------------------------------
+
 };
 
 #if !PX_DOXYGEN

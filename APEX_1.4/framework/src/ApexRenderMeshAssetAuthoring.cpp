@@ -140,7 +140,7 @@ void ApexRenderMeshAssetAuthoring::createRenderMesh(const MeshDesc& meshDesc, bo
 		}
 
 		// Create inverse map for our internal remapping
-		Array<int32_t> invMap;	// maps old indices to new indices
+		physx::shdfnd::Array<int32_t> invMap;	// maps old indices to new indices
 		invMap.resize(submeshDesc.m_numVertices);
 		for (uint32_t i = 0; i < submeshDesc.m_numVertices; ++i)
 		{
@@ -236,7 +236,7 @@ void ApexRenderMeshAssetAuthoring::createRenderMesh(const MeshDesc& meshDesc, bo
 		}
 
 		// Vertex partition
-		Array<uint32_t> lookup;
+		physx::shdfnd::Array<uint32_t> lookup;
 		createIndexStartLookup(lookup, 0, submeshDesc.m_numParts, (int32_t*)submeshMap.begin(), vertexCount, sizeof(VertexPart));
 		NvParameterized::Handle vpHandle(submeshParams);
 		submeshParams->getParameterHandle("vertexPartition", vpHandle);

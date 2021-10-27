@@ -201,7 +201,7 @@ struct PvdClassInfoDefine
 	}
 
 	template<PxU32 TKey, typename TObjectType, typename TPropertyType, PxU32 TEnableFlag>
-	void handleBuffer( const PxBufferPropertyInfo<TKey, TObjectType, const Array< TPropertyType >&, TEnableFlag>& inProp )
+	void handleBuffer( const PxBufferPropertyInfo<TKey, TObjectType, const physx::shdfnd::Array< TPropertyType >&, TEnableFlag>& inProp )
 	{
 		mHelper.pushName( inProp.mName );
 		defineProperty( getPvdNamespacedNameForType<TPropertyType>(), "", PropertyType::Array );

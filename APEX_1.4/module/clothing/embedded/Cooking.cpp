@@ -389,7 +389,7 @@ void Cooking::createSelfcollisionIndices(ClothingCookedPhysX3Param* cookedData, 
 
 	// we'll start with a full set of indices, and eliminate the ones we don't want. selfCollisionIndices
 	//  is an array of indices, i.e. a second layer of indirection
-	Array<uint32_t> selfCollisionIndices;
+	physx::shdfnd::Array<uint32_t> selfCollisionIndices;
 	for (uint32_t i = 0; i < numVertices; ++i)
 	{
 		selfCollisionIndices.pushBack(i);
@@ -537,7 +537,7 @@ void Cooking::fillOutSetsDesc(ClothingCookedPhysX3Param* cookedData)
 
 
 
-void Cooking::groupPhases(ClothingCookedPhysX3Param* cookedData, uint32_t meshIndex, uint32_t startIndex, uint32_t endIndex, Array<uint32_t>& phaseEnds) const
+void Cooking::groupPhases(ClothingCookedPhysX3Param* cookedData, uint32_t meshIndex, uint32_t startIndex, uint32_t endIndex, physx::shdfnd::Array<uint32_t>& phaseEnds) const
 {
 	shdfnd::Array<bool> usedInPhase(mPhysicalMeshes[meshIndex].numSimulatedVertices, false);
 	for (uint32_t f = startIndex; f < endIndex; f++)

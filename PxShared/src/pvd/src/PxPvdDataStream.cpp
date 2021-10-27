@@ -68,10 +68,10 @@ struct PropertyDefinitionHelper : public PvdPropertyDefinitionHelper
 {
 	PvdDataStream* mStream;
 	PvdOMMetaDataProvider& mProvider;
-    Array<char> mNameBuffer;
-    Array<uint32_t> mNameStack;
-    Array<NamedValue> mNamedValues;
-    Array<PropertyMessageArg> mPropertyMessageArgs;
+    physx::shdfnd::Array<char> mNameBuffer;
+    physx::shdfnd::Array<uint32_t> mNameStack;
+    physx::shdfnd::Array<NamedValue> mNamedValues;
+    physx::shdfnd::Array<PropertyMessageArg> mPropertyMessageArgs;
 
 	PropertyDefinitionHelper(PvdOMMetaDataProvider& provider)
 	: mStream(NULL)
@@ -200,7 +200,7 @@ struct PropertyDefinitionHelper : public PvdPropertyDefinitionHelper
 class PvdMemPool
 {
 	// Link List
-    Array<uint8_t*> mMemBuffer;
+    physx::shdfnd::Array<uint8_t*> mMemBuffer;
 	uint32_t mLength;
 	uint32_t mBufIndex;
 
@@ -259,7 +259,7 @@ struct PvdOutStream : public PvdDataStream, public UserAllocated
 {
     HashMap<String, uint32_t> mStringHashMap;
 	PvdOMMetaDataProvider& mMetaDataProvider;
-    Array<uint8_t> mTempBuffer;
+    physx::shdfnd::Array<uint8_t> mTempBuffer;
 	PropertyDefinitionHelper mPropertyDefinitionHelper;
 	DataStreamState::Enum mStreamState;
 
@@ -273,7 +273,7 @@ struct PvdOutStream : public PvdDataStream, public UserAllocated
 	uint32_t mPropertyMessageSize;
 	bool mConnected;
 	uint64_t mStreamId;
-    Array<PvdCommand*> mPvdCommandArray;
+    physx::shdfnd::Array<PvdCommand*> mPvdCommandArray;
 	PvdMemPool mPvdCommandPool;
 	PxPvdTransport& mTransport;
 

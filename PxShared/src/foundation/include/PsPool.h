@@ -193,7 +193,7 @@ definition for serialized classes is complete in checked builds.
 	*/
 	void disposeElements()
 	{
-		Array<void*, Alloc> freeNodes(*this);
+		physx::shdfnd::Array<void*, Alloc> freeNodes(*this);
 		while(mFreeElement)
 		{
 			freeNodes.pushBack(mFreeElement);
@@ -203,8 +203,8 @@ definition for serialized classes is complete in checked builds.
 		sort(freeNodes.begin(), freeNodes.size(), Less<void*>(), alloc);
 		sort(mSlabs.begin(), mSlabs.size(), Less<void*>(), alloc);
 
-		typename Array<void*, Alloc>::Iterator slabIt = mSlabs.begin(), slabEnd = mSlabs.end();
-		for(typename Array<void*, Alloc>::Iterator freeIt = freeNodes.begin(); slabIt != slabEnd; ++slabIt)
+		typename physx::shdfnd::Array<void*, Alloc>::Iterator slabIt = mSlabs.begin(), slabEnd = mSlabs.end();
+		for(typename physx::shdfnd::Array<void*, Alloc>::Iterator freeIt = freeNodes.begin(); slabIt != slabEnd; ++slabIt)
 		{
 			for(T* tIt = reinterpret_cast<T*>(*slabIt), *tEnd = tIt + mElementsPerSlab; tIt != tEnd; ++tIt)
 			{
@@ -221,15 +221,15 @@ definition for serialized classes is complete in checked builds.
 	*/
 	void releaseEmptySlabs()
 	{
-		Array<void*, Alloc> freeNodes(*this);
-		Array<void*, Alloc> slabNodes(mSlabs, *this);
+		physx::shdfnd::Array<void*, Alloc> freeNodes(*this);
+		physx::shdfnd::Array<void*, Alloc> slabNodes(mSlabs, *this);
 		while(mFreeElement)
 		{
 			freeNodes.pushBack(mFreeElement);
 			mFreeElement = mFreeElement->mNext;
 		}
 
-		typename Array<void*, Alloc>::Iterator freeIt = freeNodes.begin(), freeEnd = freeNodes.end(),
+		typename physx::shdfnd::Array<void*, Alloc>::Iterator freeIt = freeNodes.begin(), freeEnd = freeNodes.end(),
 		                                       lastCheck = freeNodes.end() - mElementsPerSlab;
 
 		if(freeNodes.size() > mElementsPerSlab)

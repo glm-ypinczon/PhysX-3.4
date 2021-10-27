@@ -94,9 +94,9 @@ public:
 	// from NvParameterized::SerializationCallback
 	void preSerialize(void* userData_ = NULL);
 
-	void permuteBoneIndices(Array<int32_t>& old2newBoneIndices);
+	void permuteBoneIndices(physx::shdfnd::Array<int32_t>& old2newBoneIndices);
 	void applyTransformation(const PxMat44& transformation, float scale);
-	void applyPermutation(const Array<uint32_t>& permutation);
+	void applyPermutation(const physx::shdfnd::Array<uint32_t>& permutation);
 
 	void makeCopy(ClothingPhysicalMeshParameters* params);
 	void allocateNormalBuffer();
@@ -175,7 +175,7 @@ private:
 	void computeEdgeLengths() const;
 
 	bool removeDuplicatedTriangles(uint32_t numIndices, uint32_t indexByteStride, const void* indices);
-	void computeNeighborInformation(Array<int32_t> &neighbors);
+	void computeNeighborInformation(physx::shdfnd::Array<int32_t> &neighbors);
 	void fixTriangleOrientations();
 
 	ModuleClothingImpl* mModule;
@@ -195,7 +195,7 @@ private:
 	uint32_t mNumMaxDistanc0Vertices;
 	uint32_t mNumSimulatedIndices;
 
-	Array<uint32_t> mMasterFlags;
+	physx::shdfnd::Array<uint32_t> mMasterFlags;
 
 	ApexQuadricSimplifier* mSimplifier;
 	bool isDirty;

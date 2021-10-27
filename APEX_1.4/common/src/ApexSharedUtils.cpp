@@ -710,9 +710,9 @@ void ConvexHullImpl::buildFromDesc(const ConvexHullDesc& desc)
 
 	setEmpty();
 
-	Array<PxPlane>	uniquePlanes;
-	Array<uint32_t>	edges;
-	Array<float>	widths;
+	physx::shdfnd::Array<PxPlane>	uniquePlanes;
+	physx::shdfnd::Array<uint32_t>	edges;
+	physx::shdfnd::Array<float>	widths;
 
 	NvParameterized::Handle handle(*mParams);
 
@@ -1128,9 +1128,9 @@ void ConvexHullImpl::buildFromConvexMesh(const ConvexMesh* mesh)
 	const uint8_t* index = (const uint8_t*)mesh->getIndexBuffer();
 
 
-	Array<PxPlane>	uniquePlanes;
-	Array<uint32_t>	edges;
-	Array<float>	widths;
+	physx::shdfnd::Array<PxPlane>	uniquePlanes;
+	physx::shdfnd::Array<uint32_t>	edges;
+	physx::shdfnd::Array<float>	widths;
 
 	NvParameterized::Handle handle(*mParams);
 
@@ -1461,7 +1461,7 @@ void ConvexHullImpl::intersectPlaneSide(const PxPlane& plane)
 
 	const uint32_t oldVertexCount = (uint32_t)mParams->vertices.arraySizes[0];
 
-	Array<PxVec3> vertices;
+	physx::shdfnd::Array<PxVec3> vertices;
 	vertices.resize(oldVertexCount);
 	NvParameterized::Handle handle(*mParams);
 	mParams->getParameterHandle("vertices", handle);

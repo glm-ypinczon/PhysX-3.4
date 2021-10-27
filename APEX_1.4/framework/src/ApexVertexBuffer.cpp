@@ -712,7 +712,7 @@ namespace
 	};
 }
 
-void ApexVertexBuffer::applyPermutation(const Array<uint32_t>& permutation)
+void ApexVertexBuffer::applyPermutation(const physx::shdfnd::Array<uint32_t>& permutation)
 {
 	const uint32_t numVertices = mParams->vertexCount;
 	PX_ASSERT(numVertices == permutation.size());

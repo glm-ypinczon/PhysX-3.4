@@ -62,7 +62,7 @@ public:
 
 	virtual VertexBufferIntl& getVertexBufferWritable() = 0;
 	virtual uint32_t* getIndexBufferWritable(uint32_t partIndex) = 0;
-	virtual void applyPermutation(const Array<uint32_t>& old2new, const Array<uint32_t>& new2old) = 0;
+	virtual void applyPermutation(const physx::shdfnd::Array<uint32_t>& old2new, const physx::shdfnd::Array<uint32_t>& new2old) = 0;
 };
 
 

@@ -1400,7 +1400,7 @@ void RTreeTriangleMeshBuilder::createMidPhaseStructure()
 	const PxMeshCookingHint::Enum meshCookingHint = (mParams.midphaseDesc.getType() == PxMeshMidPhase::eINVALID) ?
 		mParams.meshCookingHint : mParams.midphaseDesc.mBVH33Desc.meshCookingHint;
 
-	Array<PxU32> resultPermute;
+	physx::shdfnd::Array<PxU32> resultPermute;
 	RTreeCookerRemap rc(mMeshData.mNbTriangles);
 	RTreeCooker::buildFromTriangles(
 		mData.mRTree,

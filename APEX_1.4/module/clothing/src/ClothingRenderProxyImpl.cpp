@@ -44,7 +44,7 @@ mTimeInPool(0)
 
 	// prepare material names array and copy the map with override names
 	const uint32_t numSubmeshes = rma->getSubmeshCount();
-	Array<const char*> overrideMaterialNames;
+	physx::shdfnd::Array<const char*> overrideMaterialNames;
 	for (uint32_t si = 0; si < numSubmeshes; ++si)
 	{
 		const Pair<const uint32_t, ApexSimpleString>* overrideMat = overrideMaterials.find(si);

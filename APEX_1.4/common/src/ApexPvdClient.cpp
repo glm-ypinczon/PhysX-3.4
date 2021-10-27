@@ -94,7 +94,7 @@ class ApexPvdClientImpl : public UserAllocated, public ApexPvdClient, public PxA
 
 	PsPvd*						mPvd;
 	bool						mIsConnected;
-	Array<void*>				mInstances;
+	physx::shdfnd::Array<void*>				mInstances;
 	PvdDataStream*				mDataStream;
 	PvdUserRenderer*			mRenderer;
 	RendererEventClient*		mRenderClient;

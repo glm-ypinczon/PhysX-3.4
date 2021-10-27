@@ -81,13 +81,13 @@
 			<PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_DEBUG;PX_DEBUG;PX_CHECKED;PHYSX_PROFILE_SDK;PX_SUPPORT_VISUAL_DEBUGGER;PX_PROFILE;PX_NVTX=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>Sync</ExceptionHandling>
 			<WarningLevel>Level3</WarningLevel>
-			<RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>PhysX3CommonDEBUG_x86.lib PhysX3DEBUG_x86.lib PhysX3CookingDEBUG_x86.lib PhysX3ExtensionsDEBUG.lib PxPvdSDKDEBUG_x86.lib PxTaskDEBUG_x86.lib PxFoundationDEBUG_x86.lib ApexFrameworkDEBUG_x86.lib Apex_DestructibleDEBUG_x86.lib PxCudaContextManagerDEBUG_x86.lib /INCREMENTAL:NO</AdditionalOptions>
+			<AdditionalOptions>glm_PhysX3CommonDEBUG_x86.lib glm_PhysX3DEBUG_x86.lib glm_PhysX3CookingDEBUG_x86.lib PhysX3ExtensionsDEBUG.lib glm_PxPvdSDKDEBUG_x86.lib PxTaskDEBUG_x86.lib glm_PxFoundationDEBUG_x86.lib ApexFrameworkDEBUG_x86_glm.lib Apex_DestructibleDEBUG_x86.lib PxCudaContextManagerDEBUG_x86.lib /INCREMENTAL:NO</AdditionalOptions>
 			<AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)$(ProjectName)DEBUG.exe</OutputFile>
 			<AdditionalLibraryDirectories>../../../../PxShared/lib/vc12win32;./../../../lib/vc12WIN32-PhysX_3.4;../../../../PhysX_3.4/Lib/vc12WIN32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -96,7 +96,9 @@
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -124,13 +126,13 @@
 			<PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;NDEBUG;APEX_SHIPPING;_SECURE_SCL=0;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>Sync</ExceptionHandling>
 			<WarningLevel>Level3</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>PhysX3Common_x86.lib PhysX3_x86.lib PhysX3Cooking_x86.lib PhysX3Extensions.lib PxPvdSDK_x86.lib PxTask_x86.lib PxFoundation_x86.lib ApexFramework_x86.lib Apex_Destructible_x86.lib PxCudaContextManager_x86.lib /INCREMENTAL:NO</AdditionalOptions>
+			<AdditionalOptions>glm_PhysX3Common_x86.lib glm_PhysX3_x86.lib glm_PhysX3Cooking_x86.lib PhysX3Extensions.lib glm_PxPvdSDK_x86.lib PxTask_x86.lib glm_PxFoundation_x86.lib ApexFramework_x86_glm.lib Apex_Destructible_x86.lib PxCudaContextManager_x86.lib /INCREMENTAL:NO</AdditionalOptions>
 			<AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
 			<AdditionalLibraryDirectories>../../../../PxShared/lib/vc12win32;./../../../lib/vc12WIN32-PhysX_3.4;../../../../PhysX_3.4/Lib/vc12WIN32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -139,7 +141,9 @@
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -167,13 +171,13 @@
 			<PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;NDEBUG;PHYSX_PROFILE_SDK;PX_SUPPORT_VISUAL_DEBUGGER;PX_PROFILE;PX_NVTX=1;_SECURE_SCL=0;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>Sync</ExceptionHandling>
 			<WarningLevel>Level3</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>PhysX3CommonPROFILE_x86.lib PhysX3PROFILE_x86.lib PhysX3CookingPROFILE_x86.lib PhysX3ExtensionsPROFILE.lib PxPvdSDKPROFILE_x86.lib PxTaskPROFILE_x86.lib PxFoundationPROFILE_x86.lib ApexFrameworkPROFILE_x86.lib Apex_DestructiblePROFILE_x86.lib PxCudaContextManagerPROFILE_x86.lib /INCREMENTAL:NO</AdditionalOptions>
+			<AdditionalOptions>glm_PhysX3CommonPROFILE_x86.lib glm_PhysX3PROFILE_x86.lib glm_PhysX3CookingPROFILE_x86.lib PhysX3ExtensionsPROFILE.lib glm_PxPvdSDKPROFILE_x86.lib PxTaskPROFILE_x86.lib glm_PxFoundationPROFILE_x86.lib ApexFrameworkPROFILE_x86_glm.lib Apex_DestructiblePROFILE_x86.lib PxCudaContextManagerPROFILE_x86.lib /INCREMENTAL:NO</AdditionalOptions>
 			<AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)$(ProjectName)PROFILE.exe</OutputFile>
 			<AdditionalLibraryDirectories>../../../../PxShared/lib/vc12win32;./../../../lib/vc12WIN32-PhysX_3.4;../../../../PhysX_3.4/Lib/vc12WIN32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -182,7 +186,9 @@
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -210,13 +216,13 @@
 			<PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;NDEBUG;PX_CHECKED;PHYSX_PROFILE_SDK;PX_SUPPORT_VISUAL_DEBUGGER;PX_ENABLE_CHECKED_ASSERTS;PX_NVTX=1;_SECURE_SCL=0;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>Sync</ExceptionHandling>
 			<WarningLevel>Level3</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>PhysX3CommonCHECKED_x86.lib PhysX3CHECKED_x86.lib PhysX3CookingCHECKED_x86.lib PhysX3ExtensionsCHECKED.lib PxPvdSDKCHECKED_x86.lib PxTaskCHECKED_x86.lib PxFoundationCHECKED_x86.lib ApexFrameworkCHECKED_x86.lib Apex_DestructibleCHECKED_x86.lib PxCudaContextManagerCHECKED_x86.lib /INCREMENTAL:NO</AdditionalOptions>
+			<AdditionalOptions>glm_PhysX3CommonCHECKED_x86.lib glm_PhysX3CHECKED_x86.lib glm_PhysX3CookingCHECKED_x86.lib PhysX3ExtensionsCHECKED.lib glm_PxPvdSDKCHECKED_x86.lib PxTaskCHECKED_x86.lib glm_PxFoundationCHECKED_x86.lib ApexFrameworkCHECKED_x86_glm.lib Apex_DestructibleCHECKED_x86.lib PxCudaContextManagerCHECKED_x86.lib /INCREMENTAL:NO</AdditionalOptions>
 			<AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<OutputFile>$(OutDir)$(ProjectName)CHECKED.exe</OutputFile>
 			<AdditionalLibraryDirectories>../../../../PxShared/lib/vc12win32;./../../../lib/vc12WIN32-PhysX_3.4;../../../../PhysX_3.4/Lib/vc12WIN32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -225,7 +231,9 @@
 			<ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>

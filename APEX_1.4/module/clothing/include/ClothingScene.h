@@ -161,7 +161,7 @@ protected:
 	PxScene*				mPhysXScene;
 #endif
 
-	Array<ClothingAssetImpl*>	mClothingAssets;
+	physx::shdfnd::Array<ClothingAssetImpl*>	mClothingAssets;
 	nvidia::Mutex			mClothingAssetsMutex;
 
 	float					mSumBenefit;
@@ -201,7 +201,7 @@ private:
 	ClothingCookingTask*					mCurrentCookingTask;
 	nvidia::Mutex							mCookingTaskMutex;
 
-	Array<float>							mLastSimulationDeltas;
+	physx::shdfnd::Array<float>							mLastSimulationDeltas;
 	uint32_t								mCurrentSimulationDelta;
 	float									mAverageSimulationFrequency;
 

@@ -58,7 +58,7 @@
 		<OutDir>./../../../bin/vc11win32\</OutDir>
 		<IntDir>./Win32/PhysXCommon/debug\</IntDir>
 		<TargetExt>.dll</TargetExt>
-		<TargetName>PhysX3CommonDEBUG_x86</TargetName>
+		<TargetName>glm_PhysX3CommonDEBUG_x86</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -79,23 +79,25 @@
 			<PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;PX_FOUNDATION_DLL=1;PX_PHYSX_COMMON_EXPORTS;_DEBUG;PX_DEBUG=1;PX_CHECKED=1;PX_NVTX=1;PX_SUPPORT_PVD=1;PX_PHYSX_DLL_NAME_POSTFIX=DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>/MAP /MACHINE:x86 /DEBUG /DELAYLOAD:PxFoundationDEBUG_x86.dll</AdditionalOptions>
+			<AdditionalOptions>/MAP /MACHINE:x86 /DEBUG /DELAYLOAD:glm_PxFoundationDEBUG_x86.dll</AdditionalOptions>
 			<AdditionalDependencies>./../../../../Externals/nvToolsExt/1/lib/Win32/nvToolsExt32_1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)PhysX3CommonDEBUG_x86.dll</OutputFile>
+			<OutputFile>$(OutDir)glm_PhysX3CommonDEBUG_x86.dll</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
 			<SubSystem>Console</SubSystem>
 			<ImportLibrary>./../../../Lib/vc11win32/$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -105,7 +107,7 @@
 		<OutDir>./../../../bin/vc11win32\</OutDir>
 		<IntDir>./Win32/PhysXCommon/checked\</IntDir>
 		<TargetExt>.dll</TargetExt>
-		<TargetName>PhysX3CommonCHECKED_x86</TargetName>
+		<TargetName>glm_PhysX3CommonCHECKED_x86</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -125,23 +127,25 @@
 			<PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;PX_FOUNDATION_DLL=1;PX_PHYSX_COMMON_EXPORTS;NDEBUG;PX_CHECKED=1;PX_NVTX=1;PX_SUPPORT_PVD=1;PX_PHYSX_DLL_NAME_POSTFIX=CHECKED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>/MAP /MACHINE:x86 /DELAYLOAD:PxFoundationCHECKED_x86.dll</AdditionalOptions>
+			<AdditionalOptions>/MAP /MACHINE:x86 /DELAYLOAD:glm_PxFoundationCHECKED_x86.dll</AdditionalOptions>
 			<AdditionalDependencies>./../../../../Externals/nvToolsExt/1/lib/Win32/nvToolsExt32_1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)PhysX3CommonCHECKED_x86.dll</OutputFile>
+			<OutputFile>$(OutDir)glm_PhysX3CommonCHECKED_x86.dll</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
 			<SubSystem>Console</SubSystem>
 			<ImportLibrary>./../../../Lib/vc11win32/$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -151,7 +155,7 @@
 		<OutDir>./../../../bin/vc11win32\</OutDir>
 		<IntDir>./Win32/PhysXCommon/profile\</IntDir>
 		<TargetExt>.dll</TargetExt>
-		<TargetName>PhysX3CommonPROFILE_x86</TargetName>
+		<TargetName>glm_PhysX3CommonPROFILE_x86</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -171,23 +175,25 @@
 			<PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;PX_FOUNDATION_DLL=1;PX_PHYSX_COMMON_EXPORTS;NDEBUG;PX_PROFILE=1;PX_NVTX=1;PX_SUPPORT_PVD=1;PX_PHYSX_DLL_NAME_POSTFIX=PROFILE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>/MAP /MACHINE:x86 /INCREMENTAL:NO /DEBUG /DELAYLOAD:PxFoundationPROFILE_x86.dll</AdditionalOptions>
+			<AdditionalOptions>/MAP /MACHINE:x86 /INCREMENTAL:NO /DEBUG /DELAYLOAD:glm_PxFoundationPROFILE_x86.dll</AdditionalOptions>
 			<AdditionalDependencies>./../../../../Externals/nvToolsExt/1/lib/Win32/nvToolsExt32_1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)PhysX3CommonPROFILE_x86.dll</OutputFile>
+			<OutputFile>$(OutDir)glm_PhysX3CommonPROFILE_x86.dll</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
 			<SubSystem>Console</SubSystem>
 			<ImportLibrary>./../../../Lib/vc11win32/$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -197,7 +203,7 @@
 		<OutDir>./../../../bin/vc11win32\</OutDir>
 		<IntDir>./Win32/PhysXCommon/release\</IntDir>
 		<TargetExt>.dll</TargetExt>
-		<TargetName>PhysX3Common_x86</TargetName>
+		<TargetName>glm_PhysX3Common_x86</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -217,23 +223,25 @@
 			<PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;PX_FOUNDATION_DLL=1;PX_PHYSX_COMMON_EXPORTS;NDEBUG;PX_SUPPORT_PVD=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>/MAP /MACHINE:x86 /INCREMENTAL:NO /DELAYLOAD:PxFoundation_x86.dll</AdditionalOptions>
+			<AdditionalOptions>/MAP /MACHINE:x86 /INCREMENTAL:NO /DELAYLOAD:glm_PxFoundation_x86.dll</AdditionalOptions>
 			<AdditionalDependencies>./../../../../Externals/nvToolsExt/1/lib/Win32/nvToolsExt32_1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)PhysX3Common_x86.dll</OutputFile>
+			<OutputFile>$(OutDir)glm_PhysX3Common_x86.dll</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
 			<SubSystem>Console</SubSystem>
 			<ImportLibrary>./../../../Lib/vc11win32/$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>

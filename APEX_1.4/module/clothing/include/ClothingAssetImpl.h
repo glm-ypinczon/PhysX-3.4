@@ -399,6 +399,22 @@ public:
 
 	uint32_t										getInterCollisionChannels();
 
+
+
+
+	//---------------------------------------------------------------------------------
+	// Glm added accessors
+	//---------------------------------------------------------------------------------
+	PxU32                   getPhysicalMeshVertexCount(PxU32 graphicalLodId) const;
+	const PxVec3*           getPhysicalMeshVertexBuffer(PxU32 graphicalLodId) const;
+
+	PxU32                   getPhysicalMeshIndexCount(PxU32 graphicalLodId) const;
+	const PxU16*            getPhysicalMeshIndexBuffer(PxU32 graphicalLodId) const;
+
+	PxU32                   getGraphicalMeshVertexCount(PxU32 graphicalLodId, PxU32 submeshIndex) const;
+	void                    getGraphicalMeshVertexBuffer(PxVec3* dstBuffer, PxU32 dstBufferSize, PxU32 graphicalLodId, PxU32 submeshIndex) const;
+	//---------------------------------------------------------------------------------
+
 protected:
 	void											destroy();
 
@@ -442,7 +458,7 @@ protected:
 	ParamArray<ClothingGraphicalLodParameters*> mGraphicalLods;
 
 	mutable ParamArray<ClothingAssetParametersNS::BoneEntry_Type> mBones;
-	Array<PxMat44> mInvBindPoses; // not serialized!
+	physx::shdfnd::Array<PxMat44> mInvBindPoses; // not serialized!
 
 	mutable ParamArray<ClothingAssetParametersNS::BoneSphere_Type> mBoneSpheres;
 	mutable ParamArray<uint16_t> mSpherePairs;
@@ -460,8 +476,8 @@ private:
 		return CLOTHING_AUTHORING_TYPE_NAME;
 	}
 
-	Array<uint32_t>										mCompressedNumBonesPerVertex;
-	Array<uint32_t>										mCompressedTangentW;
+	physx::shdfnd::Array<uint32_t>										mCompressedNumBonesPerVertex;
+	physx::shdfnd::Array<uint32_t>										mCompressedTangentW;
 	nvidia::Mutex										mCompressedNumBonesPerVertexMutex;
 
 	ApexSimpleString									mName;
@@ -471,14 +487,14 @@ private:
 	ResourceList										mPreviews;
 
 
-	Array<SimulationAbstract*>							mUnusedSimulation;
+	physx::shdfnd::Array<SimulationAbstract*>							mUnusedSimulation;
 	nvidia::Mutex										mUnusedSimulationMutex;
 
 	static AuthObjTypeID mAssetTypeID;
 	friend class ModuleClothingImpl;
 
 
-	Array<uint32_t>										mExt2IntMorphMapping;
+	physx::shdfnd::Array<uint32_t>										mExt2IntMorphMapping;
 	uint32_t											mExt2IntMorphMappingMaxValue; // this is actually one larger than max
 
 	bool												mDirty;

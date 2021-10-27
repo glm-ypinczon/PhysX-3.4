@@ -120,7 +120,7 @@ private:
 		uint32_t triangleNr;
 	};
 
-	int32_t binarySearchEdges(const Array<SubdividerEdge>& edges, uint32_t v0, uint32_t v1, uint32_t triangleNr) const;
+	int32_t binarySearchEdges(const physx::shdfnd::Array<SubdividerEdge>& edges, uint32_t v0, uint32_t v1, uint32_t triangleNr) const;
 
 	struct SubdividerTriangle
 	{
@@ -180,13 +180,13 @@ private:
 		int32_t nextTriangle;
 	};
 
-	Array<SubdividerVertex> mVertices;
-	Array<SubdividerTriangle> mTriangles;
+	physx::shdfnd::Array<SubdividerVertex> mVertices;
+	physx::shdfnd::Array<SubdividerTriangle> mTriangles;
 	uint32_t mMarkedVertices;
 
 	QDSRand mRand;
 
-	Array<TriangleList> mTriangleList;
+	physx::shdfnd::Array<TriangleList> mTriangleList;
 	int32_t mTriangleListEmptyElement;
 	void addTriangleToVertex(uint32_t vertexNumber, uint32_t triangleNumber);
 	void removeTriangleFromVertex(uint32_t vertexNumber, uint32_t triangleNumber);

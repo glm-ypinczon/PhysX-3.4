@@ -703,7 +703,7 @@ void DestructibleStructureStressSolver::createShadowScene(uint32_t initialWarmFr
 		}
 	}
 	//Create the joints using a local hash array.. .after that we clear it. 
-	Array<Array<bool> > linkedHash;
+	physx::shdfnd::Array<Array<bool> > linkedHash;
 	linkedHash.resize(supportChunkSize);
 	for(uint32_t i = 0;i < supportChunkSize;++i)
 	{

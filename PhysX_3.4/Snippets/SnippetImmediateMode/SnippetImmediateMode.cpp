@@ -229,15 +229,15 @@ struct ContactPair
 
 class TestContactRecorder : public immediate::PxContactRecorder
 {
-	Array<ContactPair>& mContactPairs;
-	Array<Gu::ContactPoint>& mContactPoints;
+	physx::shdfnd::Array<ContactPair>& mContactPairs;
+	physx::shdfnd::Array<Gu::ContactPoint>& mContactPoints;
 	PxRigidDynamic& mActor0;
 	PxRigidActor& mActor1;
 	PxU32 mIdx0, mIdx1;
 	bool mHasContacts;
 public:
 	
-	TestContactRecorder(Array<ContactPair>& contactPairs, Array<Gu::ContactPoint>& contactPoints, PxRigidDynamic& actor0, 
+	TestContactRecorder(physx::shdfnd::Array<ContactPair>& contactPairs, physx::shdfnd::Array<Gu::ContactPoint>& contactPoints, PxRigidDynamic& actor0, 
 	PxRigidActor& actor1, PxU32 idx0, PxU32 idx1) : mContactPairs(contactPairs), mContactPoints(contactPoints),
 		mActor0(actor0), mActor1(actor1), mIdx0(idx0), mIdx1(idx1), mHasContacts(false)
 	{
@@ -279,8 +279,8 @@ private:
 	PX_NOCOPY(TestContactRecorder)
 };
 
-static bool generateContacts(PxGeometryHolder& geom0, PxGeometryHolder& geom1, PxRigidDynamic& actor0, PxRigidActor& actor1, PxCacheAllocator& cacheAllocator, Array<Gu::ContactPoint>& contactPoints,
-	Array<ContactPair>& contactPairs, PxU32 idx0, PxU32 idx1, PxCache& cache)
+static bool generateContacts(PxGeometryHolder& geom0, PxGeometryHolder& geom1, PxRigidDynamic& actor0, PxRigidActor& actor1, PxCacheAllocator& cacheAllocator, physx::shdfnd::Array<Gu::ContactPoint>& contactPoints,
+	physx::shdfnd::Array<ContactPair>& contactPairs, PxU32 idx0, PxU32 idx1, PxCache& cache)
 {
 	Gu::ContactBuffer buffer;
 
@@ -549,17 +549,17 @@ void stepPhysics(bool interactive)
 
 	const PxU32 totalActors = nbDynamics + nbStatics;
 
-	Array<ContactPair> activeContactPairs;
-	Array<Gu::ContactPoint> contactPoints;
+	physx::shdfnd::Array<ContactPair> activeContactPairs;
+	physx::shdfnd::Array<Gu::ContactPoint> contactPoints;
 
 	activeContactPairs.reserve(4 * totalActors);
 	
 
-	Array<PxActor*> actors(totalActors);
-	Array<PxBounds3> shapeBounds(totalActors);
-	Array<PxSolverBody> bodies(totalActors);
-	Array<PxSolverBodyData> bodyData(totalActors);
-	Array<PxGeometryHolder> mGeometries;
+	physx::shdfnd::Array<PxActor*> actors(totalActors);
+	physx::shdfnd::Array<PxBounds3> shapeBounds(totalActors);
+	physx::shdfnd::Array<PxSolverBody> bodies(totalActors);
+	physx::shdfnd::Array<PxSolverBodyData> bodyData(totalActors);
+	physx::shdfnd::Array<PxGeometryHolder> mGeometries;
 
 	gScene->getActors(PxActorTypeFlag::eRIGID_DYNAMIC, actors.begin(), nbDynamics);
 
@@ -691,7 +691,7 @@ void stepPhysics(bool interactive)
 		sta->userData = reinterpret_cast<void*>(szA);
 	}
 
-	Array<PxSolverConstraintDesc> descs(activeContactPairs.size() + gConstraints->size());
+	physx::shdfnd::Array<PxSolverConstraintDesc> descs(activeContactPairs.size() + gConstraints->size());
 
 	for (PxU32 a = 0; a < activeContactPairs.size(); ++a)
 	{
@@ -740,15 +740,15 @@ void stepPhysics(bool interactive)
 		
 	}
 
-	Array<PxConstraintBatchHeader> headers(descs.size());
-	Array<PxReal> contactForces(contactPoints.size());
+	physx::shdfnd::Array<PxConstraintBatchHeader> headers(descs.size());
+	physx::shdfnd::Array<PxReal> contactForces(contactPoints.size());
 
 	//Technically, you can batch the contacts and joints all at once using a single call but doing so mixes them in the orderedDescs array, which means that it is impossible to 
 	//batch all contact or all joint dispatches into a single call. While we don't do this in this snippet (we instead process a single header at a time), our approach could be extended to
 	//dispatch all contact headers at once if that was necessary.
 
 #if BATCH_CONTACTS
-	Array<PxSolverConstraintDesc> tempOrderedDescs(descs.size());
+	physx::shdfnd::Array<PxSolverConstraintDesc> tempOrderedDescs(descs.size());
 	physx::shdfnd::Array<PxSolverConstraintDesc>& orderedDescs = tempOrderedDescs;
 	//1 batch the contacts
 	const PxU32 nbContactHeaders = physx::immediate::PxBatchConstraints(descs.begin(), activeContactPairs.size(), bodies.begin(), nbDynamics, headers.begin(), orderedDescs.begin());
@@ -919,8 +919,8 @@ void stepPhysics(bool interactive)
 
 	//Solve all the constraints produced earlier. Intermediate motion linear/angular velocity buffers are filled in. These contain intermediate delta velocity information that is used
 	//the PxIntegrateSolverBody
-	Array<PxVec3> motionLinearVelocity(nbDynamics);
-	Array<PxVec3> motionAngularVelocity(nbDynamics);
+	physx::shdfnd::Array<PxVec3> motionLinearVelocity(nbDynamics);
+	physx::shdfnd::Array<PxVec3> motionAngularVelocity(nbDynamics);
 
 	//Zero the bodies array. This buffer contains the delta velocities and are accumulated during the simulation. For correct behavior, it is vital
 	//that this buffer is zeroed.

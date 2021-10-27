@@ -58,7 +58,7 @@
 		<OutDir>./../../../bin/vc14win64\</OutDir>
 		<IntDir>./x64/PhysX/debug\</IntDir>
 		<TargetExt>.dll</TargetExt>
-		<TargetName>PhysX3DEBUG_x64</TargetName>
+		<TargetName>glm_PhysX3DEBUG_x64</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -78,23 +78,25 @@
 			<PreprocessorDefinitions>PX_PHYSX_CORE_EXPORTS;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;_DEBUG;PX_DEBUG=1;PX_CHECKED=1;PX_NVTX=1;PX_SUPPORT_PVD=1;PX_PHYSX_DLL_NAME_POSTFIX=DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>/MAP /MACHINE:x64 /DELAYLOAD:nvcuda.dll /DELAYLOAD:PxFoundationDEBUG_x64.dll /DELAYLOAD:PxPvdSDKDEBUG_x64.dll /DELAYLOAD:PhysX3CommonDEBUG_x64.dll /DEBUG</AdditionalOptions>
-			<AdditionalDependencies>./../../../../Externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;./../../../Lib/vc14win64/PhysX3GpuDEBUG_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)PhysX3DEBUG_x64.dll</OutputFile>
+			<AdditionalOptions>/MAP /MACHINE:x64 /DELAYLOAD:nvcuda.dll /DELAYLOAD:glm_PxFoundationDEBUG_x64.dll /DELAYLOAD:glm_PxPvdSDKDEBUG_x64.dll /DELAYLOAD:glm_PhysX3CommonDEBUG_x64.dll /DEBUG</AdditionalOptions>
+			<AdditionalDependencies>./../../../../Externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;./../../../Lib/vc14win64/glm_PhysX3GpuDEBUG_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<OutputFile>$(OutDir)glm_PhysX3DEBUG_x64.dll</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
 			<SubSystem>Console</SubSystem>
 			<ImportLibrary>./../../../Lib/vc14win64/$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX64</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -104,7 +106,7 @@
 		<OutDir>./../../../bin/vc14win64\</OutDir>
 		<IntDir>./x64/PhysX/checked\</IntDir>
 		<TargetExt>.dll</TargetExt>
-		<TargetName>PhysX3CHECKED_x64</TargetName>
+		<TargetName>glm_PhysX3CHECKED_x64</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -123,23 +125,25 @@
 			<PreprocessorDefinitions>PX_PHYSX_CORE_EXPORTS;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;PX_CHECKED=1;PX_NVTX=1;PX_SUPPORT_PVD=1;PX_PHYSX_DLL_NAME_POSTFIX=CHECKED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>/MAP /MACHINE:x64 /DELAYLOAD:nvcuda.dll /DELAYLOAD:PxFoundationCHECKED_x64.dll /DELAYLOAD:PxPvdSDKCHECKED_x64.dll /DELAYLOAD:PhysX3CommonCHECKED_x64.dll</AdditionalOptions>
-			<AdditionalDependencies>./../../../../Externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;./../../../Lib/vc14win64/PhysX3GpuCHECKED_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)PhysX3CHECKED_x64.dll</OutputFile>
+			<AdditionalOptions>/MAP /MACHINE:x64 /DELAYLOAD:nvcuda.dll /DELAYLOAD:glm_PxFoundationCHECKED_x64.dll /DELAYLOAD:glm_PxPvdSDKCHECKED_x64.dll /DELAYLOAD:glm_PhysX3CommonCHECKED_x64.dll</AdditionalOptions>
+			<AdditionalDependencies>./../../../../Externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;./../../../Lib/vc14win64/glm_PhysX3GpuCHECKED_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<OutputFile>$(OutDir)glm_PhysX3CHECKED_x64.dll</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
 			<SubSystem>Console</SubSystem>
 			<ImportLibrary>./../../../Lib/vc14win64/$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX64</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -149,7 +153,7 @@
 		<OutDir>./../../../bin/vc14win64\</OutDir>
 		<IntDir>./x64/PhysX/profile\</IntDir>
 		<TargetExt>.dll</TargetExt>
-		<TargetName>PhysX3PROFILE_x64</TargetName>
+		<TargetName>glm_PhysX3PROFILE_x64</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -168,23 +172,25 @@
 			<PreprocessorDefinitions>PX_PHYSX_CORE_EXPORTS;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;PX_PROFILE=1;PX_NVTX=1;PX_SUPPORT_PVD=1;PX_PHYSX_DLL_NAME_POSTFIX=PROFILE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>/MAP /MACHINE:x64 /DELAYLOAD:nvcuda.dll /DELAYLOAD:PxFoundationPROFILE_x64.dll /DELAYLOAD:PxPvdSDKPROFILE_x64.dll /DELAYLOAD:PhysX3CommonPROFILE_x64.dll /INCREMENTAL:NO /DEBUG</AdditionalOptions>
-			<AdditionalDependencies>./../../../../Externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;./../../../Lib/vc14win64/PhysX3GpuPROFILE_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)PhysX3PROFILE_x64.dll</OutputFile>
+			<AdditionalOptions>/MAP /MACHINE:x64 /DELAYLOAD:nvcuda.dll /DELAYLOAD:glm_PxFoundationPROFILE_x64.dll /DELAYLOAD:glm_PxPvdSDKPROFILE_x64.dll /DELAYLOAD:glm_PhysX3CommonPROFILE_x64.dll /INCREMENTAL:NO /DEBUG</AdditionalOptions>
+			<AdditionalDependencies>./../../../../Externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;./../../../Lib/vc14win64/glm_PhysX3GpuPROFILE_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<OutputFile>$(OutDir)glm_PhysX3PROFILE_x64.dll</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
 			<SubSystem>Console</SubSystem>
 			<ImportLibrary>./../../../Lib/vc14win64/$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX64</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -194,7 +200,7 @@
 		<OutDir>./../../../bin/vc14win64\</OutDir>
 		<IntDir>./x64/PhysX/release\</IntDir>
 		<TargetExt>.dll</TargetExt>
-		<TargetName>PhysX3_x64</TargetName>
+		<TargetName>glm_PhysX3_x64</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -213,23 +219,25 @@
 			<PreprocessorDefinitions>PX_PHYSX_CORE_EXPORTS;WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;PX_SUPPORT_PVD=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 		</ClCompile>
 		<Link>
-			<AdditionalOptions>/MAP /MACHINE:x64 /DELAYLOAD:nvcuda.dll /DELAYLOAD:PxFoundation_x64.dll /DELAYLOAD:PxPvdSDK_x64.dll /DELAYLOAD:PhysX3Common_x64.dll /INCREMENTAL:NO</AdditionalOptions>
-			<AdditionalDependencies>./../../../../Externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;./../../../Lib/vc14win64/PhysX3Gpu_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)PhysX3_x64.dll</OutputFile>
+			<AdditionalOptions>/MAP /MACHINE:x64 /DELAYLOAD:nvcuda.dll /DELAYLOAD:glm_PxFoundation_x64.dll /DELAYLOAD:glm_PxPvdSDK_x64.dll /DELAYLOAD:glm_PhysX3Common_x64.dll /INCREMENTAL:NO</AdditionalOptions>
+			<AdditionalDependencies>./../../../../Externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;./../../../Lib/vc14win64/glm_PhysX3Gpu_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<OutputFile>$(OutDir)glm_PhysX3_x64.dll</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
 			<SubSystem>Console</SubSystem>
 			<ImportLibrary>./../../../Lib/vc14win64/$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX64</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>

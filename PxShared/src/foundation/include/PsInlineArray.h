@@ -40,15 +40,15 @@ namespace shdfnd
 
 // array that pre-allocates for N elements
 template <typename T, uint32_t N, typename Alloc = typename AllocatorTraits<T>::Type>
-class InlineArray : public Array<T, InlineAllocator<N * sizeof(T), Alloc> >
+class InlineArray : public physx::shdfnd::Array<T, InlineAllocator<N * sizeof(T), Alloc> >
 {
 	typedef InlineAllocator<N * sizeof(T), Alloc> Allocator;
 
   public:
-	InlineArray(const PxEMPTY v) : Array<T, Allocator>(v)
+	InlineArray(const PxEMPTY v) : physx::shdfnd::Array<T, Allocator>(v)
 	{
 		if(isInlined())
-			this->mData = reinterpret_cast<T*>(Array<T, Allocator>::getInlineBuffer());
+			this->mData = reinterpret_cast<T*>(physx::shdfnd::Array<T, Allocator>::getInlineBuffer());
 	}
 
 	PX_INLINE bool isInlined() const
@@ -56,7 +56,7 @@ class InlineArray : public Array<T, InlineAllocator<N * sizeof(T), Alloc> >
 		return Allocator::isBufferUsed();
 	}
 
-	PX_INLINE explicit InlineArray(const Alloc& alloc = Alloc()) : Array<T, Allocator>(alloc)
+	PX_INLINE explicit InlineArray(const Alloc& alloc = Alloc()) : physx::shdfnd::Array<T, Allocator>(alloc)
 	{
 		this->mData = this->allocate(N);
 		this->mCapacity = N;

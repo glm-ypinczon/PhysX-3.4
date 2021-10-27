@@ -43,7 +43,7 @@ namespace
 
 struct PropDescImpl : public PropertyDescription, public UserAllocated
 {
-    Array<NamedValue> mValueNames;
+    physx::shdfnd::Array<NamedValue> mValueNames;
 	PropDescImpl(const PropertyDescription& inBase, StringTable& table)
 	: PropertyDescription(inBase), mValueNames("NamedValue")
 	{
@@ -72,9 +72,9 @@ struct PropDescImpl : public PropertyDescription, public UserAllocated
 
 struct ClassDescImpl : public ClassDescription, public UserAllocated
 {
-    Array<PropDescImpl*> mPropImps;
-    Array<PtrOffset> m32OffsetArray;
-	Array<PtrOffset> m64OffsetArray;
+    physx::shdfnd::Array<PropDescImpl*> mPropImps;
+    physx::shdfnd::Array<PtrOffset> m32OffsetArray;
+	physx::shdfnd::Array<PtrOffset> m64OffsetArray;
 	ClassDescImpl(const ClassDescription& inBase)
 	: ClassDescription(inBase)
 	, mPropImps("PropDescImpl*")
@@ -272,7 +272,7 @@ class StringTableImpl : public StringTable, public UserAllocated
 		uint32_t numStrs;
 		stream >> numStrs;
 		stream >> mNextStrHandle;
-		Array<uint8_t> readBuffer("StringTable::read::readBuffer");
+		physx::shdfnd::Array<uint8_t> readBuffer("StringTable::read::readBuffer");
 		uint32_t bufSize = 0;
 		for(uint32_t idx = 0; idx < numStrs; ++idx)
 		{
@@ -355,9 +355,9 @@ struct PropertyMessageEntryImpl : public PropertyMessageEntry
 
 struct PropertyMessageDescriptionImpl : public PropertyMessageDescription, public UserAllocated
 {
-	Array<PropertyMessageEntryImpl> mEntryImpls;
-	Array<PropertyMessageEntry> mEntries;
-	Array<uint32_t> mStringOffsetArray;
+	physx::shdfnd::Array<PropertyMessageEntryImpl> mEntryImpls;
+	physx::shdfnd::Array<PropertyMessageEntry> mEntries;
+	physx::shdfnd::Array<uint32_t> mStringOffsetArray;
 	PropertyMessageDescriptionImpl(const PropertyMessageDescription& data)
 	: PropertyMessageDescription(data)
 	, mEntryImpls("PropertyMessageDescriptionImpl::mEntryImpls")
@@ -416,11 +416,11 @@ struct PvdObjectModelMetaDataImpl : public PvdObjectModelMetaData, public UserAl
 
 	TNameToClassMap mNameToClasses;
 	TNameToPropMap mNameToProperties;
-	Array<ClassDescImpl*> mClasses;
-	Array<PropDescImpl*> mProperties;
+	physx::shdfnd::Array<ClassDescImpl*> mClasses;
+	physx::shdfnd::Array<PropDescImpl*> mProperties;
     StringTableImpl* mStringTable;
 	TNameToPropertyMessageMap mPropertyMessageMap;
-	Array<PropertyMessageDescriptionImpl*> mPropertyMessages;
+	physx::shdfnd::Array<PropertyMessageDescriptionImpl*> mPropertyMessages;
 	int32_t mNextClassId;
 	uint32_t mRefCount;
 
@@ -807,8 +807,8 @@ struct PvdObjectModelMetaDataImpl : public PvdObjectModelMetaData, public UserAl
 		return offset;
 	}
 
-	void transferPtrOffsets(ClassDescriptionSizeInfo& destInfo, Array<PtrOffset>& destArray,
-	                        const Array<PtrOffset>& src, uint32_t offset)
+	void transferPtrOffsets(ClassDescriptionSizeInfo& destInfo, physx::shdfnd::Array<PtrOffset>& destArray,
+	                        const physx::shdfnd::Array<PtrOffset>& src, uint32_t offset)
 	{
 		PVD_FOREACH(idx, src.size())
 		destArray.pushBack(PtrOffset(src[idx].mOffsetType, src[idx].mOffset + offset));
@@ -1293,13 +1293,13 @@ struct PvdObjectModelMetaDataImpl : public PvdObjectModelMetaData, public UserAl
 				type->serialize(*this);
 		}
 		template <typename TArrayType>
-		void streamify(const Array<TArrayType>& type)
+		void streamify(const physx::shdfnd::Array<TArrayType>& type)
 		{
 			mStream << static_cast<uint32_t>(type.size());
 			PVD_FOREACH(idx, type.size()) streamify(const_cast<TArrayType&>(type[idx]));
 		}
 		template <typename TArrayType>
-		void streamifyLinks(const Array<TArrayType>& type)
+		void streamifyLinks(const physx::shdfnd::Array<TArrayType>& type)
 		{
 			mStream << static_cast<uint32_t>(type.size());
 			PVD_FOREACH(idx, type.size()) streamifyLinks(const_cast<TArrayType&>(type[idx]));
@@ -1393,7 +1393,7 @@ struct PvdObjectModelMetaDataImpl : public PvdObjectModelMetaData, public UserAl
 				type = NULL;
 		}
 		template <typename TArrayType>
-		void streamify(Array<TArrayType>& type)
+		void streamify(physx::shdfnd::Array<TArrayType>& type)
 		{
 			uint32_t typeSize;
 			mStream >> typeSize;
@@ -1401,7 +1401,7 @@ struct PvdObjectModelMetaDataImpl : public PvdObjectModelMetaData, public UserAl
 			PVD_FOREACH(idx, type.size()) streamify(type[idx]);
 		}
 		template <typename TArrayType>
-		void streamifyLinks(Array<TArrayType>& type)
+		void streamifyLinks(physx::shdfnd::Array<TArrayType>& type)
 		{
 			uint32_t typeSize;
 			mStream >> typeSize;

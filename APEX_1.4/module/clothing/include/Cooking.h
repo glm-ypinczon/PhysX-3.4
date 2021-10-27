@@ -49,7 +49,7 @@ private:
 	void createSelfcollisionIndices(ClothingCookedPhysX3Param* cookedData, uint32_t subMeshIndex) const;
 	bool verifyValidity(const ClothingCookedPhysX3Param* cookedData, uint32_t subMeshIndex);
 	void fillOutSetsDesc(ClothingCookedPhysX3Param* cookedData);
-	void groupPhases(ClothingCookedPhysX3Param* cookedData, uint32_t subMeshIndex, uint32_t startIndex, uint32_t endIndex, Array<uint32_t>& phaseEnds) const;
+	void groupPhases(ClothingCookedPhysX3Param* cookedData, uint32_t subMeshIndex, uint32_t startIndex, uint32_t endIndex, physx::shdfnd::Array<uint32_t>& phaseEnds) const;
 
 	void dumpObj(const char* filename, uint32_t subMeshIndex) const;
 	void dumpApx(const char* filename, const NvParameterized::Interface* data) const;

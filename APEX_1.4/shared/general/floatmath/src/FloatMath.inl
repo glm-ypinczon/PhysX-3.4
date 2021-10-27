@@ -2248,7 +2248,7 @@ namespace VERTEX_INDEX
 
 class KdTreeNode;
 
-typedef Array< KdTreeNode * > KdTreeNodeVector;
+typedef physx::shdfnd::Array< KdTreeNode * > KdTreeNodeVector;
 
 enum Axes
 {
@@ -2741,8 +2741,8 @@ public:
 };
 
 
-typedef Array< double > DoubleVector;
-typedef Array< float >  FloatVector;
+typedef physx::shdfnd::Array< double > DoubleVector;
+typedef physx::shdfnd::Array< float >  FloatVector;
 
 class KdTree : public KdTreeInterface, public UserAllocated
 {
@@ -3319,7 +3319,7 @@ nextone:
 }
 
 
-typedef Array< fm_LineSegment > LineSegmentVector;
+typedef physx::shdfnd::Array< fm_LineSegment > LineSegmentVector;
 
 static inline void setMinMax(double &vmin,double &vmax,double v1,double v2)
 {
@@ -3360,7 +3360,7 @@ public:
 };
 
 
-typedef Array< Intersection > IntersectionList;
+typedef physx::shdfnd::Array< Intersection > IntersectionList;
 
 class MyLineSegment : public fm_LineSegment, public UserAllocated
 {
@@ -3554,7 +3554,7 @@ public:
   IntersectionList mIntersections;
 };
 
-typedef Array< MyLineSegment > MyLineSegmentVector;
+typedef physx::shdfnd::Array< MyLineSegment > MyLineSegmentVector;
 
 class MyLineSweep : public fm_LineSweep, public fm_quickSort, public UserAllocated
 {
@@ -4368,7 +4368,7 @@ void  fm_initMinMax(REAL bmin[3],REAL bmax[3])
 
 #define TESSELATE_H
 
-typedef Array< uint32_t > UintVector;
+typedef physx::shdfnd::Array< uint32_t > UintVector;
 
 class Myfm_Tesselate : public fm_Tesselate, public UserAllocated
 {
@@ -5070,8 +5070,8 @@ public:
   double z;
 };
 
-typedef Array< TVec >  TVecVector;
-typedef Array< TU32 >  TU32Vector;
+typedef physx::shdfnd::Array< TVec >  TVecVector;
+typedef physx::shdfnd::Array< TU32 >  TU32Vector;
 
 class CTriangulator
 {

@@ -603,8 +603,8 @@ struct ConvexMeshBuilder
 	void operator()(uint32_t mask, float scale=1.0f);
 
 	const PxVec4* mPlanes;
-	Array<PxVec3> mVertices;
-	Array<uint16_t> mIndices;
+	physx::shdfnd::Array<PxVec3> mVertices;
+	physx::shdfnd::Array<uint16_t> mIndices;
 };
 
 
@@ -655,7 +655,7 @@ bool arrayFind(uint32_t& index, const T& t, const physx::Array<T>& array)
 }
 
 #include "ApexUsingNamespace.h"
-#if PX_X64
+#if PX_X64 && !PX_LINUX
 #pragma warning(push)
 #pragma warning(disable: 4324) // 'IndexBank<IndexType>' : structure was padded due to __declspec(align())
 #endif
@@ -956,14 +956,14 @@ class IndexBank
 
 	protected:
 
-	Array<IndexType>		indices;
-	Array<IndexType>		ranks;
+	physx::shdfnd::Array<IndexType>		indices;
+	physx::shdfnd::Array<IndexType>		ranks;
 	uint32_t					maxCapacity;
 	uint32_t					indexCount;
 	bool					capacityLocked;
 };
 
-#if PX_X64
+#if PX_X64 && !PX_LINUX
 #pragma warning(pop)
 #endif
 

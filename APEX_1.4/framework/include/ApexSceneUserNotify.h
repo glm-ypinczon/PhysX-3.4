@@ -65,7 +65,7 @@ private:
 	virtual void onAdvance(const PxRigidBody*const* bodyBuffer, const PxTransform* poseBuffer, const PxU32 count);
 
 private:
-	Array<physx::PxSimulationEventCallback*>	mModuleNotifiers;
+	physx::shdfnd::Array<physx::PxSimulationEventCallback*>	mModuleNotifiers;
 	PxSimulationEventCallback*			mAppNotify;
 
 
@@ -73,7 +73,7 @@ private:
 	bool								mBatchAppNotify;
 
 	// onConstraintBreak
-	Array<physx::PxConstraintInfo>		mBatchedBreakNotifications;
+	physx::shdfnd::Array<physx::PxConstraintInfo>		mBatchedBreakNotifications;
 
 	// onContact
 	struct BatchedContactNotification
@@ -104,8 +104,8 @@ private:
 		physx::PxContactPair *		pairs;
 		uint32_t				nbPairs;
 	};
-	Array<BatchedContactNotification>		mBatchedContactNotifications;
-	Array<uint32_t>							mBatchedContactStreams;
+	physx::shdfnd::Array<BatchedContactNotification>		mBatchedContactNotifications;
+	physx::shdfnd::Array<uint32_t>							mBatchedContactStreams;
 
 	// onWake/onSleep
 	struct SleepWakeBorders
@@ -115,12 +115,12 @@ private:
 		uint32_t count;
 		bool sleepEvents;
 	};
-	Array<SleepWakeBorders>				mBatchedSleepWakeEventBorders;
-	Array<PxActor*>						mBatchedSleepEvents;
-	Array<PxActor*>						mBatchedWakeEvents;
+	physx::shdfnd::Array<SleepWakeBorders>				mBatchedSleepWakeEventBorders;
+	physx::shdfnd::Array<PxActor*>						mBatchedSleepEvents;
+	physx::shdfnd::Array<PxActor*>						mBatchedWakeEvents;
 
 	// onTrigger
-	Array<physx::PxTriggerPair> mBatchedTriggerReports;
+	physx::shdfnd::Array<physx::PxTriggerPair> mBatchedTriggerReports;
 };
 
 
@@ -144,7 +144,7 @@ private:
 	virtual void onContactModify(physx::PxContactModifyPair* const pairs, uint32_t count);
 
 private:
-	Array<physx::PxContactModifyCallback*>	mModuleContactModify;
+	physx::shdfnd::Array<physx::PxContactModifyCallback*>	mModuleContactModify;
 	PxContactModifyCallback*	   	mAppContactModify;
 };
 

@@ -14,7 +14,7 @@
 #define DECLARE_ARRAY_H
 
 #error "Do not include DeclareArray.h anywhere!"
-// PH: Also, don't use DeclareArray anymore, use physx::Array< >  or Array< > directly
+// PH: Also, don't use DeclareArray anymore, use physx::Array< >  or physx::shdfnd::Array< > directly
 
 #include "ApexUsingNamespace.h"
 #include "PsArray.h"

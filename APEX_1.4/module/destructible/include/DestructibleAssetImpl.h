@@ -809,11 +809,11 @@ protected:
 	bool							mOwnsParams;
 
 	// Has a parameterized internal representation
-	Array<ConvexHullImpl>			chunkConvexHulls;
+	physx::shdfnd::Array<ConvexHullImpl>			chunkConvexHulls;
 
 	// Runtime / derived
 	int32_t						chunkOverlapCacheDepth;
-	Array<ResID>				mStaticMaterialIDs;
+	physx::shdfnd::Array<ResID>				mStaticMaterialIDs;
 
 	ApexAssetTracker			mCrumbleAssetTracker;
 	ApexAssetTracker			mDustAssetTracker;
@@ -825,7 +825,7 @@ protected:
 
 	uint32_t				mRuntimeCookedConvexCount;
 
-	Array<RenderMeshAsset*>	scatterMeshAssets;
+	physx::shdfnd::Array<RenderMeshAsset*>	scatterMeshAssets;
 
 	// Instanced chunks
 	uint16_t								m_instancedChunkMeshCount;
@@ -873,7 +873,7 @@ private:
 	private:
 		PlatformKeyValuePair();
 	};
-	Array<PlatformKeyValuePair> m_platformFractureDepthMap;
+	physx::shdfnd::Array<PlatformKeyValuePair> m_platformFractureDepthMap;
 	bool setDepthCount(uint32_t targetDepthCount) const;
 };
 

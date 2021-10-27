@@ -590,7 +590,7 @@ void DestructibleAssetImpl::addChunkOverlaps(IntPair* supportGraphEdges, uint32_
 
 	uint32_t numChunks = (uint32_t)mParams->chunks.arraySizes[0];
 
-	Array< Array<IntPair> > overlapsAtDepth(mParams->depthCount);
+	physx::shdfnd::Array< physx::shdfnd::Array<IntPair> > overlapsAtDepth(mParams->depthCount);
 
 	// store symmetric pairs at corresponding depth
 	for (uint32_t i = 0; i < supportGraphEdgeCount; ++i)
@@ -678,7 +678,7 @@ void DestructibleAssetImpl::addChunkOverlaps(IntPair* supportGraphEdges, uint32_
 		// check for duplicates
 		if (cachedOverlapsAtDepth->overlaps.arraySizes[0] > 1)
 		{
-			Array<uint32_t> toRemove;
+			physx::shdfnd::Array<uint32_t> toRemove;
 			for (uint32_t j = 1; j < (uint32_t)cachedOverlapsAtDepth->overlaps.arraySizes[0]; ++j)
 			{
 				if (cachedOverlapsAtDepth->overlaps.buf[j].i1 == cachedOverlapsAtDepth->overlaps.buf[j-1].i1 &&
@@ -711,7 +711,7 @@ void DestructibleAssetImpl::addChunkOverlaps(IntPair* supportGraphEdges, uint32_
 
 void DestructibleAssetImpl::removeChunkOverlaps(IntPair* supportGraphEdges, uint32_t numSupportGraphEdges, bool keepCachedFlagIfEmpty)
 {
-	Array< Array<uint32_t> > toRemoveAtDepth(mParams->depthCount);
+	physx::shdfnd::Array< physx::shdfnd::Array<uint32_t> > toRemoveAtDepth(mParams->depthCount);
 	for (uint32_t i = 0; i < numSupportGraphEdges; ++i)
 	{
 		CachedOverlapsNS::IntPair_Type& pair = (CachedOverlapsNS::IntPair_Type&)supportGraphEdges[i];
@@ -1468,7 +1468,7 @@ void DestructibleAssetImpl::updateChunkInstanceRenderResources(bool rewriteBuffe
 bool DestructibleAssetImpl::setPlatformMaxDepth(PlatformTag platform, uint32_t maxDepth)
 {
 	bool isExistingPlatform = false;
-	for (Array<PlatformKeyValuePair>::Iterator iter = m_platformFractureDepthMap.begin(); iter != m_platformFractureDepthMap.end(); ++iter)
+	for (physx::shdfnd::Array<PlatformKeyValuePair>::Iterator iter = m_platformFractureDepthMap.begin(); iter != m_platformFractureDepthMap.end(); ++iter)
 	{
 		if (nvidia::strcmp(iter->key, platform) == 0)
 		{
@@ -1550,7 +1550,7 @@ bool DestructibleAssetImpl::prepareForPlatform(nvidia::apex::PlatformTag platfor
 {
 	bool isExistingPlatform = false;
 	bool isDepthLimitChanged = false;
-	for (Array<PlatformKeyValuePair>::ConstIterator kIter = m_platformFractureDepthMap.begin(); kIter != m_platformFractureDepthMap.end(); ++kIter)
+	for (physx::shdfnd::Array<PlatformKeyValuePair>::ConstIterator kIter = m_platformFractureDepthMap.begin(); kIter != m_platformFractureDepthMap.end(); ++kIter)
 	{
 		if (nvidia::strcmp(kIter->key, platform) == 0)
 		{
@@ -2361,7 +2361,7 @@ void DestructibleAssetAuthoringImpl::cookChunks(const DestructibleAssetCookingDe
 	}
 
 	// Sort - chunks must be in parent-sorted order
-	Array<ChunkSortElement> sortElements;
+	physx::shdfnd::Array<ChunkSortElement> sortElements;
 	sortElements.resize(numChunks);
 	for (uint32_t i = 0; i < numChunks; ++i)
 	{
@@ -2383,7 +2383,7 @@ void DestructibleAssetAuthoringImpl::cookChunks(const DestructibleAssetCookingDe
 	}
 	qsort(sortElements.begin(), numChunks, sizeof(ChunkSortElement), compareChunkParents);
 
-	Array<uint32_t> ranks;
+	physx::shdfnd::Array<uint32_t> ranks;
 	if (chunkIndexMapUser2Apex == NULL && numChunks > 0)
 	{
 		ranks.resize(numChunks);
@@ -2684,7 +2684,7 @@ void DestructibleAssetAuthoringImpl::cookChunks(const DestructibleAssetCookingDe
 		cacheChunkOverlapsUpToDepth(chunkOverlapCacheDepth);
 	}
 
-	Array<IntPair> supportGraphEdgesInternal(cookingDesc.supportGraphEdgeCount);
+	physx::shdfnd::Array<IntPair> supportGraphEdgesInternal(cookingDesc.supportGraphEdgeCount);
 	if (cookingDesc.supportGraphEdgeCount > 0)
 	{
 		for (uint32_t i = 0; i < cookingDesc.supportGraphEdgeCount; ++i)
@@ -3230,7 +3230,7 @@ PxConvexMesh* DestructibleAssetCollision::getConvexMesh(uint32_t hullIndex, cons
 			return NULL;
 		}
 
-		Array<PxVec3> scaledPoints;
+		physx::shdfnd::Array<PxVec3> scaledPoints;
 		scaledPoints.resize(hullData.getVertexCount());
 		PxVec3 centroid(0.0f);
 		for (uint32_t i = 0; i < scaledPoints.size(); ++i)
@@ -3318,7 +3318,7 @@ PxConvexMesh* DestructibleAssetCollision::getConvexMesh(uint32_t hullIndex, cons
 					triangleCount += polygon.mNbVerts - 2;
 				}
 				const uint8_t* indexBuffer = (const uint8_t*)convexMesh->getIndexBuffer();
-				Array<uint32_t> indices;
+				physx::shdfnd::Array<uint32_t> indices;
 				indices.reserve(triangleCount*3);
 				for (uint32_t i = 0; i < convexMesh->getNbPolygons(); ++i)
 				{

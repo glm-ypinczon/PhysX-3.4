@@ -1594,9 +1594,9 @@ void PxsCCDContext::updateCCD(PxReal dt, PxBaseTask* continuation, bool disableR
 	const PxU16 noLabelYet = 0xFFFF;
 	
 	//Temporary array allocations. Ideally, we should use the scratch pad for there
-	Array<PxU16> islandLabels; 
+	physx::shdfnd::Array<PxU16> islandLabels; 
 	islandLabels.resize(ccdBodyCount);
-	Array<const PxsCCDBody*> stack; 
+	physx::shdfnd::Array<const PxsCCDBody*> stack; 
 	stack.reserve(ccdBodyCount);
 	stack.forceSize_Unsafe(ccdBodyCount);
 

@@ -110,7 +110,7 @@ public:
 	bool isValid() const;
 
 protected:
-	Array<PhysicalMesh>		mPhysicalMeshes;
+	physx::shdfnd::Array<PhysicalMesh>		mPhysicalMeshes;
 
 	const BoneActorEntry*	mBoneActors;
 	uint32_t				mNumBoneActors;

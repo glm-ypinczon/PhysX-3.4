@@ -722,7 +722,7 @@ void ClothingPhysicalMeshImpl::writeBackData()
 
 	isDirty = false;
 
-	Array<int32_t> old2new(mSimplifier->getNumVertices());
+	physx::shdfnd::Array<int32_t> old2new(mSimplifier->getNumVertices());
 
 	PX_ASSERT(mSimplifier->getNumVertices() - mSimplifier->getNumDeletedVertices() < mParams->physicalMesh.numVertices);
 
@@ -1155,7 +1155,7 @@ void ClothingPhysicalMeshImpl::preSerialize(void* userData_)
 
 
 
-void ClothingPhysicalMeshImpl::permuteBoneIndices(Array<int32_t>& old2newBoneIndices)
+void ClothingPhysicalMeshImpl::permuteBoneIndices(physx::shdfnd::Array<int32_t>& old2newBoneIndices)
 {
 	if (mBoneIndices.size() == 0)
 	{
@@ -1262,7 +1262,7 @@ void ClothingPhysicalMeshImpl::applyTransformation(const PxMat44& transformation
 
 
 
-void ClothingPhysicalMeshImpl::applyPermutation(const Array<uint32_t>& permutation)
+void ClothingPhysicalMeshImpl::applyPermutation(const physx::shdfnd::Array<uint32_t>& permutation)
 {
 	const uint32_t numVertices = mParams->physicalMesh.numVertices;
 	const uint32_t numBonesPerVertex = mParams->physicalMesh.numBonesPerVertex;
@@ -1359,7 +1359,7 @@ struct OrderedTriangle
 bool ClothingPhysicalMeshImpl::removeDuplicatedTriangles(uint32_t numIndices, uint32_t indexByteStride, const void* indices)
 {
 	uint32_t numTriangles = numIndices / 3;
-	Array<OrderedTriangle> triangles;
+	physx::shdfnd::Array<OrderedTriangle> triangles;
 	triangles.resize(numTriangles);
 
 	{
@@ -1458,12 +1458,12 @@ struct OrderedTriangleEdge
 	uint32_t triNr, edgeNr;
 };
 
-void ClothingPhysicalMeshImpl::computeNeighborInformation(Array<int32_t> &neighbors)
+void ClothingPhysicalMeshImpl::computeNeighborInformation(physx::shdfnd::Array<int32_t> &neighbors)
 {
 	// compute neighbor information
 	const uint32_t numTriangles = mParams->physicalMesh.numIndices / 3;
 
-	Array<OrderedTriangleEdge> edges;
+	physx::shdfnd::Array<OrderedTriangleEdge> edges;
 	edges.resize(3 * numTriangles);
 
 	for (uint32_t i = 0; i < numTriangles; i++)
@@ -1499,16 +1499,16 @@ void ClothingPhysicalMeshImpl::computeNeighborInformation(Array<int32_t> &neighb
 void ClothingPhysicalMeshImpl::fixTriangleOrientations()
 {
 	PX_ASSERT(!mParams->physicalMesh.isTetrahedralMesh);
-	Array<int32_t> neighbors;
+	physx::shdfnd::Array<int32_t> neighbors;
 	computeNeighborInformation(neighbors);
 
 	const uint32_t numTriangles = mParams->physicalMesh.numIndices / 3;
 
 	// 0 = non visited, 1 = visited, 2 = visited, to be flipped
-	Array<uint8_t> marks;
+	physx::shdfnd::Array<uint8_t> marks;
 	marks.resize(numTriangles, 0);
 
-	Array<uint32_t> queue;
+	physx::shdfnd::Array<uint32_t> queue;
 
 	for (uint32_t i = 0; i < numTriangles; i++)
 	{

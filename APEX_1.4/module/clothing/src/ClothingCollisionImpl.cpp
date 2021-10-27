@@ -192,9 +192,9 @@ void ClothingTriangleMeshImpl::sortAddAndRemoves()
 
 void ClothingTriangleMeshImpl::update(const PxTransform& tm, const nvidia::Array<PxVec3>& allTrianglesOld, nvidia::Array<PxVec3>& allTrianglesOldTemp, nvidia::Array<PxVec3>& allTriangles)
 {
-	Array<PxVec3> trianglesOldTemp;
-	Array<PxVec3> trianglesTemp;
-	Array<uint32_t> idsTemp;
+	physx::shdfnd::Array<PxVec3> trianglesOldTemp;
+	physx::shdfnd::Array<PxVec3> trianglesTemp;
+	physx::shdfnd::Array<uint32_t> idsTemp;
 
 	mLock.lock();
 

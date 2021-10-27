@@ -58,7 +58,7 @@
 		<OutDir>./../../../bin/vc14win32\</OutDir>
 		<IntDir>./Win32/PhysXCharacterKinematic/debug\</IntDir>
 		<TargetExt>.dll</TargetExt>
-		<TargetName>PhysX3CharacterKinematicDEBUG_x86</TargetName>
+		<TargetName>glm_PhysX3CharacterKinematicDEBUG_x86</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -79,7 +79,7 @@
 			<PreprocessorDefinitions>PX_PHYSX_CHARACTER_EXPORTS;PX_PHYSX_CORE_EXPORTS;PX_FOUNDATION_DLL=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;_DEBUG;PX_DEBUG=1;PX_CHECKED=1;PX_NVTX=1;PX_SUPPORT_PVD=1;PX_PHYSX_DLL_NAME_POSTFIX=DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
@@ -88,14 +88,16 @@
 		<Link>
 			<AdditionalOptions>/MAP /MACHINE:x86 /DEBUG</AdditionalOptions>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)PhysX3CharacterKinematicDEBUG_x86.dll</OutputFile>
+			<OutputFile>$(OutDir)glm_PhysX3CharacterKinematicDEBUG_x86.dll</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
 			<SubSystem>Console</SubSystem>
 			<ImportLibrary>./../../../Lib/vc14win32/$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -105,7 +107,7 @@
 		<OutDir>./../../../bin/vc14win32\</OutDir>
 		<IntDir>./Win32/PhysXCharacterKinematic/checked\</IntDir>
 		<TargetExt>.dll</TargetExt>
-		<TargetName>PhysX3CharacterKinematicCHECKED_x86</TargetName>
+		<TargetName>glm_PhysX3CharacterKinematicCHECKED_x86</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -125,7 +127,7 @@
 			<PreprocessorDefinitions>PX_PHYSX_CHARACTER_EXPORTS;PX_PHYSX_CORE_EXPORTS;PX_FOUNDATION_DLL=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;PX_CHECKED=1;PX_NVTX=1;PX_SUPPORT_PVD=1;PX_PHYSX_DLL_NAME_POSTFIX=CHECKED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
@@ -134,14 +136,16 @@
 		<Link>
 			<AdditionalOptions>/MAP /MACHINE:x86</AdditionalOptions>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)PhysX3CharacterKinematicCHECKED_x86.dll</OutputFile>
+			<OutputFile>$(OutDir)glm_PhysX3CharacterKinematicCHECKED_x86.dll</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
 			<SubSystem>Console</SubSystem>
 			<ImportLibrary>./../../../Lib/vc14win32/$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -151,7 +155,7 @@
 		<OutDir>./../../../bin/vc14win32\</OutDir>
 		<IntDir>./Win32/PhysXCharacterKinematic/profile\</IntDir>
 		<TargetExt>.dll</TargetExt>
-		<TargetName>PhysX3CharacterKinematicPROFILE_x86</TargetName>
+		<TargetName>glm_PhysX3CharacterKinematicPROFILE_x86</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -171,7 +175,7 @@
 			<PreprocessorDefinitions>PX_PHYSX_CHARACTER_EXPORTS;PX_PHYSX_CORE_EXPORTS;PX_FOUNDATION_DLL=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;PX_PROFILE=1;PX_NVTX=1;PX_SUPPORT_PVD=1;PX_PHYSX_DLL_NAME_POSTFIX=PROFILE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
@@ -180,14 +184,16 @@
 		<Link>
 			<AdditionalOptions>/MAP /MACHINE:x86 /INCREMENTAL:NO /DEBUG</AdditionalOptions>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)PhysX3CharacterKinematicPROFILE_x86.dll</OutputFile>
+			<OutputFile>$(OutDir)glm_PhysX3CharacterKinematicPROFILE_x86.dll</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
 			<SubSystem>Console</SubSystem>
 			<ImportLibrary>./../../../Lib/vc14win32/$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>
@@ -197,7 +203,7 @@
 		<OutDir>./../../../bin/vc14win32\</OutDir>
 		<IntDir>./Win32/PhysXCharacterKinematic/release\</IntDir>
 		<TargetExt>.dll</TargetExt>
-		<TargetName>PhysX3CharacterKinematic_x86</TargetName>
+		<TargetName>glm_PhysX3CharacterKinematic_x86</TargetName>
 		<CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
 		<CodeAnalysisRules />
 		<CodeAnalysisRuleAssemblies />
@@ -217,7 +223,7 @@
 			<PreprocessorDefinitions>PX_PHYSX_CHARACTER_EXPORTS;PX_PHYSX_CORE_EXPORTS;PX_FOUNDATION_DLL=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;PX_SUPPORT_PVD=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ExceptionHandling>false</ExceptionHandling>
 			<WarningLevel>Level4</WarningLevel>
-			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<PrecompiledHeader>NotUsing</PrecompiledHeader>
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
@@ -226,14 +232,16 @@
 		<Link>
 			<AdditionalOptions>/MAP /MACHINE:x86 /INCREMENTAL:NO</AdditionalOptions>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-			<OutputFile>$(OutDir)PhysX3CharacterKinematic_x86.dll</OutputFile>
+			<OutputFile>$(OutDir)glm_PhysX3CharacterKinematic_x86.dll</OutputFile>
 			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<ProgramDatabaseFile>$(TargetDir)\$(TargetName).pdb</ProgramDatabaseFile>
 			<SubSystem>Console</SubSystem>
 			<ImportLibrary>./../../../Lib/vc14win32/$(TargetName).lib</ImportLibrary>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<TargetMachine>MachineX86</TargetMachine>
-		</Link>
+
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+	</Link>
 		<ResourceCompile>
 		</ResourceCompile>
 		<ProjectReference>

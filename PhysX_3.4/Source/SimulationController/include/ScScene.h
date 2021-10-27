@@ -507,7 +507,16 @@ namespace Sc
 					void**						allocatePointerBlock(PxU32 size);
 					void						deallocatePointerBlock(void**, PxU32 size);
 
-	private:
+	
+
+
+		//---------------------------------------------------------------------------------
+		// Glm added accessor
+		//---------------------------------------------------------------------------------
+		PxU32 getCollisionPairStatus(PxU32 pairID);
+		//---------------------------------------------------------------------------------
+
+private:
 	// Get the number of active one-way dominator actors
 	PX_FORCE_INLINE	PxU32						getActiveKinematicBodiesCount() const { return mActiveKinematicBodyCount; }
 

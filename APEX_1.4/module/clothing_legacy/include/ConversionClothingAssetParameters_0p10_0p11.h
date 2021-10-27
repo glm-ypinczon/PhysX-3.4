@@ -71,8 +71,8 @@ protected:
 		//	For more info see the versioning wiki.
 
 		// extract planes from convex collision boneActors and store in bonePlanes
-		Array<parameterized::ClothingAssetParameters_0p11NS::BonePlane_Type> bonePlanes;
-		Array<uint32_t> convexes;
+		physx::shdfnd::Array<parameterized::ClothingAssetParameters_0p11NS::BonePlane_Type> bonePlanes;
+		physx::shdfnd::Array<uint32_t> convexes;
 		for (int32_t i = 0; i < mLegacyData->boneActors.arraySizes[0]; ++i)
 		{
 			parameterized::ClothingAssetParameters_0p10NS::ActorEntry_Type& boneActor = mLegacyData->boneActors.buf[i];

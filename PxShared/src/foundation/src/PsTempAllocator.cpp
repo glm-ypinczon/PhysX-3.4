@@ -48,7 +48,7 @@ namespace shdfnd
 namespace
 {
 typedef TempAllocatorChunk Chunk;
-typedef Array<Chunk*, NonTrackingAllocator> AllocFreeTable;
+typedef physx::shdfnd::Array<Chunk*, NonTrackingAllocator> AllocFreeTable;
 
 PX_INLINE Foundation::AllocFreeTable& getFreeTable()
 {

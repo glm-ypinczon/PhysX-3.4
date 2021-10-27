@@ -47,8 +47,8 @@ public:
 	};
 	struct CustomSubmeshData
 	{
-		Array<RenderDataFormat::Enum>	customBufferFormats;
-		Array<void*>					customBufferVoidPtrs;
+		physx::shdfnd::Array<RenderDataFormat::Enum>	customBufferFormats;
+		physx::shdfnd::Array<void*>					customBufferVoidPtrs;
 	};
 
 
@@ -107,7 +107,7 @@ public:
 	{
 		return *mSubmeshes[submeshIndex];
 	}
-	void						permuteBoneIndices(const Array<int32_t>& old2new);
+	void						permuteBoneIndices(const physx::shdfnd::Array<int32_t>& old2new);
 	void						applyTransformation(const PxMat44& transformation, float scale);
 	void						reverseWinding();
 	void						applyScale(float scale);
@@ -220,12 +220,12 @@ protected:
 	ApexSimpleString			mName;
 
 	// Local (not serialized) data
-	Array<ApexRenderSubmesh*>	mSubmeshes;
+	physx::shdfnd::Array<ApexRenderSubmesh*>	mSubmeshes;
 
-	Array<ResID>				mMaterialIDs;
+	physx::shdfnd::Array<ResID>				mMaterialIDs;
 	ResourceList				mActorList;
-	Array<SubmeshData>			mRuntimeSubmeshData;
-	Array<CustomSubmeshData>	mRuntimeCustomSubmeshData;
+	physx::shdfnd::Array<SubmeshData>			mRuntimeSubmeshData;
+	physx::shdfnd::Array<CustomSubmeshData>	mRuntimeCustomSubmeshData;
 
 	friend class ApexRenderMeshActor;
 	friend class RenderMeshAuthorableObject;

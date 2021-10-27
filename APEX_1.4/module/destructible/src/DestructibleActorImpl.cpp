@@ -2216,7 +2216,7 @@ void DestructibleActorImpl::fillInstanceBuffers()
 				DestructibleAssetImpl::ChunkInstanceBufferDataElement instanceDataElement;
 				const DestructibleAssetParametersNS::InstanceInfo_Type& instanceData = instanceDataArray[sourceChunk.meshPartIndex];
 				const uint16_t instancedActorIndex = mAsset->m_instancedChunkActorMap[sourceChunk.meshPartIndex];
-				Array<DestructibleAssetImpl::ChunkInstanceBufferDataElement>& instanceBufferData = mAsset->m_chunkInstanceBufferData[instancedActorIndex];
+				physx::shdfnd::Array<DestructibleAssetImpl::ChunkInstanceBufferDataElement>& instanceBufferData = mAsset->m_chunkInstanceBufferData[instancedActorIndex];
 				instanceDataElement.translation = pose.getPosition();// + poseScaledRotation*instanceData.chunkPositionOffset;
 				instanceDataElement.scaledRotation = poseScaledRotation;
 				instanceDataElement.uvOffset = instanceData.chunkUVOffset;
@@ -2247,7 +2247,7 @@ void DestructibleActorImpl::fillInstanceBuffers()
 					const physx::PxU8 scatterMeshIndex = mAsset->mParams->scatterMeshIndices.buf[scatterMeshNum];
 					const PxMat44& scatterMeshTransform = mAsset->mParams->scatterMeshTransforms.buf[scatterMeshNum];
 					DestructibleAssetImpl::ScatterMeshInstanceInfo& scatterMeshInstanceInfo = mAsset->m_scatterMeshInstanceInfo[scatterMeshIndex];
-					Array<DestructibleAssetImpl::ScatterInstanceBufferDataElement>& instanceBufferData = scatterMeshInstanceInfo.m_instanceBufferData;
+					physx::shdfnd::Array<DestructibleAssetImpl::ScatterInstanceBufferDataElement>& instanceBufferData = scatterMeshInstanceInfo.m_instanceBufferData;
 					DestructibleAssetImpl::ScatterInstanceBufferDataElement instanceDataElement;
 					instanceDataElement.translation = poseScaledRotation*scatterMeshTransform.getPosition() + pose.getPosition();// + poseScaledRotation*instanceData.chunkPositionOffset;
 					PxMat33 smTm33(scatterMeshTransform.column0.getXYZ(),

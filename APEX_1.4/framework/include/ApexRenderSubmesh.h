@@ -70,7 +70,7 @@ public:
 		return mParams->indexBuffer.buf + mParams->indexPartition.buf[partIndex];
 	}
 
-	virtual void						applyPermutation(const Array<uint32_t>& old2new, const Array<uint32_t>& new2old);
+	virtual void						applyPermutation(const physx::shdfnd::Array<uint32_t>& old2new, const physx::shdfnd::Array<uint32_t>& new2old);
 
 	// own methods
 

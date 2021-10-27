@@ -2446,3 +2446,16 @@ void Sc::NPhaseCore::pool_deleteParticleElementRbElementPair(ParticleElementRbEl
 		mActorElementPairPool.destroy(aep);
 }
 #endif	// PX_USE_PARTICLE_SYSTEM_API
+
+
+
+		//---------------------------------------------------------------------------------
+		// Glm added accessor
+		//---------------------------------------------------------------------------------
+		PxU32 Sc::NPhaseCore::getCollisionPairStatus(PxU32 pairID)
+		{
+			const FilterPair& fp = (*mFilterPairManager)[pairID];
+			return fp.getType();
+		}
+		//---------------------------------------------------------------------------------
+

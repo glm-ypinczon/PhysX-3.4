@@ -20,7 +20,7 @@ namespace nvidia
 namespace fracture
 {
 
-void Mesh::gatherPartMesh(Array<PxVec3>& vertices,
+void Mesh::gatherPartMesh(physx::shdfnd::Array<PxVec3>& vertices,
 					nvidia::Array<uint32_t>&  indices,
 					nvidia::Array<PxVec3>& normals,
 					nvidia::Array<PxVec2>& texcoords,

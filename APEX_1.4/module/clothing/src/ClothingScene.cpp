@@ -450,7 +450,7 @@ void ClothingScene::removeRenderProxies(ClothingAssetImpl* asset)
 	{
 		RenderMeshAssetIntl* renderMeshAsset = asset->getGraphicalMesh(i);
 
-		Array<ClothingRenderProxyImpl*>& renderProxies = mRenderProxies[renderMeshAsset];
+		physx::shdfnd::Array<ClothingRenderProxyImpl*>& renderProxies = mRenderProxies[renderMeshAsset];
 		for (int32_t i = (int32_t)renderProxies.size()-1; i >= 0 ; --i)
 		{
 			ClothingRenderProxyImpl* renderProxy = renderProxies[(uint32_t)i];
@@ -540,9 +540,9 @@ void ClothingScene::destroy()
 	mClothingAssetsMutex.unlock();
 
 	// clear render list
-	for (HashMap<RenderMeshAssetIntl*, Array<ClothingRenderProxyImpl*> >::Iterator iter = mRenderProxies.getIterator(); !iter.done(); ++iter)
+	for (HashMap<RenderMeshAssetIntl*, physx::shdfnd::Array<ClothingRenderProxyImpl*> >::Iterator iter = mRenderProxies.getIterator(); !iter.done(); ++iter)
 	{
-		Array<ClothingRenderProxyImpl*>& renderProxies = iter->second;
+		physx::shdfnd::Array<ClothingRenderProxyImpl*>& renderProxies = iter->second;
 
 		for (int32_t i = (int32_t)renderProxies.size()-1; i >= 0 ; --i)
 		{
@@ -821,7 +821,7 @@ ClothingRenderProxyImpl* ClothingScene::getRenderProxy(RenderMeshAssetIntl* rma,
 
 
 	mRenderProxiesLock.lock();
-	Array<ClothingRenderProxyImpl*>& renderProxies = mRenderProxies[rma];
+	physx::shdfnd::Array<ClothingRenderProxyImpl*>& renderProxies = mRenderProxies[rma];
 	for (uint32_t i = 0; i < renderProxies.size(); ++i)
 	{
 		ClothingRenderProxyImpl* proxyInPool = renderProxies[i];
@@ -858,9 +858,9 @@ void ClothingScene::tickRenderProxies()
 	PX_PROFILE_ZONE("ClothingScene::tickRenderProxies", GetInternalApexSDK()->getContextId());
 	mRenderProxiesLock.lock();
 
-	for(HashMap<RenderMeshAssetIntl*, Array<ClothingRenderProxyImpl*> >::Iterator iter = mRenderProxies.getIterator(); !iter.done(); ++iter)
+	for(HashMap<RenderMeshAssetIntl*, physx::shdfnd::Array<ClothingRenderProxyImpl*> >::Iterator iter = mRenderProxies.getIterator(); !iter.done(); ++iter)
 	{
-		Array<ClothingRenderProxyImpl*>& renderProxies = iter->second;
+		physx::shdfnd::Array<ClothingRenderProxyImpl*>& renderProxies = iter->second;
 
 		for (int32_t i = (int32_t)renderProxies.size()-1; i >= 0 ; --i)
 		{

@@ -749,7 +749,7 @@ struct PvdContactConverter
 	}
 };
 
-void PvdMetaDataBinding::sendContacts(PvdDataStream& inStream, const PxScene& inScene, Array<Contact>& inContacts)
+void PvdMetaDataBinding::sendContacts(PvdDataStream& inStream, const PxScene& inScene, physx::shdfnd::Array<Contact>& inContacts)
 {
 	ScopedPropertyValueSender<PvdContact, 32, Sc::Contact, PvdContactConverter> sender(inStream, &inScene, "Contacts");
 
@@ -1328,11 +1328,11 @@ template <typename TReadDataType>
 struct ParticleFluidUpdater
 {
 	TReadDataType& mData;
-	Array<PxU8>& mTempU8Array;
+	physx::shdfnd::Array<PxU8>& mTempU8Array;
 	PvdDataStream& mStream;
 	const void* mInstanceId;
 	PxU32 mRdFlags;
-	ParticleFluidUpdater(TReadDataType& d, PvdDataStream& s, const void* id, PxU32 flags, Array<PxU8>& tempArray)
+	ParticleFluidUpdater(TReadDataType& d, PvdDataStream& s, const void* id, PxU32 flags, physx::shdfnd::Array<PxU8>& tempArray)
 	: mData(d), mTempU8Array(tempArray), mStream(s), mInstanceId(id), mRdFlags(flags)
 	{
 	}
@@ -1563,11 +1563,11 @@ void PvdMetaDataBinding::updateDynamicActorsAndArticulations(PvdDataStream& inSt
 template <typename TObjType>
 struct CollectionOperator
 {
-	Array<PxU8>& mTempArray;
+	physx::shdfnd::Array<PxU8>& mTempArray;
 	const TObjType& mObject;
 	PvdDataStream& mStream;
 
-	CollectionOperator(Array<PxU8>& ary, const TObjType& obj, PvdDataStream& stream)
+	CollectionOperator(physx::shdfnd::Array<PxU8>& ary, const TObjType& obj, PvdDataStream& stream)
 	: mTempArray(ary), mObject(obj), mStream(stream)
 	{
 	}
@@ -1615,7 +1615,7 @@ struct CollectionOperator
 #if PX_USE_CLOTH_API
 struct PxClothFabricCollectionOperator : CollectionOperator<PxClothFabric>
 {
-	PxClothFabricCollectionOperator(Array<PxU8>& ary, const PxClothFabric& obj, PvdDataStream& stream)
+	PxClothFabricCollectionOperator(physx::shdfnd::Array<PxU8>& ary, const PxClothFabric& obj, PvdDataStream& stream)
 	: CollectionOperator<PxClothFabric>(ary, obj, stream)
 	{
 	}

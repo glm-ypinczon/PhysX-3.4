@@ -69,7 +69,7 @@ public:
 		}
 	}
 
-	Array<ConvexHullAtScale> meshes;
+	physx::shdfnd::Array<ConvexHullAtScale> meshes;
 };
 
 

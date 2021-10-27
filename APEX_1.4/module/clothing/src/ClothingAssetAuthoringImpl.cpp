@@ -431,8 +431,8 @@ void ClothingAssetAuthoringImpl::sortPhysicalMeshes()
 	}
 
 	// sort physical lods according to references in graphical lods
-	Array<uint32_t> new2old(mPhysicalMeshes.size(), (uint32_t) - 1);
-	Array<uint32_t> old2new(mPhysicalMeshes.size(), (uint32_t) - 1);
+	physx::shdfnd::Array<uint32_t> new2old(mPhysicalMeshes.size(), (uint32_t) - 1);
+	physx::shdfnd::Array<uint32_t> old2new(mPhysicalMeshes.size(), (uint32_t) - 1);
 	bool reorderFailed = false;
 
 	uint32_t nextId = 0;
@@ -630,7 +630,7 @@ void ClothingAssetAuthoringImpl::setMeshes(uint32_t lod, RenderMeshAssetAuthorin
 	sortPhysicalMeshes();
 
 	bool isIdentity = true;
-	Array<int32_t> old2new(mBones.size(), -1);
+	physx::shdfnd::Array<int32_t> old2new(mBones.size(), -1);
 	for (uint32_t i = 0; i < mBones.size(); i++)
 	{
 		old2new[(uint32_t)mBones[i].externalIndex] = mBones[i].internalIndex;
@@ -1428,7 +1428,7 @@ void ClothingAssetAuthoringImpl::applyTransformation(const PxMat44& transformati
 void ClothingAssetAuthoringImpl::updateBindPoses(const PxMat44* newBindPoses, uint32_t newBindPosesCount, bool isInternalOrder, bool collisionMaintainWorldPose)
 {
 	WRITE_ZONE();
-	Array<PxMat44> transformation(mBones.size());
+	physx::shdfnd::Array<PxMat44> transformation(mBones.size());
 
 	bool hasSkew = false;
 	for (uint32_t i = 0; i < mBones.size(); i++)
@@ -1682,8 +1682,8 @@ uint32_t ClothingAssetAuthoringImpl::addBoneConvexInternal(uint32_t boneIndex, c
 	uint32_t maxNumberPositions = PxMin(20u, numPositions);
 	uint32_t newNumPositions = 0;
 
-	Array<PxVec3> newPositions(numPositions);
-	Array<float> minDist(numPositions, PX_MAX_F32);
+	physx::shdfnd::Array<PxVec3> newPositions(numPositions);
+	physx::shdfnd::Array<float> minDist(numPositions, PX_MAX_F32);
 
 	if (numPositions > 0)
 	{
@@ -1768,7 +1768,7 @@ uint32_t ClothingAssetAuthoringImpl::addBoneConvexInternal(uint32_t boneIndex, c
 	// extract planes from points
 	ConvexHullImpl convexHull;
 	convexHull.init();
-	Array<PxPlane> planes;
+	physx::shdfnd::Array<PxPlane> planes;
 
 	convexHull.buildFromPoints(&newPositions[0], newNumPositions, sizeof(PxVec3));
 
@@ -1917,7 +1917,7 @@ void ClothingAssetAuthoringImpl::compressBones() const
 
 
 	// create map from old indices to new ones and store the number of used bones
-	Array<int32_t> old2new(mBones.size(), -1);
+	physx::shdfnd::Array<int32_t> old2new(mBones.size(), -1);
 	mParams->bonesReferenced = 0;
 	mParams->bonesReferencedByMesh = 0;
 	for (uint32_t i = 0; i < mBones.size(); i++)
@@ -2129,7 +2129,7 @@ void ClothingAssetAuthoringImpl::updateMappingAuthoring(ClothingGraphicalLodPara
 
 	HierarchicalProgressListener progress(100, progressListener);
 
-	Array<AbstractMeshDescription> targetMeshes(renderMeshAssetCopy->getSubmeshCount());
+	physx::shdfnd::Array<AbstractMeshDescription> targetMeshes(renderMeshAssetCopy->getSubmeshCount());
 	uint32_t numTotalVertices = 0;
 	bool hasTangents = false;
 	for (uint32_t submeshIndex = 0; submeshIndex < targetMeshes.size(); submeshIndex++)
@@ -2298,7 +2298,7 @@ void ClothingAssetAuthoringImpl::updateMappingAuthoring(ClothingGraphicalLodPara
 			pMesh.pBoneWeights = physicalMesh.boneWeights.buf;
 		}
 
-		Array<Confidentially> confidence(pMesh.numVertices);
+		physx::shdfnd::Array<Confidentially> confidence(pMesh.numVertices);
 
 		uint32_t graphicalVertexOffset = 0;
 		const uint32_t numGraphicalVerticesTotal = numTotalVertices;
@@ -2950,7 +2950,7 @@ void ClothingAssetAuthoringImpl::sortDeformableIndices(ClothingPhysicalMeshImpl&
 	uint32_t* deformableIndices = physicalMesh.getIndicesBuffer();
 	ClothingConstrainCoefficients* constrainCoeffs = physicalMesh.getConstrainCoefficientBuffer();
 
-	Array<uint32_t> deformableIndicesPermutation;
+	physx::shdfnd::Array<uint32_t> deformableIndicesPermutation;
 	deformableIndicesPermutation.resize(physicalMesh.getNumIndices());
 
 	uint32_t numIndices = physicalMesh.isTetrahedralMesh() ? 4u : 3u;
@@ -2977,7 +2977,7 @@ void ClothingAssetAuthoringImpl::sortDeformableIndices(ClothingPhysicalMeshImpl&
 
 
 	// inverse permutation
-	Array<int32_t> invPerm(physicalMesh.getNumIndices());
+	physx::shdfnd::Array<int32_t> invPerm(physicalMesh.getNumIndices());
 	for (uint32_t i = 0; i < physicalMesh.getNumIndices(); i++)
 	{
 		PX_ASSERT(deformableIndicesPermutation[i] < physicalMesh.getNumIndices());
@@ -3348,7 +3348,7 @@ bool ClothingAssetAuthoringImpl::generateSkinClothMap(const AbstractMeshDescript
 	const uint32_t physNumIndices = physicalMesh.numIndices;
 
 	// compute mapping
-	Array<TriangleWithNormals> triangles;
+	physx::shdfnd::Array<TriangleWithNormals> triangles;
 	triangles.reserve(physNumIndices / 3);
 
 	// create a list of physics mesh triangles
@@ -3387,7 +3387,7 @@ bool ClothingAssetAuthoringImpl::generateSkinClothMap(const AbstractMeshDescript
 	// find the best triangle for each graphical vertex
 	SkinClothMap* mapEntry = result.begin();
 
-	Array<uint32_t> queryResult;
+	physx::shdfnd::Array<uint32_t> queryResult;
 
 	uint32_t targetOffset = 0;
 	for (uint32_t targetIndex = 0; targetIndex < numTargetMeshes; targetIndex++)
@@ -3650,7 +3650,7 @@ void ClothingAssetAuthoringImpl::removeMaxDistance0Mapping(ClothingGraphicalLodP
 		reinterpret_cast<ParamDynamicArrayStruct*>(&graphicalLod.immediateClothMap));
 
 	// temp array to keep the simulated verts, as we want to discard the fixed verts
-	Array<SkinClothMap> skinClothMapNew;
+	physx::shdfnd::Array<SkinClothMap> skinClothMapNew;
 	skinClothMapNew.reserve(skinClothMap.size());
 
 	uint32_t offset = 0;

@@ -40,8 +40,8 @@ class Mesh : public base::Mesh
 public:
 	void loadFromRenderMesh(const apex::RenderMeshAsset& mesh, uint32_t partIndex);
 protected:
-	static void gatherPartMesh(Array<PxVec3>& vertices, Array<uint32_t>&  indices, Array<PxVec3>& normals,
-		Array<PxVec2>& texcoords, nvidia::Array<SubMesh>& subMeshes, const apex::RenderMeshAsset& renderMeshAsset, uint32_t partIndex);
+	static void gatherPartMesh(physx::shdfnd::Array<PxVec3>& vertices, physx::shdfnd::Array<uint32_t>&  indices, physx::shdfnd::Array<PxVec3>& normals,
+		physx::shdfnd::Array<PxVec2>& texcoords, nvidia::Array<SubMesh>& subMeshes, const apex::RenderMeshAsset& renderMeshAsset, uint32_t partIndex);
 };
 
 }

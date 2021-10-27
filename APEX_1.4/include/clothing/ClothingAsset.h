@@ -236,6 +236,22 @@ public:
 	\brief Releases all data needed to compute render data in apex clothing.
 	*/
 	virtual bool releaseGraphicalData() = 0;
+
+
+
+	//---------------------------------------------------------------------------------
+	// Glm added accessors
+	//---------------------------------------------------------------------------------
+	virtual PxU32           getPhysicalMeshVertexCount(PxU32 graphicalLodId) const = 0;
+	virtual const PxVec3*   getPhysicalMeshVertexBuffer(PxU32 graphicalLodId) const = 0;
+
+	virtual PxU32           getPhysicalMeshIndexCount(PxU32 graphicalLodId) const = 0;
+	virtual const PxU16*    getPhysicalMeshIndexBuffer(PxU32 graphicalLodId) const = 0;
+
+	virtual PxU32           getGraphicalMeshVertexCount(PxU32 graphicalLodId, PxU32 submeshIndex) const = 0;
+	virtual void            getGraphicalMeshVertexBuffer(PxVec3* dstBuffer, PxU32 dstBufferSize, PxU32 graphicalLodId, PxU32 submeshIndex) const = 0;
+	//---------------------------------------------------------------------------------
+
 };
 
 PX_POP_PACK

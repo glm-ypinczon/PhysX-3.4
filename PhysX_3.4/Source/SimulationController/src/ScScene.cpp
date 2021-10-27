@@ -6646,3 +6646,15 @@ void Sc::Scene::unregisterMaterialInNP(const PxsMaterialCore& materialCore)
 {
 	mLLContext->getNphaseImplementationContext()->unregisterMaterial(materialCore);
 }
+
+
+
+		//---------------------------------------------------------------------------------
+		// Glm added accessor
+		//---------------------------------------------------------------------------------
+      PxU32 Sc::Scene::getCollisionPairStatus(PxU32 pairID)
+      {
+      	return getNPhaseCore()->getCollisionPairStatus(pairID);
+      }
+		//---------------------------------------------------------------------------------
+

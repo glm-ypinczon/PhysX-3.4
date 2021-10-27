@@ -227,7 +227,7 @@ private:
 
 	ClothingBackendFactory		mBackendFactory;
 
-	Array<BackendFactory*>		mBackendFactories;
+	physx::shdfnd::Array<BackendFactory*>		mBackendFactories;
 
 	ClothingModuleParameters*	mModuleParams;
 	ClothingModuleParametersNS::ParametersStruct mInternalModuleParams;

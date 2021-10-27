@@ -96,7 +96,7 @@
     <OutDir>./../../bin/vc14win64-PhysX_3.4\</OutDir>
     <IntDir>./build/x64/APEX_Destructible/debug\</IntDir>
     <TargetExt>.dll</TargetExt>
-    <TargetName>$(ProjectName)DEBUG_x64</TargetName>
+    <TargetName>$(ProjectName)DEBUG_x64_glm</TargetName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules/>
     <CodeAnalysisRuleAssemblies/>
@@ -115,22 +115,24 @@
       <PreprocessorDefinitions>WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;INSTALLER=1;EXCLUDE_PARTICLES=1;_USRDLL;ENABLE_TEST=0;_DEBUG;PX_DEBUG;PX_CHECKED;PHYSX_PROFILE_SDK;PX_SUPPORT_VISUAL_DEBUGGER;PX_PROFILE;PX_NVTX=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <WarningLevel>Level4</WarningLevel>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <AdditionalOptions>/MACHINE:x64 /INCREMENTAL:NO</AdditionalOptions>
-      <AdditionalDependencies>./../../../Externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;PhysX3CommonDEBUG_x64.lib;PhysX3DEBUG_x64.lib;PhysX3ExtensionsDEBUG.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(ProjectName)DEBUG_x64.dll</OutputFile>
+      <AdditionalDependencies>./../../../Externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;glm_PhysX3CommonDEBUG_x64.lib;glm_PhysX3DEBUG_x64.lib;PhysX3ExtensionsDEBUG.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName)DEBUG_x64_glm.dll</OutputFile>
       <AdditionalLibraryDirectories>../../../PxShared/lib/vc14win64;../../../PhysX_3.4/Lib/vc14win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ProgramDatabaseFile>$(OutDir)/$(ProjectName)DEBUG_x64.dll.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(OutDir)/$(ProjectName)DEBUG_x64_glm.dll.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <ImportLibrary>./../../lib/vc14win64-PhysX_3.4/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX64</TargetMachine>
-    </Link>
+  
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+ </Link>
     <ResourceCompile></ResourceCompile>
     <ProjectReference></ProjectReference>
   </ItemDefinitionGroup>
@@ -138,7 +140,7 @@
     <OutDir>./../../bin/vc14win64-PhysX_3.4\</OutDir>
     <IntDir>./build/x64/APEX_Destructible/release\</IntDir>
     <TargetExt>.dll</TargetExt>
-    <TargetName>$(ProjectName)_x64</TargetName>
+    <TargetName>$(ProjectName)_x64_glm</TargetName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules/>
     <CodeAnalysisRuleAssemblies/>
@@ -156,22 +158,24 @@
       <PreprocessorDefinitions>WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;INSTALLER=1;EXCLUDE_PARTICLES=1;_USRDLL;ENABLE_TEST=0;NDEBUG;APEX_SHIPPING;_SECURE_SCL=0;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <WarningLevel>Level4</WarningLevel>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <AdditionalOptions>/MACHINE:x64 /INCREMENTAL:NO</AdditionalOptions>
-      <AdditionalDependencies>./../../../Externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;PhysX3Common_x64.lib;PhysX3_x64.lib;PhysX3Extensions.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(ProjectName)_x64.dll</OutputFile>
+      <AdditionalDependencies>./../../../Externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;glm_PhysX3Common_x64.lib;glm_PhysX3_x64.lib;PhysX3Extensions.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName)_x64_glm.dll</OutputFile>
       <AdditionalLibraryDirectories>../../../PxShared/lib/vc14win64;../../../PhysX_3.4/Lib/vc14win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ProgramDatabaseFile>$(OutDir)/$(ProjectName)_x64.dll.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(OutDir)/$(ProjectName)_x64_glm.dll.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <ImportLibrary>./../../lib/vc14win64-PhysX_3.4/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX64</TargetMachine>
-    </Link>
+  
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+ </Link>
     <ResourceCompile></ResourceCompile>
     <ProjectReference></ProjectReference>
   </ItemDefinitionGroup>
@@ -179,7 +183,7 @@
     <OutDir>./../../bin/vc14win64-PhysX_3.4\</OutDir>
     <IntDir>./build/x64/APEX_Destructible/profile\</IntDir>
     <TargetExt>.dll</TargetExt>
-    <TargetName>$(ProjectName)PROFILE_x64</TargetName>
+    <TargetName>$(ProjectName)PROFILE_x64_glm</TargetName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules/>
     <CodeAnalysisRuleAssemblies/>
@@ -197,22 +201,24 @@
       <PreprocessorDefinitions>WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;INSTALLER=1;EXCLUDE_PARTICLES=1;_USRDLL;ENABLE_TEST=0;NDEBUG;PHYSX_PROFILE_SDK;PX_SUPPORT_VISUAL_DEBUGGER;PX_PROFILE;PX_NVTX=1;_SECURE_SCL=0;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <WarningLevel>Level4</WarningLevel>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <AdditionalOptions>/MACHINE:x64 /INCREMENTAL:NO</AdditionalOptions>
-      <AdditionalDependencies>./../../../Externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;PhysX3CommonPROFILE_x64.lib;PhysX3PROFILE_x64.lib;PhysX3ExtensionsPROFILE.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(ProjectName)PROFILE_x64.dll</OutputFile>
+      <AdditionalDependencies>./../../../Externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;glm_PhysX3CommonPROFILE_x64.lib;glm_PhysX3PROFILE_x64.lib;PhysX3ExtensionsPROFILE.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName)PROFILE_x64_glm.dll</OutputFile>
       <AdditionalLibraryDirectories>../../../PxShared/lib/vc14win64;../../../PhysX_3.4/Lib/vc14win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ProgramDatabaseFile>$(OutDir)/$(ProjectName)PROFILE_x64.dll.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(OutDir)/$(ProjectName)PROFILE_x64_glm.dll.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <ImportLibrary>./../../lib/vc14win64-PhysX_3.4/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX64</TargetMachine>
-    </Link>
+  
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+ </Link>
     <ResourceCompile></ResourceCompile>
     <ProjectReference></ProjectReference>
   </ItemDefinitionGroup>
@@ -220,7 +226,7 @@
     <OutDir>./../../bin/vc14win64-PhysX_3.4\</OutDir>
     <IntDir>./build/x64/APEX_Destructible/checked\</IntDir>
     <TargetExt>.dll</TargetExt>
-    <TargetName>$(ProjectName)CHECKED_x64</TargetName>
+    <TargetName>$(ProjectName)CHECKED_x64_glm</TargetName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules/>
     <CodeAnalysisRuleAssemblies/>
@@ -238,22 +244,24 @@
       <PreprocessorDefinitions>WIN32;WIN64;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;INSTALLER=1;EXCLUDE_PARTICLES=1;_USRDLL;ENABLE_TEST=0;NDEBUG;PX_CHECKED;PHYSX_PROFILE_SDK;PX_SUPPORT_VISUAL_DEBUGGER;PX_ENABLE_CHECKED_ASSERTS;PX_NVTX=1;_SECURE_SCL=0;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <WarningLevel>Level4</WarningLevel>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <AdditionalOptions>/MACHINE:x64 /INCREMENTAL:NO</AdditionalOptions>
-      <AdditionalDependencies>./../../../Externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;PhysX3CommonCHECKED_x64.lib;PhysX3CHECKED_x64.lib;PhysX3ExtensionsCHECKED.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(ProjectName)CHECKED_x64.dll</OutputFile>
+      <AdditionalDependencies>./../../../Externals/nvToolsExt/1/lib/x64/nvToolsExt64_1.lib;glm_PhysX3CommonCHECKED_x64.lib;glm_PhysX3CHECKED_x64.lib;PhysX3ExtensionsCHECKED.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName)CHECKED_x64_glm.dll</OutputFile>
       <AdditionalLibraryDirectories>../../../PxShared/lib/vc14win64;../../../PhysX_3.4/Lib/vc14win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ProgramDatabaseFile>$(OutDir)/$(ProjectName)CHECKED_x64.dll.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(OutDir)/$(ProjectName)CHECKED_x64_glm.dll.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <ImportLibrary>./../../lib/vc14win64-PhysX_3.4/$(TargetName).lib</ImportLibrary>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX64</TargetMachine>
-    </Link>
+  
+<IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+ </Link>
     <ResourceCompile></ResourceCompile>
     <ProjectReference></ProjectReference>
   </ItemDefinitionGroup>

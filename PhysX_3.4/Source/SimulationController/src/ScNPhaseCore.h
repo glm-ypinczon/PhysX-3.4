@@ -259,7 +259,16 @@ namespace Sc
 		ElementSimInteraction* createRbElementInteraction(const PxFilterInfo& fInfo, ShapeSim& s0, ShapeSim& s1, PxsContactManager* contactManager, Sc::ShapeInteraction* shapeInteraction, 
 			Sc::ElementInteractionMarker* interactionMarker, PxU32 isTriggerPair);
 
-	private:
+	
+
+
+		//---------------------------------------------------------------------------------
+		// Glm added accessor
+		//---------------------------------------------------------------------------------
+		PxU32 getCollisionPairStatus(PxU32 pairID);
+		//---------------------------------------------------------------------------------
+
+private:
 		ElementSimInteraction* createRbElementInteraction(ShapeSim& s0, ShapeSim& s1, PxsContactManager* contactManager, Sc::ShapeInteraction* shapeInteraction, 
 			Sc::ElementInteractionMarker* interactionMarker);
 

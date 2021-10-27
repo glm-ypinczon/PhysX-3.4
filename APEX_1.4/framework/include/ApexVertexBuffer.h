@@ -87,7 +87,7 @@ public:
 
 	uint32_t			getAllocationSize() const;
 
-	void					applyPermutation(const Array<uint32_t>& permutation);
+	void					applyPermutation(const physx::shdfnd::Array<uint32_t>& permutation);
 
 protected:
 	VertexBufferParameters*			mParams;

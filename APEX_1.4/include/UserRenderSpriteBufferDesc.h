@@ -33,7 +33,7 @@ namespace apex
 
 PX_PUSH_PACK_DEFAULT
 
-#if !PX_PS4
+#if !PX_PS4 && !PX_LINUX
 	#pragma warning(push)
 	#pragma warning(disable:4121)
 #endif	//!PX_PS4
@@ -352,7 +352,7 @@ public:
 	UserRenderSpriteTextureDesc	textureDescs[MAX_SPRITE_TEXTURES];	//!< an array of texture descriptors
 };
 
-#if !PX_PS4
+#if !PX_PS4 && !PX_LINUX
 	#pragma warning(pop)
 #endif	//!PX_PS4
 
