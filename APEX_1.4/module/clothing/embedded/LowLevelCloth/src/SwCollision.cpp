@@ -240,6 +240,12 @@ template <typename Simd4f>
 cloth::SwCollision<Simd4f>::SwCollision(SwClothData& clothData, SwKernelAllocator& alloc, profile::PxProfileZone* profiler)
 : mClothData(clothData), mAllocator(alloc), mProfiler(profiler)
 {
+	sGridsCount = (uint32_t)::ceilf(clothData.mNumSpheres / 32.f);
+	mfullSphereGrid = static_cast<Simd4i*>(malloc(sizeof(Simd4i) * sGridsCount * sGridsPan));
+	mfullConeGrid = static_cast<Simd4i*>(malloc(sizeof(Simd4i) * sGridsCount * sGridsPan));
+	mSphereGrid = mfullSphereGrid;
+	mConeGrid = mfullConeGrid;
+
 	allocate(mCurData);
 
 	if(mClothData.mEnableContinuousCollision || mClothData.mFrictionScale > 0.0f)
@@ -258,6 +264,8 @@ cloth::SwCollision<Simd4f>::~SwCollision()
 {
 	deallocate(mCurData);
 	deallocate(mPrevData);
+	free(mfullConeGrid);
+	free(mfullSphereGrid);
 }
 
 template <typename Simd4f>
@@ -300,8 +308,13 @@ void cloth::SwCollision<Simd4f>::operator()(const IterationState<Simd4f>& state)
 		if(mClothData.mEnableContinuousCollision)
 			collideContinuousParticles();
 
-		mergeAcceleration((uint32_t*)mSphereGrid);
-		mergeAcceleration((uint32_t*)mConeGrid);
+		for (uint32_t iGrid = 0; iGrid < sGridsCount; ++iGrid)
+		{
+			mSphereGrid = &mfullSphereGrid[iGrid * sGridsPan];
+			mConeGrid = &mfullConeGrid[iGrid * sGridsPan];
+			mergeAcceleration((uint32_t*)mSphereGrid);
+			mergeAcceleration((uint32_t*)mConeGrid);
+		}
 
 		if(!mClothData.mEnableContinuousCollision)
 			collideParticles();
@@ -398,29 +411,35 @@ template <typename Simd4f>
 void cloth::SwCollision<Simd4f>::buildSphereAcceleration(const SphereData* sIt)
 {
 	static const int maxIndex = sGridSize - 1;
+	const SphereData* sBegin = sIt;
 
-	const SphereData* sEnd = sIt + mClothData.mNumSpheres;
-	for(uint32_t mask = 0x1; sIt != sEnd; ++sIt, mask <<= 1)
+	//per grid fill
+	for (uint32_t iGrid = 0; iGrid < sGridsCount; ++iGrid)
 	{
-		Simd4f sphere = loadAligned(array(sIt->center));
-		Simd4f radius = splat<3>(sphere);
-
-		Simd4i first = intFloor(max((sphere - radius) * mGridScale + mGridBias, sZero));
-		Simd4i last = intFloor(min((sphere + radius) * mGridScale + mGridBias, sGridLength));
-
-		const int* firstIdx = simdi::array(first);
-		const int* lastIdx = simdi::array(last);
-
-		uint32_t* firstIt = (uint32_t*)mSphereGrid;
-		uint32_t* lastIt = firstIt + 3 * sGridSize;
-
-		for(uint32_t i = 0; i < 3; ++i, firstIt += sGridSize, lastIt += sGridSize)
+		sIt = sBegin + (iGrid * 32 < mClothData.mNumSpheres ? iGrid * 32 : mClothData.mNumSpheres);
+		const SphereData* sEnd = sBegin + (((iGrid + 1) * 32) < mClothData.mNumSpheres ? (iGrid + 1) * 32 : mClothData.mNumSpheres);
+		for (uint32_t mask = 0x1; sIt != sEnd; ++sIt, mask <<= 1)
 		{
-			for(int j = firstIdx[i]; j <= maxIndex; ++j)
-				firstIt[j] |= mask;
+			Simd4f sphere = loadAligned(array(sIt->center));
+			Simd4f radius = splat<3>(sphere);
 
-			for(int j = lastIdx[i]; j >= 0; --j)
-				lastIt[j] |= mask;
+			Simd4i first = intFloor(max((sphere - radius) * mGridScale + mGridBias, sZero));
+			Simd4i last = intFloor(min((sphere + radius) * mGridScale + mGridBias, sGridLength));
+
+			const int* firstIdx = simdi::array(first);
+			const int* lastIdx = simdi::array(last);
+
+			uint32_t* firstIt = (uint32_t*)&mfullSphereGrid[iGrid * sGridsPan];
+			uint32_t* lastIt = firstIt + 3 * sGridSize;
+
+			for (uint32_t i = 0; i < 3; ++i, firstIt += sGridSize, lastIt += sGridSize)
+			{
+				for (int j = firstIdx[i]; j <= maxIndex; ++j)
+					firstIt[j] |= mask;
+
+				for (int j = lastIdx[i]; j >= 0; --j)
+					lastIt[j] |= mask;
+			}
 		}
 	}
 }
@@ -429,21 +448,25 @@ void cloth::SwCollision<Simd4f>::buildSphereAcceleration(const SphereData* sIt)
 template <typename Simd4f>
 void cloth::SwCollision<Simd4f>::buildConeAcceleration()
 {
-	const ConeData* coneIt = mCurData.mCones;
-	const ConeData* coneEnd = coneIt + mClothData.mNumCapsules;
-	for(uint32_t coneMask = 0x1; coneIt != coneEnd; ++coneIt, coneMask <<= 1)
+	//per grid fill
+	for (uint32_t iGrid = 0; iGrid < sGridsCount; ++iGrid)
 	{
-		if(coneIt->radius == 0.0f)
-			continue;
+		const ConeData* coneIt = mCurData.mCones + (iGrid * 32 < mClothData.mNumCapsules ? iGrid * 32 : mClothData.mNumCapsules);
+		const ConeData* coneEnd = mCurData.mCones + ((iGrid + 1) * 32 < mClothData.mNumCapsules ? (iGrid + 1) * 32 : mClothData.mNumCapsules);
+		for (uint32_t coneMask = 0x1; coneIt != coneEnd; ++coneIt, coneMask <<= 1)
+		{
+			if (coneIt->radius == 0.0f)
+				continue;
 
-		uint32_t spheresMask = coneIt->bothMask;
+			uint32_t spheresMask = coneIt->bothMask;
 
-		uint32_t* sphereIt = (uint32_t*)mSphereGrid;
-		uint32_t* sphereEnd = sphereIt + 6 * sGridSize;
-		uint32_t* gridIt = (uint32_t*)mConeGrid;
-		for(; sphereIt != sphereEnd; ++sphereIt, ++gridIt)
-			if(*sphereIt & spheresMask)
-				*gridIt |= coneMask;
+			uint32_t* sphereIt = (uint32_t*)&mfullSphereGrid[iGrid * sGridsPan];
+			uint32_t* sphereEnd = sphereIt + 6 * sGridSize;
+			uint32_t* gridIt = (uint32_t*)&mfullConeGrid[iGrid * sGridsPan];
+			for (; sphereIt != sphereEnd; ++sphereIt, ++gridIt)
+				if (*sphereIt & spheresMask)
+					*gridIt |= coneMask;
+		}
 	}
 }
 
@@ -489,12 +512,12 @@ bool cloth::SwCollision<Simd4f>::buildAcceleration()
 	PX_ASSERT(allTrue(((bounds.mLower * mGridScale + mGridBias) >= simd4f(0.0f)) | sMaskW));
 	PX_ASSERT(allTrue(((bounds.mUpper * mGridScale + mGridBias) < simd4f(8.0f)) | sMaskW));
 
-	memset(mSphereGrid, 0, sizeof(uint32_t) * 6 * (sGridSize));
+	memset(mfullSphereGrid, 0, sizeof(uint32_t) * sGridsCount * 6 * (sGridSize));
 	if(mClothData.mEnableContinuousCollision)
 		buildSphereAcceleration(mPrevData.mSpheres);
 	buildSphereAcceleration(mCurData.mSpheres);
 
-	memset(mConeGrid, 0, sizeof(uint32_t) * 6 * (sGridSize));
+	memset(mfullConeGrid, 0, sizeof(uint32_t) * sGridsCount * 6 * (sGridSize));
 	buildConeAcceleration();
 
 	return true;
@@ -654,9 +677,9 @@ struct cloth::SwCollision<Simd4f>::ImpulseAccumulator
 
 template <typename Simd4f>
 FORCE_INLINE void cloth::SwCollision<Simd4f>::collideSpheres(const Simd4i& sphereMask, const Simd4f* positions,
-                                                             ImpulseAccumulator& accum) const
+                                                             ImpulseAccumulator& accum, const SphereData* currentSpheresData, const SphereData* prevSpheresData) const
 {
-	const float* __restrict spherePtr = array(mCurData.mSpheres->center);
+	const float* __restrict spherePtr = array(currentSpheresData->center);	//array(mCurData.mSpheres->center);
 
 	bool frictionEnabled = mClothData.mFrictionScale > 0.0f;
 
@@ -686,7 +709,7 @@ FORCE_INLINE void cloth::SwCollision<Simd4f>::collideSpheres(const Simd4i& spher
 		if(frictionEnabled)
 		{
 			// load previous sphere pos
-			const float* __restrict prevSpherePtr = array(mPrevData.mSpheres->center);
+			const float* __restrict prevSpherePtr = array(prevSpheresData->center);	//array(mPrevData.mSpheres->center);
 
 			Simd4f prevSphere = loadAligned(prevSpherePtr, offset);
 			Simd4f velocity = sphere - prevSphere;
@@ -1215,11 +1238,22 @@ void cloth::SwCollision<Simd4f>::collideParticles()
 		transpose(curPos[0], curPos[1], curPos[2], curPos[3]);
 
 		ImpulseAccumulator accum;
-		Simd4i sphereMask = collideCones(curPos, accum);
-		collideSpheres(sphereMask, curPos, accum);
 
+		//loop on group of 32 cones/spheres
 		Simd4f mask;
-		if(!anyGreater(accum.mNumCollisions, sEpsilon, mask))
+		int hasCollisions(0);
+		for (uint32_t iGrid = 0; iGrid < sGridsCount; ++iGrid)
+		{
+			mSphereGrid = &mfullSphereGrid[iGrid * sGridsPan];
+			mConeGrid = &mfullConeGrid[iGrid * sGridsPan];
+
+			Simd4i sphereMask = collideCones(curPos, accum);
+			collideSpheres(sphereMask, curPos, accum, &mCurData.mSpheres[iGrid*32], &mPrevData.mSpheres[iGrid * 32]);	//32 spheres per grid
+
+			hasCollisions |= anyGreater(accum.mNumCollisions, sEpsilon, mask);
+		}
+
+		if(hasCollisions==0)
 			continue;
 
 		Simd4f invNumCollisions = recip(accum.mNumCollisions);
@@ -1333,7 +1367,7 @@ void cloth::SwCollision<Simd4f>::collideVirtualParticles()
 
 		ImpulseAccumulator accum;
 		Simd4i sphereMask = collideCones(curPos, accum);
-		collideSpheres(sphereMask, curPos, accum);
+		collideSpheres(sphereMask, curPos, accum, &mCurData.mSpheres[0 * 32], &mPrevData.mSpheres[0 * 32]);
 
 		Simd4f mask;
 		if(!anyGreater(accum.mNumCollisions, sEpsilon, mask))
@@ -1674,51 +1708,90 @@ template <typename Simd4f>
 void cloth::SwCollision<Simd4f>::collideConvexes(const Simd4f* __restrict planes, Simd4f* __restrict curPos,
                                                  ImpulseAccumulator& accum)
 {
-	Simd4i result = simd4i(_0);
-	Simd4i mask4 = simd4i(_1);
+	uint32_t planeIterationsCount = (uint32_t)::ceilf(mClothData.mNumPlanes / 32.f);
+	Simd4i* results = static_cast<Simd4i*>(alloca(sizeof(Simd4i) * planeIterationsCount));
+	memset(results, 0, sizeof(Simd4i) * planeIterationsCount);
+	bool hasCollisions(false);
 
-	const Simd4f* __restrict pIt, *pEnd = planes + mClothData.mNumPlanes;
-	Simd4f* __restrict dIt = const_cast<Simd4f*>(pEnd);
-	for(pIt = planes; pIt != pEnd; ++pIt, ++dIt)
+	for (uint32_t planeIteration = 0; planeIteration < planeIterationsCount; ++planeIteration)
 	{
-		*dIt = splat<3>(*pIt) + curPos[2] * splat<2>(*pIt) + curPos[1] * splat<1>(*pIt) + curPos[0] * splat<0>(*pIt);
-		result = result | (mask4 & simd4i(*dIt < simd4f(_0)));
-		mask4 = mask4 << 1; // todo: shift by Simd4i on consoles
+		Simd4i& result = results[planeIteration];
+		Simd4i mask4 = simd4i(_1);
+
+		const Simd4f* __restrict pIt = planes + (planeIteration * 32 < mClothData.mNumPlanes ? planeIteration * 32 : mClothData.mNumPlanes);
+		const Simd4f* __restrict pEnd = planes + ((planeIteration + 1) * 32 < mClothData.mNumPlanes ? (planeIteration + 1) * 32 : mClothData.mNumPlanes);
+		Simd4f* __restrict dIt = const_cast<Simd4f*>(planes + mClothData.mNumPlanes + planeIteration * 32);
+		for (; pIt != pEnd; ++pIt, ++dIt)
+		{
+			*dIt = splat<3>(*pIt) + curPos[2] * splat<2>(*pIt) + curPos[1] * splat<1>(*pIt) + curPos[0] * splat<0>(*pIt);
+			result = result | (mask4 & simd4i(*dIt < simd4f(_0)));
+			mask4 = mask4 << 1; // todo: shift by Simd4i on consoles
+		}
+
+		if (!simdi::allEqual(result, simd4i(_0)))
+			hasCollisions=true;
 	}
 
-	if(simdi::allEqual(result, simd4i(_0)))
+	if (!hasCollisions)
 		return;
 
-	const uint32_t* __restrict cIt = mClothData.mConvexMasks;
-	const uint32_t* __restrict cEnd = cIt + mClothData.mNumConvexes;
-	for(; cIt != cEnd; ++cIt)
+	const Simd4f* __restrict pEnd = planes + mClothData.mNumPlanes;
+	const Array<uint32_t>* __restrict cIt = mClothData.mConvexMasks;
+	const Array<uint32_t>* __restrict cEnd = cIt + mClothData.mNumConvexes;
+	for (; cIt != cEnd; ++cIt)
 	{
-		uint32_t mask = *cIt;
-		mask4 = simd4i(int(mask));
-		if(!simdi::anyEqual(mask4 & result, mask4, mask4))
+		Simd4i mergedMask4 = simd4i(_0);
+		Simd4i mergedResult = simd4i(_0);
+		for (uint32_t planeIteration = 0; planeIteration < cIt->size(); ++planeIteration)
+		{
+			Simd4i& result = results[planeIteration];
+			uint32_t mask = (*cIt)[planeIteration];
+			Simd4i mask4 = simd4i(int(mask));
+
+			mergedMask4 = mergedMask4 | mask4;
+			mergedResult = mergedResult | (mask4 & result);
+		}	//merge operation is valid only because a convex can not have more than 32 faces, so each bit in the mask always belong to a different plane, even if from another planeIteration
+		if (!simdi::anyEqual(mergedMask4 & mergedResult, mergedMask4, mergedMask4))
 			continue;
 
+		uint32_t planeIteration = cIt->size() - 1;	//given the way the mask was written, we're always certain that the last index is not empty
+		uint32_t mask = (*cIt)[planeIteration];
+		Simd4i mask4 = simd4i(int(mask));
 		uint32_t test = mask - 1;
-		uint32_t planeIndex = findBitSet(mask & ~test);
+		uint32_t planeIndex = findBitSet(mask & ~test) + (planeIteration * 32);;
 		Simd4f plane = planes[planeIndex];
 		Simd4f planeX = splat<0>(plane);
 		Simd4f planeY = splat<1>(plane);
 		Simd4f planeZ = splat<2>(plane);
 		Simd4f planeD = pEnd[planeIndex];
-		while(mask &= test)
+
+		planeIteration = (cIt->size() > 2) ? cIt->size() - 2 : 0;	//there can't be more than 32 planes per convex, and there added in row. The number of 32bits masks is increased intill it's big enough for the plane mask, so the planes are always in the last or last 2 masks
+		for (; planeIteration < cIt->size(); ++planeIteration)
 		{
-			test = mask - 1;
-			planeIndex = findBitSet(mask & ~test);
-			plane = planes[planeIndex];
-			Simd4f dist = pEnd[planeIndex];
-			Simd4f closer = dist > planeD;
-			planeX = select(closer, splat<0>(plane), planeX);
-			planeY = select(closer, splat<1>(plane), planeY);
-			planeZ = select(closer, splat<2>(plane), planeZ);
-			planeD = max(dist, planeD);
+			Simd4i& result = results[planeIteration];
+			mask = (*cIt)[planeIteration];
+			if(!mask)
+				continue;
+			mask4 = simd4i(int(mask));
+			if (!simdi::anyEqual(mask4 & result, mask4, mask4))
+				continue;
+
+			test = mask;
+			while (mask &= test)
+			{
+				test = mask - 1;
+				planeIndex = findBitSet(mask & ~test) + (planeIteration * 32);
+				plane = planes[planeIndex];
+				Simd4f dist = pEnd[planeIndex];
+				Simd4f closer = dist > planeD;
+				planeX = select(closer, splat<0>(plane), planeX);
+				planeY = select(closer, splat<1>(plane), planeY);
+				planeZ = select(closer, splat<2>(plane), planeZ);
+				planeD = max(dist, planeD);
+			}
 		}
 
-		accum.subtract(planeX, planeY, planeZ, planeD, simd4f(mask4));
+		accum.subtract(planeX, planeY, planeZ, planeD, simd4f(mergedMask4));
 	}
 }
 

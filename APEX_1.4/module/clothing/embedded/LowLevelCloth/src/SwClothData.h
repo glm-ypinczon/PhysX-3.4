@@ -15,6 +15,7 @@
 
 #include "Px.h"
 #include "Types.h"
+#include "PsArray.h"
 
 namespace nvidia
 {
@@ -88,7 +89,7 @@ struct SwClothData
 	const float* mTargetCollisionPlanes;
 	uint32_t mNumPlanes;
 
-	const uint32_t* mConvexMasks;
+	const Array<uint32_t>* mConvexMasks;
 	uint32_t mNumConvexes;
 
 	const float* mStartCollisionTriangles;

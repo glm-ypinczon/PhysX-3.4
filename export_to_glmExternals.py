@@ -65,6 +65,8 @@ def doCopyFileTree(src, dst, fileExtensions, ignoreDirectories):
 def main():
     src = os.path.abspath(".")
     dst = "{}/pack".format(src)
+    if('GLM_EXTERNALS_HOME' in os.environ):
+        dst = "{}\\physX\\physX-3.4\\".format(os.environ['GLM_EXTERNALS_HOME'])
     ignoreDirectories = {".git", ".vs", "Externals", "KaplaDemo", "Documentation", "Sample", "Snippets", "Media", "compiler", "vc11win32", "vc12win32", "vc12win64", "vc14win32"}
     fileExtensions = {".h", ".inl", ".lib", ".dll", ".pdb", ".a", ".so"}
 
@@ -73,7 +75,7 @@ def main():
     dialog = QtGui.QFileDialog()
     dialog.setWindowTitle("Output directory")
     dialog.setFileMode(QtGui.QFileDialog.Directory)
-    dialog.setDirectory(os.path.dirname(src))
+    dialog.setDirectory(os.path.dirname(dst))
     execCode = dialog.exec_()
     if execCode == QtGui.QDialog.Accepted:
         selectedFiles = dialog.selectedFiles()

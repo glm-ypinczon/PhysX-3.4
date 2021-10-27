@@ -332,7 +332,7 @@ ModuleClothingImpl::ModuleClothingImpl(ApexSDKIntl* inSdk)
 	}
 	else if (!gpuClothingDllName.empty())
 	{
-		APEX_DEBUG_WARNING("Failed to load the GPU dll \'%s\'", gpuClothingDllName.c_str());
+		APEX_DEBUG_INFO("Failed to load the GPU dll \'%s\'", gpuClothingDllName.c_str());
 	}
 #endif
 }
