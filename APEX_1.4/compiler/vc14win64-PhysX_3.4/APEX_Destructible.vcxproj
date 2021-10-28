@@ -119,6 +119,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalOptions>/MACHINE:x64 /INCREMENTAL:NO</AdditionalOptions>
@@ -162,6 +163,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalOptions>/MACHINE:x64 /INCREMENTAL:NO</AdditionalOptions>
@@ -205,6 +207,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalOptions>/MACHINE:x64 /INCREMENTAL:NO</AdditionalOptions>
@@ -248,6 +251,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalOptions>/MACHINE:x64 /INCREMENTAL:NO</AdditionalOptions>

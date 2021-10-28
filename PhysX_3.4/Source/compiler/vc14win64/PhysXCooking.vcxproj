@@ -83,6 +83,7 @@
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
 		</ClCompile>
 		<Link>
 			<AdditionalOptions>/MAP /MACHINE:x64 /DEBUG /DELAYLOAD:glm_PxFoundationDEBUG_x64.dll /DELAYLOAD:glm_PhysX3CommonDEBUG_x64.dll</AdditionalOptions>
@@ -130,6 +131,7 @@
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
 		</ClCompile>
 		<Link>
 			<AdditionalOptions>/MAP /MACHINE:x64 /DELAYLOAD:glm_PxFoundationCHECKED_x64.dll /DELAYLOAD:glm_PhysX3CommonCHECKED_x64.dll</AdditionalOptions>
@@ -177,6 +179,7 @@
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
 		</ClCompile>
 		<Link>
 			<AdditionalOptions>/MAP /MACHINE:x64 /INCREMENTAL:NO /DEBUG /DELAYLOAD:glm_PxFoundationPROFILE_x64.dll /DELAYLOAD:glm_PhysX3CommonPROFILE_x64.dll</AdditionalOptions>
@@ -224,6 +227,7 @@
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
 		</ClCompile>
 		<Link>
 			<AdditionalOptions>/MAP /MACHINE:x64 /INCREMENTAL:NO /DELAYLOAD:glm_PxFoundation_x64.dll /DELAYLOAD:glm_PhysX3Common_x64.dll</AdditionalOptions>

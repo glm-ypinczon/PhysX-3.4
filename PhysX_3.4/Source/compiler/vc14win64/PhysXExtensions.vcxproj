@@ -82,6 +82,7 @@
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
 		</ClCompile>
 		<Lib>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -125,6 +126,7 @@
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
 		</ClCompile>
 		<Lib>
 			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -168,6 +170,7 @@
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
 		</ClCompile>
 		<Lib>
 			<AdditionalOptions>/INCREMENTAL:NO</AdditionalOptions>
@@ -212,6 +215,7 @@
 			<PrecompiledHeaderFile></PrecompiledHeaderFile>
 			<ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
 			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
 		</ClCompile>
 		<Lib>
 			<AdditionalOptions>/INCREMENTAL:NO</AdditionalOptions>

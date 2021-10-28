@@ -117,6 +117,7 @@
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalOptions>/DELAYLOAD:glm_PxFoundationDEBUG_x64.dll</AdditionalOptions>
@@ -162,6 +163,7 @@
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalOptions>/INCREMENTAL:NO /DELAYLOAD:glm_PxFoundation_x64.dll</AdditionalOptions>
@@ -207,6 +209,7 @@
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalOptions>/DELAYLOAD:glm_PxFoundationCHECKED_x64.dll</AdditionalOptions>
@@ -252,6 +255,7 @@
       <PrecompiledHeaderFile></PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>5045</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalOptions>/INCREMENTAL:NO /DELAYLOAD:glm_PxFoundationPROFILE_x64.dll</AdditionalOptions>
