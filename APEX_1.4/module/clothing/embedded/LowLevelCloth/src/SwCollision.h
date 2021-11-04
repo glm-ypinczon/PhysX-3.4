@@ -157,7 +157,7 @@ class SwCollision
 
   public:
 	// acceleration structure
-	uint32_t sGridsCount = 1;
+	uint32_t sGridsCount;
 	static const uint32_t sGridSize = 8;
 	static const uint32_t sGridsPan = 6 * sGridSize / 4;
 	Simd4i* mfullSphereGrid;
