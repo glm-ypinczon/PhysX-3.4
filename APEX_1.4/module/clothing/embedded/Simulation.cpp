@@ -666,7 +666,7 @@ void Simulation::updateCollision(tBoneActor* boneActors, uint32_t numBoneActors,
 		uint32_t maxPlaneId(0);
 		for (uint32_t j = 0; j < convex->getNumPlanes(); ++j)
 			maxPlaneId = (uint32_t)planes[j]->getId() > maxPlaneId ? (uint32_t)planes[j]->getId() : maxPlaneId;
-		uint32_t planeIterationsCount = (uint32_t)::ceilf(maxPlaneId / 32.f);
+		uint32_t planeIterationsCount = (uint32_t)::floorf(maxPlaneId / 32.f) + 1;
 		convexMask.resize(planeIterationsCount, 0);
 
 		for (uint32_t j = 0; j < convex->getNumPlanes(); ++j)
