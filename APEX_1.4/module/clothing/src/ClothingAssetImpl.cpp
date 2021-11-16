@@ -1946,8 +1946,11 @@ void ClothingAssetImpl::prepareCookingJob(CookingAbstract& job, float scale, PxV
 	if (mParams->materialLibrary != NULL)
 	{
 		ClothingMaterialLibraryParameters* matLib = static_cast<ClothingMaterialLibraryParameters*>(mParams->materialLibrary);
-		float selfcollisionThickness = matLib->materials.buf[mParams->materialIndex].selfcollisionThickness;
-		job.setSelfcollisionRadius(selfcollisionThickness);
+		if (mParams->materialIndex < matLib->materials.arraySizes[0])
+		{
+			float selfcollisionThickness = matLib->materials.buf[mParams->materialIndex].selfcollisionThickness;
+			job.setSelfcollisionRadius(selfcollisionThickness);
+		}
 	}
 
 	PxVec3 gravityDir = mParams->simulation.gravityDirection;
