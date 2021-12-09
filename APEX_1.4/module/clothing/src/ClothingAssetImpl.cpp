@@ -1946,7 +1946,7 @@ void ClothingAssetImpl::prepareCookingJob(CookingAbstract& job, float scale, PxV
 	if (mParams->materialLibrary != NULL)
 	{
 		ClothingMaterialLibraryParameters* matLib = static_cast<ClothingMaterialLibraryParameters*>(mParams->materialLibrary);
-		if (mParams->materialIndex < matLib->materials.arraySizes[0])
+		if ((int32_t)mParams->materialIndex < matLib->materials.arraySizes[0])
 		{
 			float selfcollisionThickness = matLib->materials.buf[mParams->materialIndex].selfcollisionThickness;
 			job.setSelfcollisionRadius(selfcollisionThickness);
