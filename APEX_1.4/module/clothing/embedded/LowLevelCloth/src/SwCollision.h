@@ -140,7 +140,7 @@ class SwCollision
 	ShapeMask getShapeMask(const Simd4f*, const Simd4f*) const;
 
 	void collideSpheres(const Simd4i&, const Simd4f*, ImpulseAccumulator&, const SphereData* currentSpheresData, const SphereData* prevSpheresData) const;
-	Simd4i collideCones(const Simd4f*, ImpulseAccumulator&, const ConeData* currentConesData) const;
+	Simd4i collideCones(const Simd4f*, ImpulseAccumulator&, uint32_t currentGridIndex, const ConeData* currentConesData) const;
 
 	void collideSpheres(const Simd4i&, const Simd4f*, Simd4f*, ImpulseAccumulator&) const;
 	Simd4i collideCones(const Simd4f*, Simd4f*, ImpulseAccumulator&) const;

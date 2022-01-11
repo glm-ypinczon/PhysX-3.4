@@ -742,11 +742,12 @@ FORCE_INLINE void cloth::SwCollision<Simd4f>::collideSpheres(const Simd4i& spher
 
 template <typename Simd4f>
 FORCE_INLINE typename cloth::SwCollision<Simd4f>::Simd4i
-cloth::SwCollision<Simd4f>::collideCones(const Simd4f* __restrict positions, ImpulseAccumulator& accum, const ConeData* currentConesData) const
+cloth::SwCollision<Simd4f>::collideCones(const Simd4f* __restrict positions, ImpulseAccumulator& accum, uint32_t currentGridIndex, const ConeData* currentConesData) const
 {
 	const float* __restrict centerPtr = array(currentConesData->center);	//array(mCurData.mCones->center);
 	const float* __restrict axisPtr = array(currentConesData->axis);		//array(mCurData.mCones->axis);
 	const float* __restrict auxiliaryPtr = &currentConesData->sqrCosine;	//&mCurData.mCones->sqrCosine;
+	uint32_t currentGridIndex_aligned = 4 * (uint32_t)::floor(currentGridIndex / 4);
 
 	bool frictionEnabled = mClothData.mFrictionScale > 0.0f;
 
@@ -786,7 +787,23 @@ cloth::SwCollision<Simd4f>::collideCones(const Simd4f* __restrict positions, Imp
 		Simd4f sqrDistance = deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ - dot * dot;
 
 		Simd4i auxiliary = simd4i((Simd4f)loadAligned(auxiliaryPtr, offset));
-		Simd4i bothMask = splat<0>(simd4i((Simd4f)loadAligned((float*)(&currentConesData[coneIndex].bothMask[0]))));	//was: Simd4i bothMask = splat<3>(auxiliary); BUT the 3rd value after the auxiliary is now an Array<uint32_t> instead of an uint32_t
+		Simd4i bothMask = simd4i((Simd4f)loadAligned((float*)&currentConesData[coneIndex].bothMask[currentGridIndex_aligned]));	//was: Simd4i bothMask = splat<3>(auxiliary); BUT the 3rd value after the auxiliary is now an Array<uint32_t> instead of an uint32_t
+		switch (currentGridIndex - currentGridIndex_aligned)
+		{
+		default:
+		case 0:
+			bothMask = splat<0>(bothMask);
+			break;
+		case 1:
+			bothMask = splat<1>(bothMask);
+			break;
+		case 2:
+			bothMask = splat<2>(bothMask);
+			break;
+		case 3:
+			bothMask = splat<3>(bothMask);
+			break;
+		}
 
 		Simd4f contactMask;
 		if(!anyGreater(radius * radius, sqrDistance, contactMask))
@@ -811,7 +828,23 @@ cloth::SwCollision<Simd4f>::collideCones(const Simd4f* __restrict positions, Imp
 		Simd4i rightMask = simd4i(base > halfLength);
 
 		// we use both mask because of the early out above.
-		Simd4i firstMask = splat<0>(simd4i((Simd4f)loadAligned((float*)(&currentConesData[coneIndex].firstMask[0])))); //was Simd4i firstMask = splat<2>(auxiliary); BUT the 2nd value after the auxiliary is now an Array<uint32_t> instead of an uint32_t
+		Simd4i firstMask = simd4i((Simd4f)loadAligned((float*)(&currentConesData[coneIndex].firstMask[currentGridIndex_aligned]))); //was Simd4i firstMask = splat<2>(auxiliary); BUT the 2nd value after the auxiliary is now an Array<uint32_t> instead of an uint32_t
+		switch (currentGridIndex - currentGridIndex_aligned)
+		{
+		default:
+		case 0:
+			firstMask = splat<0>(firstMask);
+			break;
+		case 1:
+			firstMask = splat<1>(firstMask);
+			break;
+		case 2:
+			firstMask = splat<2>(firstMask);
+			break;
+		case 3:
+			firstMask = splat<3>(firstMask);
+			break;
+		}
 		Simd4i secondMask = firstMask ^ bothMask;
 		shapeMask.mSpheres = shapeMask.mSpheres & ~(firstMask & ~leftMask);
 		shapeMask.mSpheres = shapeMask.mSpheres & ~(secondMask & ~rightMask);
@@ -1268,7 +1301,7 @@ void cloth::SwCollision<Simd4f>::collideParticles()
 			mSphereGrid = &mfullSphereGrid[iGrid * sGridsPan];
 			mConeGrid = &mfullConeGrid[iGrid * sGridsPan];
 
-			Simd4i sphereMask = collideCones(curPos, accum, &mCurData.mCones[iGrid * 32]);								//32 cones per grid
+			Simd4i sphereMask = collideCones(curPos, accum, iGrid, &mCurData.mCones[iGrid * 32]);						//32 cones per grid
 			collideSpheres(sphereMask, curPos, accum, &mCurData.mSpheres[iGrid*32], &mPrevData.mSpheres[iGrid * 32]);	//32 spheres per grid
 
 			hasCollisions |= anyGreater(accum.mNumCollisions, sEpsilon, mask);
@@ -1387,7 +1420,7 @@ void cloth::SwCollision<Simd4f>::collideVirtualParticles()
 		curPos[2] = pz;
 
 		ImpulseAccumulator accum;
-		Simd4i sphereMask = collideCones(curPos, accum, &mCurData.mCones[0 * 32]);
+		Simd4i sphereMask = collideCones(curPos, accum, 0, &mCurData.mCones[0 * 32]);
 		collideSpheres(sphereMask, curPos, accum, &mCurData.mSpheres[0 * 32], &mPrevData.mSpheres[0 * 32]);
 
 		Simd4f mask;
