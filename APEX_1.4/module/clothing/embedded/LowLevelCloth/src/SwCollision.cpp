@@ -786,7 +786,7 @@ cloth::SwCollision<Simd4f>::collideCones(const Simd4f* __restrict positions, Imp
 		Simd4f sqrDistance = deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ - dot * dot;
 
 		Simd4i auxiliary = simd4i((Simd4f)loadAligned(auxiliaryPtr, offset));
-		Simd4i bothMask = splat<3>(auxiliary);
+		Simd4i bothMask = splat<0>(simd4i((Simd4f)loadAligned((float*)(&currentConesData[coneIndex].bothMask[0]))));	//was: Simd4i bothMask = splat<3>(auxiliary); BUT the 3rd value after the auxiliary is now an Array<uint32_t> instead of an uint32_t
 
 		Simd4f contactMask;
 		if(!anyGreater(radius * radius, sqrDistance, contactMask))
@@ -811,7 +811,7 @@ cloth::SwCollision<Simd4f>::collideCones(const Simd4f* __restrict positions, Imp
 		Simd4i rightMask = simd4i(base > halfLength);
 
 		// we use both mask because of the early out above.
-		Simd4i firstMask = splat<2>(auxiliary);
+		Simd4i firstMask = splat<0>(simd4i((Simd4f)loadAligned((float*)(&currentConesData[coneIndex].firstMask[0])))); //was Simd4i firstMask = splat<2>(auxiliary); BUT the 2nd value after the auxiliary is now an Array<uint32_t> instead of an uint32_t
 		Simd4i secondMask = firstMask ^ bothMask;
 		shapeMask.mSpheres = shapeMask.mSpheres & ~(firstMask & ~leftMask);
 		shapeMask.mSpheres = shapeMask.mSpheres & ~(secondMask & ~rightMask);
@@ -1118,7 +1118,7 @@ cloth::SwCollision<Simd4f>::collideCones(const Simd4f* __restrict prevPos, Simd4
 		Simd4f contactMask;
 		int anyContact = anyGreater(curRadius * curRadius, curSqrDistance, contactMask);
 
-		Simd4i bothMask = splat<3>(curAuxiliary);
+		Simd4i bothMask = splat<0>(simd4i((Simd4f)loadAligned((float*)(&mCurData.mCones[coneIndex].bothMask[0])))); //was Simd4i bothMask = splat<3>(curAuxiliary);
 
 		// instead of culling continuous collision for ~collisionMask, and discrete
 		// collision for ~contactMask, disable both if ~collisionMask & ~contactMask
@@ -1137,7 +1137,7 @@ cloth::SwCollision<Simd4f>::collideCones(const Simd4f* __restrict prevPos, Simd4
 
 		// can only skip continuous sphere collision if post-ccd position
 		// is on code side *and* particle had cone-ccd collision.
-		Simd4i firstMask = splat<2>(curAuxiliary);
+		Simd4i firstMask = splat<0>(simd4i((Simd4f)loadAligned((float*)(&mCurData.mCones[coneIndex].firstMask[0])))); //was Simd4i firstMask = splat<2>(curAuxiliary);
 		Simd4i secondMask = firstMask ^ bothMask;
 		cullMask = (firstMask & ~leftMask) | (secondMask & ~rightMask);
 		shapeMask.mSpheres = shapeMask.mSpheres & ~(cullMask & simd4i(collisionMask));
